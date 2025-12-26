@@ -1,11 +1,135 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Header from "../components/Header.astro";
+import ImageCarousel from "../components/ImageCarousel.astro";
+import TextSwipe from "../components/TextSwipe.astro";
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const images = [
+  "../src/assets/bano-sevilla.jpg",
+  "../src/assets/casa-trujillo.jpg",
+  "../src/assets/casa-verde.png",
+  "../src/assets/cocina2.jpg",
+  "../src/assets/sala.png",
+  "../src/assets/terraza.jpeg",
+];
 ---
 
 <Layout>
-	<Welcome />
+  <Header />
+  <main class="relative w-full">
+    <section
+      id="hero-section"
+      class="bg-[#151515] text-[#fcfcfc] h-screen w-full flex flex-col overflow-hidden sticky top-0"
+    >
+      <div class="h-full w-full flex flex-col">
+        <div class="flex flex-1 justify-center items-center">
+          <p
+            class="text-6xl text-center max-w-5xl tracking-tighter font-medium pt-20 title"
+          >
+            Nuestro sello es la creación de espacios únicos - integrando
+            funcionalidad y diseño con un estilo propio.
+          </p>
+        </div>
+
+        <div class="flex flex-col justify-end items-end pb-2 carousel">
+          <div class="flex w-full justify-between text-xs pb-2 px-6">
+            <p class="font-medium">Lima, PE</p>
+            <p>RGB © 2025</p>
+            <p class="font-medium">Architectura</p>
+          </div>
+          <ImageCarousel images={images} />
+        </div>
+      </div>
+    </section>
+
+    <section class="relative w-full bg-white flex flex-col py-12 px-6">
+      <h3
+        class="uppercase text-[8rem] font-medium max-w-6xl leading-[0.95] tracking-normal"
+      >
+        Experience focused design
+      </h3>
+      <div class="flex flex-col w-full items-center mt-10">
+        <img
+          src="../src/assets/sala.png"
+          alt="cocina"
+          class="h-72 w-115 aspect-square object-cover"
+        />
+        <p class="text-xl font-medium max-w-115 mt-8">
+          En RGB creemos en la arquitectura como una forma de transformar ideas
+          en espacios con identidad propia. Nuestro estudio combina creatividad,
+          técnica y colaboración para diseñar proyectos que transmiten
+          equilibrio entre funcionalidad, estética y sostenibilidad.
+        </p>
+        <p class="text-xl font-medium max-w-115 mt-6">
+          Cada detalle refleja el compromiso de nuestro equipo con la innovación
+          y la calidad. Trabajamos con pasión y dedicación, creando propuestas
+          únicas que buscan inspirar, conectar y trascender en el tiempo.
+        </p>
+
+        <div class="w-115">
+          <button
+            class="group bg-[#151515] h-12 px-6 rounded-full cursor-pointer flex items-center mt-10"
+          >
+            <TextSwipe
+              class="font-medium tracking-tighter leading-[0.85] text-sm text-[#fcfcfc]"
+            >
+              <Fragment slot="text1">LEARN ABOUT OUR STUDIO</Fragment>
+            </TextSwipe>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative flex flex-col h-screen w-full py-12 px-6 bg-white">
+      <div class="flex justify-between items-end">
+        <h3
+          class="uppercase text-[8rem] font-medium max-w-6xl leading-[0.95] tracking-normal"
+        >
+          Nuestros <span class="ml-40">proyectos</span>
+        </h3>
+
+        <p class="text-[8rem] font-medium">(06)</p>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<script>
+  import Lenis from "lenis";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const lenis = new Lenis();
+
+  lenis.on("scroll", ScrollTrigger.update);
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+
+  gsap.ticker.lagSmoothing(0);
+
+  gsap.to(".title", {
+    y: -200,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "section.bg-white",
+      start: "top bottom",
+      end: "top top",
+      scrub: true,
+    },
+  });
+
+  gsap.to(".carousel", {
+    y: -200,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "section.bg-white",
+      start: "top bottom",
+      end: "top top",
+      scrub: true,
+    },
+  });
+</script>

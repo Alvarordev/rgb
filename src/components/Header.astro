@@ -1,0 +1,46 @@
+---
+import TextSwipe from "./TextSwipe.astro";
+---
+
+<header class="absolute top-0 z-50 w-full px-6">
+  <div class="text-[#fcfcfc] flex w-full justify-between mt-8 items-center">
+    <h1 class="text-5xl font-semibold tracking-tighter">RGB STUDIO</h1>
+
+    <ul class="flex text-sm gap-4 font-medium items-center uppercase">
+      <li>
+        <TextSwipe
+          class="tracking-tighter leading-[0.85]"
+          class2="text-red-500"
+        >
+          <Fragment slot="text1">Proyectos</Fragment>
+        </TextSwipe>
+      </li>
+      <li>
+        <TextSwipe
+          class="tracking-tighter leading-[0.85]"
+          class2="text-green-500"
+        >
+          <Fragment slot="text1">Nosotros</Fragment>
+        </TextSwipe>
+      </li>
+      <li>
+        <TextSwipe
+          class="tracking-tighter leading-[0.85]"
+          class2="text-blue-500"
+        >
+          <Fragment slot="text1">Contacto</Fragment>
+        </TextSwipe>
+      </li>
+    </ul>
+
+    <button
+      class="group bg-[#fcfcfc] h-12 px-6 rounded-full cursor-pointer flex items-center"
+    >
+      <TextSwipe
+        class="font-medium tracking-tighter leading-[0.85] text-sm text-[#151515]"
+      >
+        <Fragment slot="text1">GET IN TOUCH</Fragment>
+      </TextSwipe>
+    </button>
+  </div>
+</header>

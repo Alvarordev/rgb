@@ -1,0 +1,81 @@
+---
+interface Props {
+  images?: string[];
+}
+
+const { images = [] } = Astro.props;
+---
+
+<div
+  class="image-carousel w-full overflow-hidden"
+  data-duration="30"
+>
+  <div class="carousel-track flex">
+    <div class="carousel-group flex gap-4 shrink-0 items-center pr-4">
+      {
+        images.map((src, index) => (
+          <img
+            src={src}
+            alt={`Project ${index + 1}`}
+            class="h-72 w-auto min-w-75 object-cover shrink-0 rounded-lg"
+          />
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  const initCarousel = (): void => {
+    const carousel = document.querySelector<HTMLElement>(".image-carousel");
+    if (!carousel) return;
+
+    const track = carousel.querySelector<HTMLElement>(".carousel-track");
+    const group = carousel.querySelector<HTMLElement>(".carousel-group");
+    const durationAttr = carousel.dataset.duration;
+
+    if (!track || !group || !durationAttr) return;
+
+    const duration = parseFloat(durationAttr);
+
+    // Clone group for seamless infinite loop
+    const clone = group.cloneNode(true) as HTMLElement;
+    track.appendChild(clone);
+
+    // Create animations for both original and cloned groups
+    const groups = track.querySelectorAll<HTMLElement>(".carousel-group");
+    const animations = gsap.utils.toArray<HTMLElement>(groups).map((el) =>
+      gsap.to(el, {
+        xPercent: -100,
+        repeat: -1,
+        duration,
+        ease: "none",
+      })
+    );
+
+    // Interaction handlers with inertia effect
+    const pause = () => {
+      animations.forEach((anim) =>
+        gsap.to(anim, { timeScale: 0, duration: 0.8, ease: "power2.out" })
+      );
+    };
+
+    const play = () => {
+      animations.forEach((anim) =>
+        gsap.to(anim, { timeScale: 1, duration: 0.2, ease: "power2.inOut" })
+      );
+    };
+
+    carousel.addEventListener("mouseenter", pause);
+    carousel.addEventListener("mouseleave", play);
+  };
+
+  // Ensure images are loaded to get correct dimensions before animating
+  if (document.readyState === "complete") {
+    initCarousel();
+  } else {
+    window.addEventListener("load", initCarousel);
+  }
+</script>

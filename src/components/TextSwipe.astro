@@ -1,0 +1,52 @@
+---
+interface Props {
+  class?: string;
+  class1?: string;
+  class2?: string;
+  duration?: string;
+}
+
+const { class: className, class1, class2, duration = "300" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "swipe-animation relative overflow-hidden cursor-pointer",
+    className,
+  ]}
+  style={`--duration: ${duration}ms`}
+>
+  <div class="grid grid-cols-1 grid-rows-1">
+    <span class:list={["block col-start-1 row-start-1", class1]}>
+      <slot name="text1" />
+    </span>
+    <span
+      class:list={["block col-start-1 row-start-1", class2]}
+      aria-hidden="true"
+    >
+      <slot name="text2">
+        <slot name="text1" />
+      </slot>
+    </span>
+  </div>
+</div>
+
+<style>
+  .swipe-animation span {
+    transition: transform var(--duration) cubic-bezier(0.85, 0, 0.15, 1);
+  }
+
+  .swipe-animation span:nth-child(2) {
+    transform: translateY(100%);
+  }
+
+  .swipe-animation:hover span:nth-child(1),
+  :global(.group:hover) .swipe-animation span:nth-child(1) {
+    transform: translateY(-101%);
+  }
+
+  .swipe-animation:hover span:nth-child(2),
+  :global(.group:hover) .swipe-animation span:nth-child(2) {
+    transform: translateY(0);
+  }
+</style>
