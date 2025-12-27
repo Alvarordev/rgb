@@ -1,0 +1,83 @@
+---
+interface Props {
+  class?: string;
+  duration?: number;
+}
+
+const { class: className, duration = 0.8 } = Astro.props;
+---
+
+<div
+  class:list={["animated-paragraph", className]}
+  data-duration={duration}
+>
+  <slot />
+</div>
+
+<style is:global>
+  .animated-paragraph {
+    opacity: 0; 
+  }
+
+  .animated-paragraph.is-ready {
+    opacity: 1;
+  }
+
+  .line-wrapper {
+    overflow: hidden;
+    display: block;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initAnimations = () => {
+    const paragraphs = document.querySelectorAll(".animated-paragraph");
+
+    paragraphs.forEach((p) => {
+      const duration = parseFloat((p as HTMLElement).dataset.duration || "0.8");
+
+      // Dividir el texto en líneas
+      const split = new SplitType(p as HTMLElement, {
+        types: "lines",
+        lineClass: "split-line",
+      });
+
+      // Envolver cada línea para el efecto de máscara (reveal)
+      split.lines?.forEach((line) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "line-wrapper";
+        line.parentNode?.insertBefore(wrapper, line);
+        wrapper.appendChild(line);
+      });
+
+      // Marcar como listo para mostrar
+      p.classList.add("is-ready");
+
+      // Animación con GSAP
+      gsap.from(split.lines, {
+        scrollTrigger: {
+          trigger: p,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        yPercent: 100,
+        opacity: 0,
+        duration: duration,
+        stagger: 0.1,
+        ease: "expo.out",
+      });
+    });
+  };
+
+  // Ejecutar al cargar
+  initAnimations();
+
+  // Soporte para Astro View Transitions
+  document.addEventListener("astro:page-load", initAnimations);
+</script>

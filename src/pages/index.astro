@@ -1,8 +1,11 @@
 ---
 import Header from "../components/Header.astro";
 import ImageCarousel from "../components/ImageCarousel.astro";
+import SvgPathAnimation from "../components/SvgPathAnimation.astro";
 import TextSwipe from "../components/TextSwipe.astro";
+import AnimatedParagraph from "../components/AnimatedParagraph.astro";
 import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
 
 const images = [
   "../src/assets/bano-sevilla.jpg",
@@ -23,30 +26,35 @@ const images = [
     >
       <div class="h-full w-full flex flex-col">
         <div class="flex flex-1 justify-center items-center">
-          <p
-            class="text-6xl text-center max-w-5xl tracking-tighter font-medium pt-20 title"
+          <AnimatedParagraph
+            class="text-7xl text-center max-w-6xl tracking-tighter font-medium pt-20 title"
+            duration={2}
           >
             Nuestro sello es la creación de espacios únicos - integrando
             funcionalidad y diseño con un estilo propio.
-          </p>
+          </AnimatedParagraph>
         </div>
 
         <div class="flex flex-col justify-end items-end pb-2 carousel">
-          <div class="flex w-full justify-between text-xs pb-2 px-6">
-            <p class="font-medium">Lima, PE</p>
+          <div class="flex w-full justify-between text-xs pb-2 px-7 font-bold">
+            <p>Lima, PE</p>
             <p>RGB © 2025</p>
-            <p class="font-medium">Architectura</p>
+            <p>Architectura</p>
           </div>
           <ImageCarousel images={images} />
         </div>
       </div>
     </section>
 
-    <section class="relative w-full bg-white flex flex-col py-12 px-6">
+    {/* About Section */}
+    <section
+      class="relative w-full bg-[#fcfcfc] flex flex-col py-12 px-7 about"
+    >
       <h3
-        class="uppercase text-[8rem] font-medium max-w-6xl leading-[0.95] tracking-normal"
+        class="uppercase text-[8rem] font-medium leading-[0.95] tracking-normal"
       >
-        Experience focused design
+        Diseñando <br />
+        <span class="ml-40"> con propósito</span>
       </h3>
       <div class="flex flex-col w-full items-center mt-10">
         <img
@@ -54,33 +62,36 @@ const images = [
           alt="cocina"
           class="h-72 w-115 aspect-square object-cover"
         />
-        <p class="text-xl font-medium max-w-115 mt-8">
+        <AnimatedParagraph class="text-xl font-medium max-w-115 mt-8 w-full">
           En RGB creemos en la arquitectura como una forma de transformar ideas
           en espacios con identidad propia. Nuestro estudio combina creatividad,
           técnica y colaboración para diseñar proyectos que transmiten
           equilibrio entre funcionalidad, estética y sostenibilidad.
-        </p>
-        <p class="text-xl font-medium max-w-115 mt-6">
+        </AnimatedParagraph>
+        <AnimatedParagraph class="text-xl font-medium max-w-115 mt-6 w-full">
           Cada detalle refleja el compromiso de nuestro equipo con la innovación
           y la calidad. Trabajamos con pasión y dedicación, creando propuestas
           únicas que buscan inspirar, conectar y trascender en el tiempo.
-        </p>
+        </AnimatedParagraph>
 
         <div class="w-115">
           <button
             class="group bg-[#151515] h-12 px-6 rounded-full cursor-pointer flex items-center mt-10"
           >
             <TextSwipe
-              class="font-medium tracking-tighter leading-[0.85] text-sm text-[#fcfcfc]"
+              class="font-bold tracking-tighter leading-[1.15] text-sm text-[#fcfcfc]"
             >
-              <Fragment slot="text1">LEARN ABOUT OUR STUDIO</Fragment>
+              <Fragment slot="text1">descubre más sobre nosotros</Fragment>
             </TextSwipe>
           </button>
         </div>
       </div>
     </section>
 
-    <section class="relative flex flex-col h-screen w-full py-12 px-6 bg-white">
+    {/* Projects Section */}
+    <section
+      class="relative flex flex-col w-full pt-20 pb-10 px-7 bg-[#fcfcfc]"
+    >
       <div class="flex justify-between items-end">
         <h3
           class="uppercase text-[8rem] font-medium max-w-6xl leading-[0.95] tracking-normal"
@@ -88,48 +99,361 @@ const images = [
           Nuestros <span class="ml-40">proyectos</span>
         </h3>
 
-        <p class="text-[8rem] font-medium">(06)</p>
+        <p class="text-[8rem] font-medium leading-[0.95]">(06)</p>
+      </div>
+
+      <div class="grid grid-cols-12 gap-x-6 gap-y-20 pt-12">
+        <div class="col-span-6">
+          <div class="flex flex-col group">
+            <img
+              src="../src/assets/casa-trujillo.jpg"
+              alt="casa trujillo"
+              class="h-full w-full object-cover max-h-[90vh]"
+            />
+            <div class="flex justify-between text-sm font-bold pt-2">
+              <div class="flex">
+                <p>(01)</p>
+                <p class="pl-8">CASA TRUJILLO</p>
+              </div>
+
+              <div>
+                <TextSwipe
+                  class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
+                >
+                  <Fragment slot="text1">VER PROYECTO</Fragment>
+                </TextSwipe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-span-6">
+          <div class="flex flex-col group">
+            <img
+              src="../src/assets/sala.png"
+              alt="sala"
+              class="h-full w-full object-cover max-h-[80vh]"
+            />
+            <div class="flex justify-between text-sm font-bold pt-2">
+              <div class="flex">
+                <p>(02)</p>
+                <p class="pl-8">SALA HACIENDA</p>
+              </div>
+
+              <div>
+                <TextSwipe
+                  class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
+                >
+                  <Fragment slot="text1">VER PROYECTO</Fragment>
+                </TextSwipe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6">
+          <div class="grid grid-cols-6">
+            <div class="flex flex-col group col-span-5">
+              <img
+                src="../src/assets/terraza.jpeg"
+                alt="terraza"
+                class="h-full w-full object-cover max-h-[80vh]"
+              />
+
+              <div class="flex justify-between text-sm font-bold pt-2">
+                <div class="flex">
+                  <p>(03)</p>
+                  <p class="pl-8">TERRAZA LIMA</p>
+                </div>
+
+                <div>
+                  <TextSwipe
+                    class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
+                  >
+                    <Fragment slot="text1">VER PROYECTO</Fragment>
+                  </TextSwipe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6">
+          <div class="flex flex-col group">
+            <img
+              src="../src/assets/casa-verde.png"
+              alt="casa-verde"
+              class="h-full w-full object-cover max-h-[80vh]"
+            />
+
+            <div class="flex justify-between text-sm font-bold pt-2">
+              <div class="flex">
+                <p>(04)</p>
+                <p class="pl-8">CASA VERDE</p>
+              </div>
+
+              <div>
+                <TextSwipe
+                  class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+                >
+                  <Fragment slot="text1">2024</Fragment>
+                  <Fragment slot="text2">VER PROYECTO</Fragment>
+                </TextSwipe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6">
+          <div class="flex flex-col group">
+            <img
+              src="../src/assets/bano-sevilla.jpg"
+              alt="bano-sevilla"
+              class="h-full w-full object-cover max-h-[80vh]"
+            />
+            <div class="flex justify-between text-sm font-bold pt-2">
+              <div class="flex">
+                <p>(05)</p>
+                <p class="pl-8">BAÑO SEVILLA</p>
+              </div>
+
+              <div>
+                <TextSwipe
+                  class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
+                >
+                  <Fragment slot="text1">VER PROYECTO</Fragment>
+                </TextSwipe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6">
+          <div class="grid grid-cols-6">
+            <div class="flex flex-col group col-span-5 col-start-2">
+              <img
+                src="../src/assets/cocina2.jpg"
+                alt="cocina2"
+                class="h-full w-full object-cover max-h-[80vh]"
+              />
+              <div class="flex justify-between text-sm font-bold pt-2">
+                <div class="flex">
+                  <p>(06)</p>
+                  <p class="pl-8">COCINA</p>
+                </div>
+
+                <div>
+                  <TextSwipe
+                    class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
+                  >
+                    <Fragment slot="text1">VER PROYECTO</Fragment>
+                  </TextSwipe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center w-full mt-10">
+        <button
+          class="group bg-[#151515] h-12 px-6 rounded-full cursor-pointer flex items-center mt-10"
+        >
+          <TextSwipe
+            class="font-bold tracking-tighter leading-[1.15] text-sm text-[#fcfcfc]"
+          >
+            <Fragment slot="text1">Ver todos los proyectos</Fragment>
+          </TextSwipe>
+        </button>
       </div>
     </section>
+
+    <section
+      class="relative w-full h-screen bg-[#fcfcfc] px-7 flex flex-col items-center justify-center"
+    >
+      <div class="grid grid-cols-12">
+        <div class="col-span-6">
+          <div
+            class="ml-20 text-[2.8rem] font-bold tracking-tighter leading-tight"
+          >
+            <AnimatedParagraph>
+              Nuestro enfoque en RGB Studio es crear espacios únicos,
+              funcionales y atemporales, adaptados a la visión y necesidades de
+              cada cliente.
+            </AnimatedParagraph>
+            <AnimatedParagraph class="mt-8">
+              Trabajamos cada proyecto de manera cercana y colaborativa,
+              transformando ideas en lugares que inspiran y perduran en el
+              tiempo.
+            </AnimatedParagraph>
+          </div>
+        </div>
+
+        <div class="col-span-6 grid grid-cols-6">
+          <div class="col-span-4 col-start-2">
+            <SvgPathAnimation />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="relative bg-[#fcfcfc] w-full px-7 flex flex-col justify-center gap-4"
+    >
+      <h3 class="font-bold text-sm">(NUESTROS CLIENTES)</h3>
+      <div class="grid grid-cols-12">
+        <div class="col-span-6 mr-10">
+          <img
+            src="../src/assets/terraza2.png"
+            alt="Terraza-2"
+            class="w-full h-auto object-cover"
+          />
+          <div class="font-medium mt-6 text-xl">
+            <AnimatedParagraph>
+              "Como terraza lo que se pensaba hacer era un punto de reunion de
+              la casa, poder recibir amistadas y familiares. Sabes que estas
+              abrazado por el espacio. Este espacio anteriormente era más como
+              un deposito de la casa estaba en desuso y el espacio no estaba
+              bien aprovechado. Decidimos darle un giro."
+            </AnimatedParagraph>
+
+            <AnimatedParagraph class="my-4 font-bold">
+              ¿Crees que tu idea se ve reflejada en el diseño final?
+            </AnimatedParagraph>
+
+            <AnimatedParagraph>
+              "Sí, yo creo que se cumplió con la visión que teniamos, la idea de
+              la terraza fue tanto mía como la de mi mamá donde tener un espacio
+              acogedor que pueda reunir a sus amistades."
+            </AnimatedParagraph>
+
+            <div class="text-sm uppercase font-extrabold leading-tight mt-6">
+              <p>Luis</p>
+              <p>Terraza Lima</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-span-1"></div>
+
+        <div class="col-span-5 flex flex-col gap-2">
+          <div
+            class="relative group cursor-pointer overflow-hidden max-h-screen video-container"
+          >
+            <video
+              id="client-video"
+              src="../src/assets/cliente1.mp4"
+              class="w-full h-full scale-120 object-contain max-h-[90vh]"
+              loop
+              playsinline></video>
+            <div
+              id="video-controls"
+              class="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              <div
+                id="play-pause-indicator"
+                class="bg-white/20 backdrop-blur-md p-6 rounded-full"
+              >
+                <svg
+                  id="play-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="white"><path d="M8 5v14l11-7z"></path></svg
+                >
+                <svg
+                  id="pause-icon"
+                  class="hidden"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  ><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg
+                >
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-sm font-bold tracking-tighter text-end mr-10">
+              DALE PLAY!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
   </main>
+
+  <script>
+    import Lenis from "lenis";
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis();
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    gsap.to(".title", {
+      y: -200,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".about",
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
+      },
+    });
+
+    gsap.to(".carousel", {
+      y: -200,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".about",
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
+      },
+    });
+
+    const video = document.getElementById("client-video") as HTMLVideoElement;
+    const playIcon = document.getElementById("play-icon");
+    const pauseIcon = document.getElementById("pause-icon");
+    const videoContainer = document.querySelector(".video-container");
+    const videoControls = document.getElementById("video-controls");
+
+    if (video && videoContainer && videoControls) {
+      const updateUI = () => {
+        if (video.paused) {
+          videoControls.classList.remove("opacity-0");
+          videoControls.classList.add("opacity-100");
+          playIcon?.classList.remove("hidden");
+          pauseIcon?.classList.add("hidden");
+        } else {
+          videoControls.classList.remove("opacity-100");
+          videoControls.classList.add("opacity-0");
+          playIcon?.classList.add("hidden");
+          pauseIcon?.classList.remove("hidden");
+        }
+      };
+
+      videoContainer.addEventListener("click", () => {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+        updateUI();
+      });
+
+      updateUI();
+    }
+  </script>
 </Layout>
-
-<script>
-  import Lenis from "lenis";
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const lenis = new Lenis();
-
-  lenis.on("scroll", ScrollTrigger.update);
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-
-  gsap.ticker.lagSmoothing(0);
-
-  gsap.to(".title", {
-    y: -200,
-    ease: "none",
-    scrollTrigger: {
-      trigger: "section.bg-white",
-      start: "top bottom",
-      end: "top top",
-      scrub: true,
-    },
-  });
-
-  gsap.to(".carousel", {
-    y: -200,
-    ease: "none",
-    scrollTrigger: {
-      trigger: "section.bg-white",
-      start: "top bottom",
-      end: "top top",
-      scrub: true,
-    },
-  });
-</script>

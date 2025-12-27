@@ -1,0 +1,47 @@
+<div class="w-full">
+  <svg
+    viewBox="0 0 3775 3309"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:space="preserve"
+    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:1.5;"
+  >
+    <g>
+      <path
+        id="firma-path"
+        d="M711.3,848.6L720.4,1667.7L2009.8,1669.2C2185.9,1827.5 2164,2604.7 2018.6,2876.3C1888.7,3118.7 1571.5,3246 1378.5,2848.6C1245.6,2575 1227.7,2088.8 1323,1669.2C1563.7,1155.2 1930.7,869 2451.9,861C2656,875.7 2840.3,940.1 2933.6,1014.6C3152.9,1189.8 3034.6,1502 2871.4,1609.1C2817.8,1644.2 2736.2,1666.3 2472.6,1654.2L2461.3,201.6C1665.6,292.1 990.4,689.9 729.9,1654.2"
+        fill="none"
+        stroke="black"
+        stroke-width="54.2"></path>
+    </g>
+  </svg>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const path = document.querySelector("#firma-path") as SVGPathElement;
+  if (path) {
+    const length = path.getTotalLength();
+
+    gsap.set(path, {
+      strokeDasharray: length,
+      strokeDashoffset: length,
+    });
+
+    gsap.to(path, {
+      strokeDashoffset: 0,
+      duration: 1.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: path,
+        start: "top 70%", // Empieza cuando el path está al 80% de la pantalla
+        toggleActions: "play none none none", // Solo se reproduce una vez al entrar
+      },
+    });
+  }
+</script>

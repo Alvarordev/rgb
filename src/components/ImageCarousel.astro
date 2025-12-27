@@ -17,7 +17,7 @@ const { images = [] } = Astro.props;
           <img
             src={src}
             alt={`Project ${index + 1}`}
-            class="h-72 w-auto min-w-75 object-cover shrink-0 rounded-lg"
+            class="h-72 w-auto min-w-75 object-cover shrink-0"
           />
         ))
       }
@@ -68,8 +68,6 @@ const { images = [] } = Astro.props;
       );
     };
 
-    carousel.addEventListener("mouseenter", pause);
-    carousel.addEventListener("mouseleave", play);
   };
 
   // Ensure images are loaded to get correct dimensions before animating

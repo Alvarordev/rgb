@@ -11,7 +11,7 @@ const { class: className, class1, class2, duration = "300" } = Astro.props;
 
 <div
   class:list={[
-    "swipe-animation relative overflow-hidden cursor-pointer",
+    "swipe-animation relative overflow-hidden cursor-pointer uppercase",
     className,
   ]}
   style={`--duration: ${duration}ms`}
