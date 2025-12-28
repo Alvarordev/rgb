@@ -12,6 +12,7 @@ import cocina2 from "../assets/cocina2.jpg";
 import sala from "../assets/sala.png";
 import terraza from "../assets/terraza.jpeg";
 import terraza2 from "../assets/terraza2.png";
+import AnimatedParagraph from "../components/AnimatedParagraph.astro";
 
 const galleryImages = [
   casaTrujillo,
@@ -36,16 +37,18 @@ const galleryImages = [
       >
         <div class="flex justify-between items-end w-full">
           <h1
-            class="text-[8rem] font-bold tracking-tighter uppercase leading-[0.85]"
+            class="text-[8rem] font-bold tracking-tight uppercase leading-[0.85]"
           >
-            Nuestros <br /> Proyectos
+            <AnimatedParagraph duration={1.5}>
+              Nuestros <br /> Proyectos
+            </AnimatedParagraph>
           </h1>
           <div class="text-xl font-medium max-w-md mb-4">
-            <p>
+            <AnimatedParagraph>
               Explora nuestra selección de trabajos más recientes, donde cada
               espacio cuenta una historia única de diseño, funcionalidad y
               estética atemporal.
-            </p>
+            </AnimatedParagraph>
           </div>
         </div>
 
