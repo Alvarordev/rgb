@@ -1,0 +1,72 @@
+---
+import Button from "./Button.astro";
+---
+
+<div id="floating-menu" class="fixed top-8 right-6 z-100 pointer-events-none">
+  <div class="flex gap-2 overflow-hidden py-2 px-1">
+    <div class="menu-button-wrapper translate-y-full opacity-0">
+      <Button
+        text1="CONTACTANOS"
+        class="bg-[#151515] text-[#fcfcfc] border border-[#151515]"
+        textSwipeClass="font-bold tracking-tighter leading-[0.85] text-sm"
+      />
+    </div>
+    <div class="menu-button-wrapper translate-y-full opacity-0">
+      <Button
+        id="open-menu-btn"
+        text1="MENU"
+        class="bg-[#efede5] text-[#151515] px-4!"
+        textSwipeClass="font-bold tracking-tighter leading-[0.85] text-sm"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initFloatingMenu = () => {
+    const menu = document.querySelector<HTMLElement>("#floating-menu");
+    const wrappers = document.querySelectorAll(".menu-button-wrapper");
+    const hero = document.querySelector("#hero-section");
+
+    if (!menu || !wrappers.length || !hero) return;
+
+    const tl = gsap.timeline({
+      paused: true,
+      defaults: { ease: "power3.out", duration: 0.6 },
+    });
+
+    tl.to(wrappers, {
+      y: 0,
+      opacity: 1,
+      stagger: 0.1,
+    });
+
+    ScrollTrigger.create({
+      trigger: hero,
+      start: "bottom 20%",
+      onEnter: () => {
+        tl.play();
+        menu.style.pointerEvents = "auto";
+      },
+      onLeaveBack: () => {
+        tl.reverse();
+        menu.style.pointerEvents = "none";
+      },
+    });
+  };
+
+  initFloatingMenu();
+
+  document.addEventListener("astro:after-swap", initFloatingMenu);
+</script>
+
+<style>
+  .menu-button-wrapper {
+    display: inline-block;
+  }
+</style>

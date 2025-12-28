@@ -1,12 +1,14 @@
 ---
 import Header from "../components/Header.astro";
-import SvgPathAnimation from "../components/SvgPathAnimation.astro";
-import AnimatedParagraph from "../components/AnimatedParagraph.astro";
-import Hero from "../components/landing/Hero.astro";
-import About from "../components/landing/About.astro";
-import Projects from "../components/landing/Projects.astro";
+import HeroSection from "../components/landing/HeroSection.astro";
+import AboutSection from "../components/landing/AboutSection.astro";
+import ProjectsSection from "../components/landing/ProjectsSection.astro";
+import ClientsSection from "../components/landing/ClientsSection.astro";
+import ApproachSection from "../components/landing/ApproachSection.astro";
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import FloatingMenu from "../components/FloatingMenu.astro";
+import MenuModal from "../components/MenuModal.astro";
 
 import banoSevilla from "../assets/bano-sevilla.jpg";
 import casaTrujillo from "../assets/casa-trujillo.jpg";
@@ -14,8 +16,6 @@ import casaVerde from "../assets/casa-verde.png";
 import cocina2 from "../assets/cocina2.jpg";
 import sala from "../assets/sala.png";
 import terraza from "../assets/terraza.jpeg";
-import terraza2 from "../assets/terraza2.png";
-import cliente1 from "../assets/cliente1.webm";
 
 const images = [
   banoSevilla.src,
@@ -29,130 +29,18 @@ const images = [
 
 <Layout>
   <Header />
+  <FloatingMenu />
+  <MenuModal />
   <main class="relative w-full">
-    <Hero images={images} />
+    <HeroSection images={images} />
 
-    <About />
+    <AboutSection />
 
-    <Projects />
+    <ProjectsSection />
 
-    { }
-    <section
-      class="relative w-full h-screen bg-[#fcfcfc] px-7 flex flex-col items-center justify-center"
-    >
-      <div class="grid grid-cols-12">
-        <div class="col-span-6">
-          <div
-            class="ml-20 text-[2.8rem] font-bold tracking-tighter leading-tight"
-          >
-            <AnimatedParagraph>
-              Nuestro enfoque en RGB Studio es crear espacios únicos,
-              funcionales y atemporales, adaptados a la visión y necesidades de
-              cada cliente.
-            </AnimatedParagraph>
-            <AnimatedParagraph class="mt-8">
-              Trabajamos cada proyecto de manera cercana y colaborativa,
-              transformando ideas en lugares que inspiran y perduran en el
-              tiempo.
-            </AnimatedParagraph>
-          </div>
-        </div>
+    <ApproachSection />
 
-        <div class="col-span-6 grid grid-cols-6">
-          <div class="col-span-4 col-start-2">
-            <SvgPathAnimation />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="relative bg-[#fcfcfc] w-full px-7 flex flex-col justify-center gap-4"
-    >
-      <h3 class="font-bold text-sm">(NUESTROS CLIENTES)</h3>
-      <div class="grid grid-cols-12">
-        <div class="col-span-6 mr-10">
-          <img
-            src={terraza2.src}
-            alt="Terraza-2"
-            class="w-full h-auto object-cover"
-          />
-          <div class="font-medium mt-6 text-xl">
-            <AnimatedParagraph>
-              "Como terraza lo que se pensaba hacer era un punto de reunion de
-              la casa, poder recibir amistadas y familiares. Sabes que estas
-              abrazado por el espacio. Este espacio anteriormente era más como
-              un deposito de la casa estaba en desuso y el espacio no estaba
-              bien aprovechado. Decidimos darle un giro."
-            </AnimatedParagraph>
-
-            <AnimatedParagraph class="my-4 font-bold">
-              ¿Crees que tu idea se ve reflejada en el diseño final?
-            </AnimatedParagraph>
-
-            <AnimatedParagraph>
-              "Sí, yo creo que se cumplió con la visión que teniamos, la idea de
-              la terraza fue tanto mía como la de mi mamá donde tener un espacio
-              acogedor que pueda reunir a sus amistades."
-            </AnimatedParagraph>
-
-            <div class="text-sm uppercase font-extrabold leading-tight mt-6">
-              <p>Luis</p>
-              <p>Terraza Lima</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-span-1"></div>
-
-        <div class="col-span-5 flex flex-col gap-2">
-          <div
-            class="relative group cursor-pointer overflow-hidden max-h-screen video-container"
-          >
-            <video
-              id="client-video"
-              src={cliente1}
-              class="w-full h-full scale-120 object-contain max-h-[90vh]"
-              loop
-              playsinline></video>
-            <div
-              id="video-controls"
-              class="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-100 transition-opacity duration-300"
-            >
-              <div
-                id="play-pause-indicator"
-                class="bg-white/20 backdrop-blur-md p-6 rounded-full"
-              >
-                <svg
-                  id="play-icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="white"><path d="M8 5v14l11-7z"></path></svg
-                >
-                <svg
-                  id="pause-icon"
-                  class="hidden"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="white"
-                  ><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg
-                >
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <p class="text-sm font-bold tracking-tighter text-end mr-10">
-              DALE PLAY!
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ClientsSection />
 
     <Footer />
   </main>
@@ -165,6 +53,7 @@ const images = [
     gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis();
+    (window as any).lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -195,38 +84,5 @@ const images = [
         scrub: true,
       },
     });
-
-    const video = document.getElementById("client-video") as HTMLVideoElement;
-    const playIcon = document.getElementById("play-icon");
-    const pauseIcon = document.getElementById("pause-icon");
-    const videoContainer = document.querySelector(".video-container");
-    const videoControls = document.getElementById("video-controls");
-
-    if (video && videoContainer && videoControls) {
-      const updateUI = () => {
-        if (video.paused) {
-          videoControls.classList.remove("opacity-0");
-          videoControls.classList.add("opacity-100");
-          playIcon?.classList.remove("hidden");
-          pauseIcon?.classList.add("hidden");
-        } else {
-          videoControls.classList.remove("opacity-100");
-          videoControls.classList.add("opacity-0");
-          playIcon?.classList.add("hidden");
-          pauseIcon?.classList.remove("hidden");
-        }
-      };
-
-      videoContainer.addEventListener("click", () => {
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
-        }
-        updateUI();
-      });
-
-      updateUI();
-    }
   </script>
 </Layout>

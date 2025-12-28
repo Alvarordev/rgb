@@ -1,0 +1,29 @@
+---
+import AnimatedParagraph from "../AnimatedParagraph.astro";
+import SvgPathAnimation from "../SvgPathAnimation.astro";
+---
+
+<section
+  class="relative w-full h-screen bg-[#fcfcfc] px-7 flex flex-col items-center justify-center"
+>
+  <div class="grid grid-cols-12">
+    <div class="col-span-6">
+      <div class="ml-20 text-[2.8rem] font-bold tracking-tighter leading-tight">
+        <AnimatedParagraph>
+          Nuestro enfoque en RGB Studio es crear espacios únicos, funcionales y
+          atemporales, adaptados a la visión y necesidades de cada cliente.
+        </AnimatedParagraph>
+        <AnimatedParagraph class="mt-8">
+          Trabajamos cada proyecto de manera cercana y colaborativa,
+          transformando ideas en lugares que inspiran y perduran en el tiempo.
+        </AnimatedParagraph>
+      </div>
+    </div>
+
+    <div class="col-span-6 grid grid-cols-6">
+      <div class="col-span-4 col-start-2">
+        <SvgPathAnimation />
+      </div>
+    </div>
+  </div>
+</section>

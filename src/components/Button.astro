@@ -2,16 +2,18 @@
 import TextSwipe from "./TextSwipe.astro";
 
 interface Props {
+  id?: string;
   class?: string;
   text1: string;
   text2?: string;
   textSwipeClass?: string;
 }
 
-const { class: className, text1, text2, textSwipeClass } = Astro.props;
+const { id, class: className, text1, text2, textSwipeClass } = Astro.props;
 ---
 
 <button
+  id={id}
   class:list={[
     "group h-12 px-6 rounded-full cursor-pointer flex items-center",
     className,

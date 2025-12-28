@@ -1,0 +1,143 @@
+---
+import TextSwipe from "./TextSwipe.astro";
+---
+
+<div
+  id="menu-modal"
+  class="fixed inset-0 z-200 pointer-events-none overflow-hidden"
+>
+  <svg
+    class="modal-transition absolute inset-0 w-full h-full"
+    viewBox="0 0 100 100"
+    preserveAspectRatio="none"
+  >
+    <path class="modal-path" fill="#151515" d="M 0 0 V 0 Q 50 0 100 0 V 0 z"
+    ></path>
+  </svg>
+
+  <div
+    class="modal-content relative h-full w-full flex flex-col justify-center items-center opacity-0 invisible"
+  >
+    <button
+      id="close-modal"
+      class="absolute top-12 right-9 text-[#fcfcfc] cursor-pointer group"
+    >
+      <TextSwipe class="font-bold tracking-tighter leading-[0.85] text-sm">
+        <Fragment slot="text1">CERRAR</Fragment>
+      </TextSwipe>
+    </button>
+
+    <nav class="flex flex-col items-center gap-8">
+      <a
+        href="/"
+        class="modal-nav-link text-[#fcfcfc] text-7xl font-bold tracking-tighter"
+      >
+        <TextSwipe>
+          <Fragment slot="text1">HOME</Fragment>
+        </TextSwipe>
+      </a>
+      <a
+        href="#proyectos"
+        class="modal-nav-link text-[#fcfcfc] text-7xl font-bold tracking-tighter"
+      >
+        <TextSwipe class2="text-red-500">
+          <Fragment slot="text1">PROYECTOS</Fragment>
+        </TextSwipe>
+      </a>
+      <a
+        href="#nosotros"
+        class="modal-nav-link text-[#fcfcfc] text-7xl font-bold tracking-tighter"
+      >
+        <TextSwipe class2="text-green-500">
+          <Fragment slot="text1">NOSOTROS</Fragment>
+        </TextSwipe>
+      </a>
+      <a
+        href="#contacto"
+        class="modal-nav-link text-[#fcfcfc] text-7xl font-bold tracking-tighter"
+      >
+        <TextSwipe class2="text-blue-500">
+          <Fragment slot="text1">CONTACTO</Fragment>
+        </TextSwipe>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  const initMenuModal = () => {
+    const modal = document.querySelector<HTMLElement>("#menu-modal");
+    const path = document.querySelector(".modal-path");
+    const content = document.querySelector(".modal-content");
+    const closeBtn = document.querySelector("#close-modal");
+    const menuBtn = document.querySelector("#open-menu-btn");
+
+    if (!modal || !path || !content || !closeBtn || !menuBtn) return;
+
+    const tl = gsap.timeline({
+      paused: true,
+      onStart: () => {
+        modal.style.pointerEvents = "auto";
+      },
+      onReverseComplete: () => {
+        modal.style.pointerEvents = "none";
+      },
+    });
+
+    const startPath = "M 0 0 V 0 Q 50 0 100 0 V 0 z";
+    const midPath = "M 0 0 V 50 Q 50 100 100 50 V 0 z";
+    const endPath = "M 0 0 V 100 Q 50 100 100 100 V 0 z";
+
+    tl.to(path, {
+      attr: { d: midPath },
+      duration: 0.4,
+      ease: "power2.in",
+    })
+      .to(path, {
+        attr: { d: endPath },
+        duration: 0.4,
+        ease: "power2.out",
+      })
+      .to(
+        content,
+        {
+          autoAlpha: 1,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.2"
+      );
+
+    menuBtn.addEventListener("click", () => {
+      tl.play();
+      document.body.style.overflow = "hidden";
+      if ((window as any).lenis) (window as any).lenis.stop();
+    });
+
+    closeBtn.addEventListener("click", () => {
+      tl.reverse();
+      document.body.style.overflow = "";
+      if ((window as any).lenis) (window as any).lenis.start();
+    });
+
+    const links = content.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", () => {
+        tl.reverse();
+        document.body.style.overflow = "";
+        if ((window as any).lenis) (window as any).lenis.start();
+      });
+    });
+  };
+
+  initMenuModal();
+  document.addEventListener("astro:after-swap", initMenuModal);
+</script>
+
+<style>
+  .modal-transition {
+    pointer-events: none;
+  }
+</style>
