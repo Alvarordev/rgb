@@ -2,45 +2,71 @@
 import TextSwipe from "./TextSwipe.astro";
 import Button from "./Button.astro";
 import logoWhite from "../assets/rgb-logo-white.png";
+import logo from "../assets/rgb-logo.png";
+
+interface Props {
+  light?: boolean;
+}
+
+const { light = false } = Astro.props;
 ---
 
 <header class="absolute top-0 z-50 w-full px-7">
-  <div class="text-[#fcfcfc] flex w-full justify-between mt-8 items-center">
-    <div class="flex items-center gap-4">
-      <img src={logoWhite.src} alt="rgb-logo" class="w-32" />
-    </div>
+  <nav
+    class:list={[
+      "flex w-full justify-between mt-8 items-center",
+      light ? "text-[#151515]" : "text-[#fcfcfc]",
+    ]}
+  >
+    <a href="/" class="flex items-center gap-4">
+      {
+        light ? (
+          <img src={logo.src} alt="rgb-logo" class="w-32" />
+        ) : (
+          <img src={logoWhite.src} alt="rgb-logo" class="w-32" />
+        )
+      }
+    </a>
 
     <ul class="flex text-sm gap-4 font-bold items-center uppercase">
       <li>
-        <TextSwipe
-          class="tracking-tight leading-[0.85]"
-          class2="text-red-500"
-        >
-          <Fragment slot="text1">Proyectos</Fragment>
-        </TextSwipe>
+        <a href="/proyectos">
+          <TextSwipe
+            class="tracking-tight leading-[0.85]"
+            class2="text-red-500"
+          >
+            <Fragment slot="text1">Proyectos</Fragment>
+          </TextSwipe>
+        </a>
       </li>
       <li>
-        <TextSwipe
-          class="tracking-tight leading-[0.85]"
-          class2="text-green-500"
-        >
-          <Fragment slot="text1">Nosotros</Fragment>
-        </TextSwipe>
+        <a href="">
+          <TextSwipe
+            class="tracking-tight leading-[0.85]"
+            class2="text-green-500"
+          >
+            <Fragment slot="text1">Nosotros</Fragment>
+          </TextSwipe>
+        </a>
       </li>
       <li>
-        <TextSwipe
-          class="tracking-tight leading-[0.85]"
-          class2="text-blue-500"
-        >
-          <Fragment slot="text1">Contacto</Fragment>
-        </TextSwipe>
+        <a href="">
+          <TextSwipe
+            class="tracking-tight leading-[0.85]"
+            class2="text-blue-500"
+          >
+            <Fragment slot="text1">Contacto</Fragment>
+          </TextSwipe>
+        </a>
       </li>
     </ul>
 
     <Button
-      class="bg-[#fcfcfc] text-[#151515]"
+      class:list={[
+        light ? "bg-[#151515] text-[#fcfcfc]" : "bg-[#fcfcfc] text-[#151515]",
+      ]}
       text1="CONTACTANOS"
       textSwipeClass="font-bold tracking-tighter leading-[0.85] text-sm"
     />
-  </div>
+  </nav>
 </header>

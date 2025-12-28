@@ -38,22 +38,35 @@ import logo from "../assets/rgb-logo.png";
       <p class="font-bold text-sm mb-4">(NAVEGACION)</p>
       <ul class="text-5xl font-bold flex flex-col gap-8">
         <li>
-          <TextSwipe class="tracking-tighter leading-[0.85]">
-            <Fragment slot="text1">Home</Fragment>
-          </TextSwipe>
+          <a href="/">
+            <TextSwipe class="tracking-tighter leading-[0.85]">
+              <Fragment slot="text1">Home</Fragment>
+            </TextSwipe>
+          </a>
         </li>
         <li>
-          <TextSwipe class="tracking-tighter leading-[0.85]" class2="text-red-500">
+          <a href="/proyectos">
+            <TextSwipe
+              class="tracking-tighter leading-[0.85]"
+            class2="text-red-500"
+          >
             <Fragment slot="text1">Proyectos</Fragment>
           </TextSwipe>
+          </a>
         </li>
         <li>
-          <TextSwipe class="tracking-tighter leading-[0.85]" class2="text-green-500">
+          <TextSwipe
+            class="tracking-tighter leading-[0.85]"
+            class2="text-green-500"
+          >
             <Fragment slot="text1">Nosotros</Fragment>
           </TextSwipe>
         </li>
         <li>
-          <TextSwipe class="tracking-tighter leading-[0.85]" class2="text-blue-500">
+          <TextSwipe
+            class="tracking-tighter leading-[0.85]"
+            class2="text-blue-500"
+          >
             <Fragment slot="text1">Contacto</Fragment>
           </TextSwipe>
         </li>
@@ -74,18 +87,18 @@ import logo from "../assets/rgb-logo.png";
       <div class="flex flex-col">
         <p class="font-bold text-sm mb-2">(SIGUENOS)</p>
         <div class="mt-4">
-            <ul class="flex gap-4 text-3xl font-bold tracking-tighter">
-                <li>
-                <TextSwipe class="tracking-tighter leading-[0.85]">
-                    <Fragment slot="text1">Instagram</Fragment>
-                </TextSwipe>
-                </li>
-                <li>
-                <TextSwipe class="tracking-tighter leading-[0.85]">
-                    <Fragment slot="text1">Tik Tok</Fragment>
-                </TextSwipe>
-                </li>
-            </ul>
+          <ul class="flex gap-4 text-3xl font-bold tracking-tighter">
+            <li>
+              <TextSwipe class="tracking-tighter leading-[0.85]">
+                <Fragment slot="text1">Instagram</Fragment>
+              </TextSwipe>
+            </li>
+            <li>
+              <TextSwipe class="tracking-tighter leading-[0.85]">
+                <Fragment slot="text1">Tik Tok</Fragment>
+              </TextSwipe>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -1,8 +1,18 @@
 ---
 import Button from "./Button.astro";
+
+interface Props {
+  triggerId: string;
+}
+
+const { triggerId } = Astro.props;
 ---
 
-<div id="floating-menu" class="fixed top-8 right-6 z-100 pointer-events-none">
+<div
+  id="floating-menu"
+  class="fixed top-8 right-6 z-100 pointer-events-none"
+  data-trigger={triggerId}
+>
   <div class="flex gap-2 overflow-hidden py-2 px-1">
     <div class="menu-button-wrapper translate-y-full opacity-0">
       <Button
@@ -31,9 +41,11 @@ import Button from "./Button.astro";
   const initFloatingMenu = () => {
     const menu = document.querySelector<HTMLElement>("#floating-menu");
     const wrappers = document.querySelectorAll(".menu-button-wrapper");
-    const hero = document.querySelector("#hero-section");
+    const triggerId = menu?.dataset.trigger;
 
-    if (!menu || !wrappers.length || !hero) return;
+    const trigger = triggerId ? document.querySelector(`#${triggerId}`) : null;
+
+    if (!menu || !wrappers.length || !trigger) return;
 
     const tl = gsap.timeline({
       paused: true,
@@ -47,14 +59,15 @@ import Button from "./Button.astro";
     });
 
     ScrollTrigger.create({
-      trigger: hero,
-      start: "bottom 20%",
+      trigger: trigger,
+      start:
+        trigger.id === "horizontal-scroll-section" ? "top -5%" : "bottom 40%",
       onEnter: () => {
-        tl.play();
+        tl.timeScale(1).play();
         menu.style.pointerEvents = "auto";
       },
       onLeaveBack: () => {
-        tl.reverse();
+        tl.timeScale(1.5).reverse();
         menu.style.pointerEvents = "none";
       },
     });
