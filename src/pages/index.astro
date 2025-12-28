@@ -1,7 +1,6 @@
 ---
 import Header from "../components/Header.astro";
 import SvgPathAnimation from "../components/SvgPathAnimation.astro";
-import TextSwipe from "../components/TextSwipe.astro";
 import AnimatedParagraph from "../components/AnimatedParagraph.astro";
 import Hero from "../components/landing/Hero.astro";
 import About from "../components/landing/About.astro";
@@ -9,13 +8,21 @@ import Projects from "../components/landing/Projects.astro";
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 
+import banoSevilla from "../assets/bano-sevilla.jpg";
+import casaTrujillo from "../assets/casa-trujillo.jpg";
+import casaVerde from "../assets/casa-verde.png";
+import cocina2 from "../assets/cocina2.jpg";
+import sala from "../assets/sala.png";
+import terraza from "../assets/terraza.jpeg";
+import terraza2 from "../assets/terraza2.png";
+
 const images = [
-  "../src/assets/bano-sevilla.jpg",
-  "../src/assets/casa-trujillo.jpg",
-  "../src/assets/casa-verde.png",
-  "../src/assets/cocina2.jpg",
-  "../src/assets/sala.png",
-  "../src/assets/terraza.jpeg",
+  banoSevilla.src,
+  casaTrujillo.src,
+  casaVerde.src,
+  cocina2.src,
+  sala.src,
+  terraza.src,
 ];
 ---
 
@@ -65,7 +72,7 @@ const images = [
       <div class="grid grid-cols-12">
         <div class="col-span-6 mr-10">
           <img
-            src="../src/assets/terraza2.png"
+            src={terraza2.src}
             alt="Terraza-2"
             class="w-full h-auto object-cover"
           />

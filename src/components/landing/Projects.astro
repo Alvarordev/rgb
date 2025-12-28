@@ -1,6 +1,13 @@
 ---
 import TextSwipe from "../TextSwipe.astro";
 import Button from "../Button.astro";
+
+import casaTrujillo from "../../assets/casa-trujillo.jpg";
+import sala from "../../assets/sala.png";
+import terraza from "../../assets/terraza.jpeg";
+import casaVerde from "../../assets/casa-verde.png";
+import banoSevilla from "../../assets/bano-sevilla.jpg";
+import cocina2 from "../../assets/cocina2.jpg";
 ---
 
 <section class="relative flex flex-col w-full pt-20 pb-10 px-7 bg-[#fcfcfc]">
@@ -18,7 +25,7 @@ import Button from "../Button.astro";
     <div class="col-span-6">
       <div class="flex flex-col group">
         <img
-          src="../src/assets/casa-trujillo.jpg"
+          src={casaTrujillo.src}
           alt="casa trujillo"
           class="h-full w-full object-cover max-h-[90vh]"
         />
@@ -42,7 +49,7 @@ import Button from "../Button.astro";
     <div class="col-span-6">
       <div class="flex flex-col group">
         <img
-          src="../src/assets/sala.png"
+          src={sala.src}
           alt="sala"
           class="h-full w-full object-cover max-h-[80vh]"
         />
@@ -66,7 +73,7 @@ import Button from "../Button.astro";
       <div class="grid grid-cols-6">
         <div class="flex flex-col group col-span-5">
           <img
-            src="../src/assets/terraza.jpeg"
+            src={terraza.src}
             alt="terraza"
             class="h-full w-full object-cover max-h-[80vh]"
           />
@@ -91,7 +98,7 @@ import Button from "../Button.astro";
     <div class="col-span-6">
       <div class="flex flex-col group">
         <img
-          src="../src/assets/casa-verde.png"
+          src={casaVerde.src}
           alt="casa-verde"
           class="h-full w-full object-cover max-h-[80vh]"
         />
@@ -116,7 +123,7 @@ import Button from "../Button.astro";
     <div class="col-span-6">
       <div class="flex flex-col group">
         <img
-          src="../src/assets/bano-sevilla.jpg"
+          src={banoSevilla.src}
           alt="bano-sevilla"
           class="h-full w-full object-cover max-h-[80vh]"
         />
@@ -140,7 +147,7 @@ import Button from "../Button.astro";
       <div class="grid grid-cols-6">
         <div class="flex flex-col group col-span-5 col-start-2">
           <img
-            src="../src/assets/cocina2.jpg"
+            src={cocina2.src}
             alt="cocina2"
             class="h-full w-full object-cover max-h-[80vh]"
           />

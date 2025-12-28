@@ -1,12 +1,13 @@
 ---
 import TextSwipe from "./TextSwipe.astro";
 import Button from "./Button.astro";
+import logoWhite from "../assets/rgb-logo-white.png";
 ---
 
 <header class="absolute top-0 z-50 w-full px-7">
   <div class="text-[#fcfcfc] flex w-full justify-between mt-8 items-center">
     <div class="flex items-center gap-4">
-      <img src="/src/assets/rgb-logo-white.png" alt="rgb-logo" class="w-32" />
+      <img src={logoWhite.src} alt="rgb-logo" class="w-32" />
     </div>
 
     <ul class="flex text-sm gap-4 font-bold items-center uppercase">

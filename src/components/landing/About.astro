@@ -1,6 +1,7 @@
 ---
 import AnimatedParagraph from "../AnimatedParagraph.astro";
 import Button from "../Button.astro";
+import sala from "../../assets/sala.png";
 ---
 
 <section class="relative w-full bg-[#fcfcfc] flex flex-col py-12 px-7 about">
@@ -10,7 +11,7 @@ import Button from "../Button.astro";
   </h3>
   <div class="flex flex-col w-full items-center mt-10">
     <img
-      src="../src/assets/sala.png"
+      src={sala.src}
       alt="cocina"
       class="h-72 w-115 aspect-square object-cover"
     />

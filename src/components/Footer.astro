@@ -1,5 +1,7 @@
 ---
 import TextSwipe from "./TextSwipe.astro";
+import casaTrujillo from "../assets/casa-trujillo.jpg";
+import logo from "../assets/rgb-logo.png";
 ---
 
 <footer class="relative w-full bg-[#fcfcfc] flex flex-col pt-40">
@@ -26,8 +28,8 @@ import TextSwipe from "./TextSwipe.astro";
     class="grid grid-cols-12 w-full border-t border-[#151515]/20 pt-10 pb-5 px-7"
   >
     <div class="col-span-3 flex flex-col gap-4">
-      <img src="/src/assets/casa-trujillo.jpg" alt="casa-trujillo" />
-      <img src="/src/assets/rgb-logo.png" alt="rgb-logo" class="w-full" />
+      <img src={casaTrujillo.src} alt="casa-trujillo" />
+      <img src={logo.src} alt="rgb-logo" class="w-full" />
     </div>
 
     <div class="col-span-1"></div>
