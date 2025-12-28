@@ -1,0 +1,24 @@
+---
+import TextSwipe from "./TextSwipe.astro";
+
+interface Props {
+  class?: string;
+  text1: string;
+  text2?: string;
+  textSwipeClass?: string;
+}
+
+const { class: className, text1, text2, textSwipeClass } = Astro.props;
+---
+
+<button
+  class:list={[
+    "group h-12 px-6 rounded-full cursor-pointer flex items-center",
+    className,
+  ]}
+>
+  <TextSwipe class:list={[textSwipeClass]}>
+    <Fragment slot="text1">{text1}</Fragment>
+    <Fragment slot="text2">{text2 || text1}</Fragment>
+  </TextSwipe>
+</button>

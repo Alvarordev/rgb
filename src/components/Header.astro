@@ -1,5 +1,6 @@
 ---
 import TextSwipe from "./TextSwipe.astro";
+import Button from "./Button.astro";
 ---
 
 <header class="absolute top-0 z-50 w-full px-7">
@@ -35,14 +36,10 @@ import TextSwipe from "./TextSwipe.astro";
       </li>
     </ul>
 
-    <button
-      class="group bg-[#fcfcfc] h-12 px-6 rounded-full cursor-pointer flex items-center"
-    >
-      <TextSwipe
-        class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
-      >
-        <Fragment slot="text1">CONTACTANOS  </Fragment>
-      </TextSwipe>
-    </button>
+    <Button
+      class="bg-[#fcfcfc] text-[#151515]"
+      text1="CONTACTANOS"
+      textSwipeClass="font-bold tracking-tighter leading-[0.85] text-sm"
+    />
   </div>
 </header>

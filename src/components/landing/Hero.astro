@@ -1,0 +1,36 @@
+---
+import ImageCarousel from "../ImageCarousel.astro";
+import AnimatedParagraph from "../AnimatedParagraph.astro";
+
+interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props;
+---
+
+<section
+  id="hero-section"
+  class="bg-[#151515] text-[#fcfcfc] h-screen w-full flex flex-col overflow-hidden sticky top-0"
+>
+  <div class="h-full w-full flex flex-col">
+    <div class="flex flex-1 justify-center items-center">
+      <AnimatedParagraph
+        class="leading-tight text-7xl text-center max-w-7xl tracking-tighter font-bold pt-20 title"
+        duration={2}
+      >
+        Nuestro sello es la creación de espacios únicos - integrando
+        funcionalidad y diseño con un estilo propio.
+      </AnimatedParagraph>
+    </div>
+
+    <div class="flex flex-col justify-end items-end pb-2 carousel">
+      <div class="flex w-full justify-between text-xs pb-2 px-7 font-bold">
+        <p>Lima, PE</p>
+        <p>RGB © 2025</p>
+        <p>Architectura</p>
+      </div>
+      <ImageCarousel images={images} />
+    </div>
+  </div>
+</section>

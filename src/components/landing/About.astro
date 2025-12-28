@@ -1,0 +1,37 @@
+---
+import AnimatedParagraph from "../AnimatedParagraph.astro";
+import Button from "../Button.astro";
+---
+
+<section class="relative w-full bg-[#fcfcfc] flex flex-col py-12 px-7 about">
+  <h3 class="uppercase text-[8rem] font-medium leading-[0.95] tracking-normal">
+    Diseñando <br />
+    <span class="ml-40"> con propósito</span>
+  </h3>
+  <div class="flex flex-col w-full items-center mt-10">
+    <img
+      src="../src/assets/sala.png"
+      alt="cocina"
+      class="h-72 w-115 aspect-square object-cover"
+    />
+    <AnimatedParagraph class="text-xl font-medium max-w-115 mt-8 w-full">
+      En RGB creemos en la arquitectura como una forma de transformar ideas en
+      espacios con identidad propia. Nuestro estudio combina creatividad,
+      técnica y colaboración para diseñar proyectos que transmiten equilibrio
+      entre funcionalidad, estética y sostenibilidad.
+    </AnimatedParagraph>
+    <AnimatedParagraph class="text-xl font-medium max-w-115 mt-6 w-full">
+      Cada detalle refleja el compromiso de nuestro equipo con la innovación y
+      la calidad. Trabajamos con pasión y dedicación, creando propuestas únicas
+      que buscan inspirar, conectar y trascender en el tiempo.
+    </AnimatedParagraph>
+
+    <div class="w-115">
+      <Button
+        class="bg-[#151515] mt-10"
+        text1="descubre más sobre nosotros"
+        textSwipeClass="font-bold tracking-tighter leading-[1.15] text-sm text-[#fcfcfc]"
+      />
+    </div>
+  </div>
+</section>

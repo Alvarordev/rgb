@@ -7,6 +7,11 @@ interface Props {
 }
 
 const { class: className, class1, class2, duration = "300" } = Astro.props;
+
+const text1 = await Astro.slots.render("text1");
+const text2 = Astro.slots.has("text2")
+  ? await Astro.slots.render("text2")
+  : text1;
 ---
 
 <div
@@ -18,15 +23,13 @@ const { class: className, class1, class2, duration = "300" } = Astro.props;
 >
   <div class="grid grid-cols-1 grid-rows-1">
     <span class:list={["block col-start-1 row-start-1", class1]}>
-      <slot name="text1" />
+      <Fragment set:html={text1} />
     </span>
     <span
       class:list={["block col-start-1 row-start-1", class2]}
       aria-hidden="true"
     >
-      <slot name="text2">
-        <slot name="text1" />
-      </slot>
+      <Fragment set:html={text2} />
     </span>
   </div>
 </div>

@@ -35,12 +35,12 @@
 
     gsap.to(path, {
       strokeDashoffset: 0,
-      duration: 1.8,
-      ease: "power2.out",
+      ease: "none",
       scrollTrigger: {
         trigger: path,
-        start: "top 70%", // Empieza cuando el path está al 80% de la pantalla
-        toggleActions: "play none none none", // Solo se reproduce una vez al entrar
+        start: "top 90%",
+        end: "center center",
+        scrub: 0.5, // Un pequeño suavizado para que se sienta más fluido
       },
     });
   }
