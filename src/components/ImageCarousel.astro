@@ -40,11 +40,9 @@ const { images = [] } = Astro.props;
 
     const duration = parseFloat(durationAttr);
 
-    // Clone group for seamless infinite loop
     const clone = group.cloneNode(true) as HTMLElement;
     track.appendChild(clone);
 
-    // Create animations for both original and cloned groups
     const groups = track.querySelectorAll<HTMLElement>(".carousel-group");
     const animations = gsap.utils.toArray<HTMLElement>(groups).map((el) =>
       gsap.to(el, {
@@ -55,7 +53,6 @@ const { images = [] } = Astro.props;
       })
     );
 
-    // Interaction handlers with inertia effect
     const pause = () => {
       animations.forEach((anim) =>
         gsap.to(anim, { timeScale: 0, duration: 0.8, ease: "power2.out" })
@@ -70,7 +67,6 @@ const { images = [] } = Astro.props;
 
   };
 
-  // Ensure images are loaded to get correct dimensions before animating
   if (document.readyState === "complete") {
     initCarousel();
   } else {

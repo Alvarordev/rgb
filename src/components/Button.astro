@@ -7,13 +7,24 @@ interface Props {
   text1: string;
   text2?: string;
   textSwipeClass?: string;
+  href?: string;
 }
 
-const { id, class: className, text1, text2, textSwipeClass } = Astro.props;
+const {
+  id,
+  class: className,
+  text1,
+  text2,
+  textSwipeClass,
+  href,
+} = Astro.props;
+
+const Element = href ? "a" : "button";
 ---
 
-<button
+<Element
   id={id}
+  href={href}
   class:list={[
     "group h-12 px-6 rounded-full cursor-pointer flex items-center",
     className,
@@ -23,4 +34,4 @@ const { id, class: className, text1, text2, textSwipeClass } = Astro.props;
     <Fragment slot="text1">{text1}</Fragment>
     <Fragment slot="text2">{text2 || text1}</Fragment>
   </TextSwipe>
-</button>
+</Element>
