@@ -1,0 +1,252 @@
+---
+import { Image } from "astro:assets";
+import AnimatedParagraph from "../AnimatedParagraph.astro";
+
+import alvaroImg from "../../assets/about/alvaro.png";
+import aleImg from "../../assets/about/ale.png";
+import marImg from "../../assets/about/mar.png";
+import grupalImg from "../../assets/about/grupal.png";
+
+const team = [
+  {
+    name: "Alvaro Rojas",
+    image: alvaroImg,
+    role: "Arquitecto & Socio-Fundador",
+    description:
+      "Graduado con una licenciatura en Arquitectura por la Universidad Peruana de Ciencias Aplicadas (UPC), Álvaro comenzó su carrera en un estudio de diseño de interiores de alta gama. Escaló hasta ser diseñador senior, produciendo diseños que le valieron premios nacionales e internacionales. Su experiencia combina un gran conocimiento y pasión en el sector de diseño interior residencial y comercial de lujo.",
+  },
+  {
+    name: "Alessandra Diaz",
+    image: aleImg,
+    role: "Arquitecta & Socia-Fundadora",
+    description:
+      "Tras obtener su título de Arquitectura por la Universidad Peruana de Ciencias Aplicadas (UPC), Katherine se unió a un prestigioso estudio de diseño de lujo. Ascendió a diseñadora principal, liderando proyectos reconocidos con importantes galardones de diseño global. Katherine aporta una experiencia vasta, enfocada en la estética y el conocimiento técnico profundo en el diseño de interiores premium residencial y comercial.",
+  },
+  {
+    name: "Marjorie Fribourg",
+    image: marImg,
+    role: "Arquitecta & Socia-Fundadora",
+    description:
+      "Después de licenciarse como Arquitecta en la Universidad Peruana de Ciencias Aplicadas (UPC), Marjorie se integró a una reconocida firma de diseño interior premium. Creció hasta convertirse en diseñadora senior, donde sus propuestas creativas ganaron múltiples premios de diseño a nivel nacional e internacional. Marjorie posee una experiencia completa, con dominio experto en proyectos de diseño de interiores en los segmentos comercial y residencial de lujo.",
+  },
+];
+---
+
+<section class="team-section relative bg-[#fcfcfc] px-7">
+  <div class="sticky-container h-[500vh]">
+    <div class="sticky top-0 h-screen flex flex-col py-12 overflow-hidden">
+      <div class="mb-8">
+        <p class="uppercase font-bold text-sm">(Nuestro equipo)</p>
+      </div>
+
+      <div class="grid grid-cols-12 flex-1">
+        <div class="col-span-3 flex flex-col">
+          <div class="w-full">
+            <Image
+              src={grupalImg}
+              alt="Equipo RGB"
+              class="w-full h-auto object-cover"
+              loading="eager"
+              decoding="async"
+            />
+            <p
+              class="text-base mt-4 uppercase font-bold leading-tight tracking-tighter"
+            >
+              Nuestro estudio combina creatividad, técnica y colaboración para
+              diseñar proyectos que transmiten equilibrio.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-span-1"></div>
+
+        <div class="col-span-8 relative flex flex-col">
+          <div class="cards-wrapper relative flex-1">
+            {
+              team.map((member, index) => (
+                <div
+                  class={`team-card absolute inset-0 flex flex-col opacity-0 pointer-events-none card-${index}`}
+                >
+                  <div class="grid grid-cols-8 h-full w-full gap-8">
+                    <div class="col-span-4 flex flex-col w-full">
+                      <div class="flex flex-col gap-3">
+                        <AnimatedParagraph
+                          class="text-6xl font-bold uppercase leading-none"
+                          duration={1.4}
+                          manual
+                        >
+                          {member.name}
+                        </AnimatedParagraph>
+                        <p class="text-lg font-bold text-zinc-600">
+                          {member.role}
+                        </p>
+                      </div>
+                      <div class="w-full pt-12">
+                        <AnimatedParagraph
+                          class="text-lg font-medium"
+                          duration={0.8}
+                          manual
+                        >
+                          {member.description}
+                        </AnimatedParagraph>
+                      </div>
+                      <div class="flex flex-1 items-end justify-start gap-2">
+                        <p class="font-bold text-sm uppercase">
+                          Sigue deslizando
+                        </p>
+                        <div class="mb-1.5">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="scroll-arrow"
+                          >
+                            <path d="M12 5v14" />
+                            <path d="m19 12-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-span-4 flex items-center">
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        class="w-125 h-full object-cover"
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .team-card {
+      transition: none;
+    }
+
+    .scroll-arrow {
+      animation: bounce 1.5s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(6px);
+      }
+    }
+  </style>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initTeamAnimation = () => {
+    const section = document.querySelector(".team-section");
+    const cards = document.querySelectorAll(".team-card");
+
+    const animateParagraph = (card: Element) => {
+      const paragraphs = card.querySelectorAll(".animated-paragraph");
+      paragraphs.forEach((p) => {
+        const duration = parseFloat(
+          (p as HTMLElement).dataset.duration || "0.8"
+        );
+        const lines = p.querySelectorAll(".split-line");
+        if (lines.length > 0) {
+          gsap.fromTo(
+            lines,
+            { yPercent: 100, opacity: 0 },
+            {
+              yPercent: 0,
+              opacity: 1,
+              duration: duration,
+              stagger: 0.05,
+              ease: "expo.out",
+              overwrite: true,
+            }
+          );
+        }
+      });
+    };
+
+    if (section && cards.length > 0) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.1,
+        },
+      });
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 20%",
+        onEnter: () => animateParagraph(cards[0]),
+      });
+
+      cards.forEach((card: Element, i) => {
+        if (i === 0) {
+          gsap.set(card, { opacity: 1, pointerEvents: "auto" });
+        }
+
+        if (i < cards.length - 1) {
+          const position = i === 0 ? 0.7 : 1.7;
+
+          tl.to(
+            card,
+            {
+              opacity: 0,
+              pointerEvents: "none",
+              duration: 0.1,
+            },
+            position
+          ).to(
+            cards[i + 1],
+            {
+              opacity: 1,
+              pointerEvents: "auto",
+              duration: 0.1,
+              onStart: () => animateParagraph(cards[i + 1]),
+            },
+            position
+          );
+        }
+      });
+
+      tl.to({}, { duration: 1.5 });
+    }
+
+    gsap.from(section, {
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+      },
+    });
+  };
+  initTeamAnimation();
+
+  document.addEventListener("astro:page-load", initTeamAnimation);
+</script>

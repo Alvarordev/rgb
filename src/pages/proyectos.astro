@@ -84,58 +84,58 @@ const galleryImages = [
 
     <Footer />
   </main>
+</Layout>
 
-  <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-    import Lenis from "lenis";
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import Lenis from "lenis";
 
-    gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis();
-    (window as any).lenis = lenis;
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
+  const lenis = new Lenis();
+  (window as any).lenis = lenis;
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
 
-    const initHorizontalScroll = () => {
-      const section = document.querySelector("#horizontal-scroll-section");
-      const strip = document.querySelector("#horizontal-strip");
-      const progressLine = document.querySelector("#scroll-progress-line");
+  const initHorizontalScroll = () => {
+    const section = document.querySelector("#horizontal-scroll-section");
+    const strip = document.querySelector("#horizontal-strip");
+    const progressLine = document.querySelector("#scroll-progress-line");
 
-      if (!section || !strip || !progressLine) return;
+    if (!section || !strip || !progressLine) return;
 
-      const getScrollAmount = () => {
-        return strip.scrollWidth - window.innerWidth;
-      };
-
-      gsap.to(strip, {
-        x: () => -getScrollAmount(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.5,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      gsap.to(progressLine, {
-        scaleX: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.5,
-        },
-      });
+    const getScrollAmount = () => {
+      return strip.scrollWidth - window.innerWidth;
     };
 
-    initHorizontalScroll();
-    document.addEventListener("astro:after-swap", initHorizontalScroll);
-  </script>
-</Layout>
+    gsap.to(strip, {
+      x: () => -getScrollAmount(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.5,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    gsap.to(progressLine, {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.5,
+      },
+    });
+  };
+
+  initHorizontalScroll();
+  document.addEventListener("astro:after-swap", initHorizontalScroll);
+</script>

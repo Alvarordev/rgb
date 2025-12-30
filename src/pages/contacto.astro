@@ -1,0 +1,111 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import AnimatedParagraph from "../components/AnimatedParagraph.astro";
+import TextSwipe from "../components/TextSwipe.astro";
+---
+
+<Layout title="Contacto | RGB Arquitectura">
+  <Header light />
+
+  <main class="bg-[#fcfcfc] text-[#151515]">
+    <section class="h-screen w-full flex flex-col justify-center px-7 pt-20">
+      <div class="grid grid-cols-12 w-full items-end">
+        <div class="col-span-8">
+          <h1
+            class="text-[8rem] font-bold uppercase tracking-tight leading-[0.9]"
+          >
+            <AnimatedParagraph duration={1.4}>
+              Hablemos de <br /> tu proyecto
+            </AnimatedParagraph>
+          </h1>
+        </div>
+        <div class="col-span-4 flex flex-col items-end pb-4">
+          <p class="text-sm font-bold uppercase mb-2">(Contacto)</p>
+          <a
+            href="mailto:hola@rgbstudio.pe"
+            class="text-4xl font-bold tracking-tighter"
+          >
+            <TextSwipe>
+              <Fragment slot="text1">hola@rgbstudio.pe</Fragment>
+            </TextSwipe>
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="grid grid-cols-12 w-full mt-20 border-t border-[#151515]/20 pt-10"
+      >
+        <div class="col-span-3">
+          <p class="text-sm font-bold uppercase mb-6">(Ubicación)</p>
+          <AnimatedParagraph class="text-2xl font-medium tracking-tighter">
+            Lima, Perú <br />
+            Calle Las Camelias 790, <br />
+            San Isidro
+          </AnimatedParagraph>
+        </div>
+
+        <div class="col-span-1"></div>
+
+        <div class="col-span-3">
+          <p class="text-sm font-bold uppercase mb-6">(Redes Sociales)</p>
+          <ul class="flex flex-col gap-2">
+            <li>
+              <a
+                href="https://www.instagram.com/rgb.studio.pe/"
+                target="_blank"
+                class="text-2xl font-bold tracking-tighter"
+              >
+                <TextSwipe>
+                  <Fragment slot="text1">Instagram</Fragment>
+                </TextSwipe>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.tiktok.com/@rgbstudiope?is_from_webapp=1&sender_device=pc"
+                target="_blank"
+                class="text-2xl font-bold tracking-tighter"
+              >
+                <TextSwipe>
+                  <Fragment slot="text1">TikTok</Fragment>
+                </TextSwipe>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-2xl font-bold tracking-tighter">
+                <TextSwipe>
+                  <Fragment slot="text1">WhatsApp</Fragment>
+                </TextSwipe>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-span-1"></div>
+
+        <div class="col-span-4 flex flex-col justify-between">
+          <div>
+            <p class="text-sm font-bold uppercase mb-6">(Llámanos)</p>
+            <a href="#" class="text-2xl font-bold tracking-tighter">
+              <TextSwipe>
+                <Fragment slot="text1">+51 999 999 999</Fragment>
+              </TextSwipe>
+            </a>
+          </div>
+
+          <div class="mt-10">
+            <button
+              class="group bg-[#151515] text-[#fcfcfc] h-14 px-8 rounded-full cursor-pointer flex items-center"
+            >
+              <TextSwipe class="font-bold tracking-tighter text-sm">
+                <Fragment slot="text1">INICIAR UNA CONSULTA</Fragment>
+              </TextSwipe>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

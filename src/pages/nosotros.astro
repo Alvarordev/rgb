@@ -1,0 +1,45 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
+import TeamSection from "../components/about/TeamSection.astro";
+import AboutHero from "../components/about/AboutHero.astro";
+import CommitmentSection from "../components/about/CommitmentSection.astro";
+import SvgSection from "../components/about/SvgSection.astro";
+import FloatingMenu from "../components/FloatingMenu.astro";
+import MenuModal from "../components/MenuModal.astro";
+---
+
+<Layout>
+  <Header light />
+  <FloatingMenu triggerId="about-section" />
+  <MenuModal />
+
+  <main class="bg-[#fcfcfc] text-[#151515]">
+    <AboutHero />
+    <CommitmentSection />
+    <SvgSection />
+    <TeamSection />
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import Lenis from "lenis";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const lenis = new Lenis();
+  (window as any).lenis = lenis;
+
+  lenis.on("scroll", ScrollTrigger.update);
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+
+  gsap.ticker.lagSmoothing(0);
+</script>

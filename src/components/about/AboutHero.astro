@@ -1,0 +1,66 @@
+---
+import AnimatedParagraph from "../AnimatedParagraph.astro";
+import oidos from "../../assets/about/oidos.webp";
+import ojos from "../../assets/about/ojos.webp";
+import boca from "../../assets/about/boca.webp";
+---
+
+<section class="flex flex-col pt-40 pb-10 items-center" id="about-section">
+  <h1 class="text-[7rem] font-bold uppercase tracking-tight">
+    <AnimatedParagraph duration={1.4}> NOSOTROS </AnimatedParagraph>
+  </h1>
+  <AnimatedParagraph
+    class="max-w-4xl text-center mt-6 text-xl px-7 font-medium"
+    duration={1}
+  >
+    RGB es un estudio de arquitectura y diseño que busca crear espacios
+    únicos, funcionales y atemporales, adaptados a la visión y necesidades
+    de cada cliente. Trabajamos cada proyecto de manera cercana y
+    colaborativa, transformando ideas en lugares que inspiran y perduran en
+    el tiempo.
+  </AnimatedParagraph>
+
+  <div class="flex w-full justify-center gap-2 mt-20 px-7">
+    <div class="relative overflow-hidden h-[70vh] w-full max-w-[30vw]">
+      <img src={oidos.src} alt="oidos" class="object-cover h-full w-full" />
+      <div
+        class="absolute bottom-0 left-0 w-full h-0 bg-red-500 mix-blend-multiply opacity-90 overlay-rgb"
+      >
+      </div>
+    </div>
+    <div class="relative overflow-hidden h-[70vh] w-full max-w-[30vw]">
+      <img src={ojos.src} alt="ojos" class="object-cover h-full w-full" />
+      <div
+        class="absolute bottom-0 left-0 w-full h-0 bg-green-500 mix-blend-multiply opacity-90 overlay-rgb"
+      >
+      </div>
+    </div>
+    <div class="relative overflow-hidden h-[70vh] w-full max-w-[30vw]">
+      <img src={boca.src} alt="boca" class="object-cover h-full w-full" />
+      <div
+        class="absolute bottom-0 left-0 w-full h-0 bg-blue-500 mix-blend-multiply opacity-90 overlay-rgb"
+      >
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initHeroAnimation = () => {
+    gsap.to(".overlay-rgb", {
+      height: "100%",
+      duration: 1.8,
+      stagger: 0.2,
+      ease: "expo.out",
+      delay: 0.5,
+    });
+  };
+
+  initHeroAnimation();
+  document.addEventListener("astro:page-load", initHeroAnimation);
+</script>

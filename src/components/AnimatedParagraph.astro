@@ -2,12 +2,17 @@
 interface Props {
   class?: string;
   duration?: number;
+  manual?: boolean;
 }
 
-const { class: className, duration = 0.8 } = Astro.props;
+const { class: className, duration = 0.8, manual = false } = Astro.props;
 ---
 
-<div class:list={["animated-paragraph", className]} data-duration={duration}>
+<div
+  class:list={["animated-paragraph", className]}
+  data-duration={duration}
+  data-manual={manual ? "true" : "false"}
+>
   <slot />
 </div>
 
@@ -52,6 +57,8 @@ const { class: className, duration = 0.8 } = Astro.props;
       });
 
       p.classList.add("is-ready");
+
+      if ((p as HTMLElement).dataset.manual === "true") return;
 
       gsap.from(split.lines, {
         scrollTrigger: {
