@@ -4,11 +4,13 @@ import SvgPathAnimation from "../SvgPathAnimation.astro";
 ---
 
 <section
-  class="relative w-full h-screen bg-[#fcfcfc] px-7 flex flex-col items-center justify-center"
+  class="relative z-10 w-full h-screen bg-[#fcfcfc] px-3.5 md:px-7 flex flex-col items-center justify-center"
 >
-  <div class="grid grid-cols-12">
+  <div class="flex flex-col md:grid md:grid-cols-12 gap-y-12 md:gap-y-0">
     <div class="col-span-6">
-      <div class="ml-20 text-[2.8rem] font-bold tracking-tighter leading-tight">
+      <div
+        class="md:ml-20 text-2xl md:text-[2.8rem] font-bold tracking-tighter leading-tight"
+      >
         <AnimatedParagraph>
           Nuestro enfoque en RGB Studio es crear espacios únicos, funcionales y
           atemporales, adaptados a la visión y necesidades de cada cliente.
@@ -21,7 +23,7 @@ import SvgPathAnimation from "../SvgPathAnimation.astro";
     </div>
 
     <div class="col-span-6 grid grid-cols-6">
-      <div class="col-span-4 col-start-2">
+      <div class="col-span-6 md:col-span-4 md:col-start-2">
         <SvgPathAnimation />
       </div>
     </div>

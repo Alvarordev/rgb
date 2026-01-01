@@ -6,17 +6,13 @@ import cliente1 from "../../assets/cliente1.webm";
 ---
 
 <section
-  class="relative bg-[#fcfcfc] w-full px-7 flex flex-col justify-center gap-4"
+  class="relative bg-[#fcfcfc] w-full px-3.5 md:px-7 flex flex-col justify-center gap-4 py-12 md:py-0"
 >
   <h3 class="font-bold text-sm">(NUESTROS CLIENTES)</h3>
-  <div class="grid grid-cols-12">
-    <div class="col-span-6 mr-10">
-      <OptimizedImage
-        src={terraza2}
-        alt="Terraza-2"
-        class="w-full h-auto"
-      />
-      <div class="font-medium mt-6 text-xl">
+  <div class="flex flex-col md:grid md:grid-cols-12 gap-y-12 md:gap-y-0">
+    <div class="col-span-12 md:col-span-6 md:mr-10">
+      <OptimizedImage src={terraza2} alt="Terraza-2" class="w-full h-auto" />
+      <div class="font-medium mt-6 text-lg md:text-xl">
         <AnimatedParagraph>
           "Como terraza lo que se pensaba hacer era un punto de reunion de la
           casa, poder recibir amistadas y familiares. Sabes que estas abrazado
@@ -42,16 +38,16 @@ import cliente1 from "../../assets/cliente1.webm";
       </div>
     </div>
 
-    <div class="col-span-1"></div>
+    <div class="hidden md:block col-span-1"></div>
 
-    <div class="col-span-5 flex flex-col gap-2">
+    <div class="col-span-12 md:col-span-5 flex flex-col gap-2">
       <div
         class="relative group cursor-pointer overflow-hidden max-h-screen video-container"
       >
         <video
           id="client-video"
           src={cliente1}
-          class="w-full h-full scale-120 object-contain max-h-[90vh]"
+          class="w-full h-full scale-100 md:scale-120 object-contain max-h-[70vh] md:max-h-[90vh]"
           loop
           playsinline></video>
         <div
@@ -77,14 +73,15 @@ import cliente1 from "../../assets/cliente1.webm";
               width="32"
               height="32"
               viewBox="0 0 24 24"
-              fill="white"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg
+              fill="white"
+              ><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg
             >
           </div>
         </div>
       </div>
 
       <div>
-        <p class="text-sm font-bold tracking-tighter text-end mr-10">
+        <p class="text-sm font-bold tracking-tighter text-end md:mr-10">
           DALE PLAY!
         </p>
       </div>

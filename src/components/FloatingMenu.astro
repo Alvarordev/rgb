@@ -10,7 +10,7 @@ const { triggerId } = Astro.props;
 
 <div
   id="floating-menu"
-  class="fixed top-8 right-6 z-100 pointer-events-none"
+  class="fixed top-1 md:top-8 right-2 md:right-6 z-100 pointer-events-none"
   data-trigger={triggerId}
 >
   <div class="flex gap-2 overflow-hidden py-2 px-1">
@@ -23,9 +23,8 @@ const { triggerId } = Astro.props;
     </div>
     <div class="menu-button-wrapper translate-y-full opacity-0">
       <Button
-        id="open-menu-btn"
+        class="open-menu-btn bg-[#efede5] text-[#151515] px-4!"
         text1="MENU"
-        class="bg-[#efede5] text-[#151515] px-4!"
         textSwipeClass="font-bold tracking-tighter leading-[0.85] text-sm"
       />
     </div>

@@ -20,7 +20,7 @@ import TextSwipe from "./TextSwipe.astro";
   >
     <button
       id="close-modal"
-      class="absolute top-12 right-9 text-[#fcfcfc] cursor-pointer group"
+      class="absolute top-12 right-3.5 md:right-9 text-[#fcfcfc] cursor-pointer group"
     >
       <TextSwipe class="font-bold tracking-tighter leading-[0.85] text-sm">
         <Fragment slot="text1">CERRAR</Fragment>
@@ -30,7 +30,7 @@ import TextSwipe from "./TextSwipe.astro";
     <nav class="flex flex-col items-center gap-8">
       <a
         href="/"
-        class="modal-nav-link text-[#fcfcfc] text-7xl font-bold tracking-tighter"
+        class="modal-nav-link text-[#fcfcfc] text-4xl md:text-7xl font-bold tracking-tighter"
       >
         <TextSwipe>
           <Fragment slot="text1">HOME</Fragment>
@@ -38,7 +38,7 @@ import TextSwipe from "./TextSwipe.astro";
       </a>
       <a
         href="/proyectos"
-        class="modal-nav-link text-[#fcfcfc] text-7xl font-bold tracking-tighter"
+        class="modal-nav-link text-[#fcfcfc] text-4xl md:text-7xl font-bold tracking-tighter"
       >
         <TextSwipe class2="text-red-500">
           <Fragment slot="text1">PROYECTOS</Fragment>
@@ -46,7 +46,7 @@ import TextSwipe from "./TextSwipe.astro";
       </a>
       <a
         href="/nosotros"
-        class="modal-nav-link text-[#fcfcfc] text-7xl font-bold tracking-tighter"
+        class="modal-nav-link text-[#fcfcfc] text-4xl md:text-7xl font-bold tracking-tighter"
       >
         <TextSwipe class2="text-green-500">
           <Fragment slot="text1">NOSOTROS</Fragment>
@@ -54,7 +54,7 @@ import TextSwipe from "./TextSwipe.astro";
       </a>
       <a
         href="/contacto"
-        class="modal-nav-link text-[#fcfcfc] text-7xl font-bold tracking-tighter"
+        class="modal-nav-link text-[#fcfcfc] text-4xl md:text-7xl font-bold tracking-tighter"
       >
         <TextSwipe class2="text-blue-500">
           <Fragment slot="text1">CONTACTO</Fragment>
@@ -72,9 +72,10 @@ import TextSwipe from "./TextSwipe.astro";
     const path = document.querySelector(".modal-path");
     const content = document.querySelector(".modal-content");
     const closeBtn = document.querySelector("#close-modal");
-    const menuBtn = document.querySelector("#open-menu-btn");
+    const menuBtns = document.querySelectorAll(".open-menu-btn");
 
-    if (!modal || !path || !content || !closeBtn || !menuBtn) return;
+    if (!modal || !path || !content || !closeBtn || menuBtns.length === 0)
+      return;
 
     const tl = gsap.timeline({
       paused: true,
@@ -110,10 +111,12 @@ import TextSwipe from "./TextSwipe.astro";
         "-=0.2"
       );
 
-    menuBtn.addEventListener("click", () => {
-      tl.play();
-      document.body.style.overflow = "hidden";
-      if ((window as any).lenis) (window as any).lenis.stop();
+    menuBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tl.play();
+        document.body.style.overflow = "hidden";
+        if ((window as any).lenis) (window as any).lenis.stop();
+      });
     });
 
     closeBtn.addEventListener("click", () => {

@@ -14,17 +14,19 @@ const { images } = Astro.props;
   class="bg-[#151515] text-[#fcfcfc] h-screen w-full flex flex-col overflow-hidden sticky top-0"
 >
   <div class="h-full w-full flex flex-col">
-    <div class="flex flex-1 justify-center items-center">
+    <div class="flex flex-1 justify-center items-center px-3.5 md:px-0">
       <AnimatedParagraph
-        class="leading-tight text-7xl text-center max-w-7xl tracking-tighter font-bold pt-20 title"
+        class="leading-tight text-4xl md:text-7xl text-center max-w-7xl tracking-tighter font-bold pt-20 title"
         duration={2}
       >
-       Creamos entornos que inspiran </br> donde la arquitectura y el propósito cobran vida en cada detalle
+        Creamos entornos que inspiran <br class="hidden md:block" /> donde la arquitectura y el propósito cobran vida en cada detalle
       </AnimatedParagraph>
     </div>
 
     <div class="flex flex-col justify-end items-end pb-2 carousel">
-      <div class="flex w-full justify-between text-xs pb-2 px-7 font-bold">
+      <div
+        class="flex w-full justify-between text-[10px] md:text-xs pb-2 px-3.5 md:px-7 font-bold"
+      >
         <p>Lima, PE</p>
         <p>RGB © 2025</p>
         <p>Architectura</p>
