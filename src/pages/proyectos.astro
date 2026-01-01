@@ -33,17 +33,17 @@ const galleryImages = [
   <main class="bg-[#fcfcfc] text-[#151515]">
     <section id="horizontal-scroll-section" class="relative h-[350vh]">
       <div
-        class="sticky top-0 h-screen w-full overflow-hidden flex flex-col px-7 pt-40 pb-8"
+        class="sticky top-0 h-screen w-full overflow-hidden flex flex-col px-3.5 md:px-7 pt-32 md:pt-40 pb-8"
       >
-        <div class="flex justify-between items-end w-full">
+        <div class="flex flex-col md:flex-row justify-between md:items-end w-full gap-y-8 md:gap-y-0">
           <h1
-            class="text-[8rem] font-bold tracking-tight uppercase leading-[0.85]"
+            class="text-5xl md:text-[8rem] font-bold tracking-tight uppercase leading-[0.85]"
           >
             <AnimatedParagraph duration={1.5}>
               Nuestros <br /> Proyectos
             </AnimatedParagraph>
           </h1>
-          <div class="text-xl font-medium max-w-md mb-4">
+          <div class="text-lg md:text-xl font-medium max-w-md md:mb-4">
             <AnimatedParagraph>
               Explora nuestra selección de trabajos más recientes, donde cada
               espacio cuenta una historia única de diseño, funcionalidad y
@@ -60,10 +60,10 @@ const galleryImages = [
           </div>
         </div>
 
-        <div class="mt-auto -mx-7">
+        <div class="mt-auto -mx-3.5 md:-mx-7">
           <div
             id="horizontal-strip"
-            class="flex gap-7 px-7 items-end will-change-transform"
+            class="flex gap-4 md:gap-7 px-3.5 md:px-7 items-end will-change-transform"
           >
             {
               galleryImages.map((img) => (
@@ -71,7 +71,7 @@ const galleryImages = [
                   <img
                     src={img.src}
                     alt="Proyecto"
-                    class="max-w-100 max-h-85 w-full object-contain"
+                    class="max-w-[70vw] md:max-w-100 max-h-[50vh] md:max-h-85 w-full object-contain"
                   />
                 </div>
               ))

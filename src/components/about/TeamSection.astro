@@ -32,15 +32,19 @@ const team = [
 ];
 ---
 
-<section class="team-section relative bg-[#fcfcfc] px-7">
-  <div class="sticky-container h-[500vh]">
-    <div class="sticky top-0 h-screen flex flex-col py-12 overflow-hidden">
+<section class="team-section relative bg-[#fcfcfc] px-3.5 md:px-7">
+  <div class="sticky-container h-auto md:h-[500vh]">
+    <div
+      class="relative md:sticky top-0 h-auto md:h-screen flex flex-col py-12 overflow-hidden"
+    >
       <div class="mb-8">
         <p class="uppercase font-bold text-sm">(Nuestro equipo)</p>
       </div>
 
-      <div class="grid grid-cols-12 flex-1">
-        <div class="col-span-3 flex flex-col">
+      <div
+        class="flex flex-col md:grid md:grid-cols-12 flex-1 gap-y-12 md:gap-y-0"
+      >
+        <div class="col-span-12 md:col-span-3 flex flex-col">
           <div class="w-full">
             <Image
               src={grupalImg}
@@ -48,12 +52,12 @@ const team = [
               width={600}
               format="webp"
               quality={80}
-              class="w-full h-auto object-cover"
+              class="w-full h-[50vh] md:h-auto object-cover"
               loading="eager"
               decoding="async"
             />
             <p
-              class="text-base mt-4 uppercase font-bold leading-tight tracking-tighter"
+              class="text-sm md:text-base mt-4 uppercase font-bold leading-tight tracking-tighter"
             >
               Nuestro estudio combina creatividad, técnica y colaboración para
               diseñar proyectos que transmiten equilibrio.
@@ -61,20 +65,22 @@ const team = [
           </div>
         </div>
 
-        <div class="col-span-1"></div>
+        <div class="hidden md:block col-span-1"></div>
 
-        <div class="col-span-8 relative flex flex-col">
-          <div class="cards-wrapper relative flex-1">
+        <div class="col-span-12 md:col-span-8 relative flex flex-col">
+          <div
+            class="cards-wrapper relative flex-1 flex flex-col gap-y-8 md:gap-y-0"
+          >
             {
               team.map((member, index) => (
                 <div
-                  class={`team-card absolute inset-0 flex flex-col opacity-0 pointer-events-none card-${index}`}
+                  class={`team-card sticky md:absolute top-20 md:inset-0 flex flex-col md:opacity-0 md:pointer-events-none card-${index} bg-[#fcfcfc] pt-10 md:pt-0`}
                 >
-                  <div class="grid grid-cols-8 h-full w-full gap-8">
-                    <div class="col-span-4 flex flex-col w-full">
+                  <div class="flex flex-col md:grid md:grid-cols-8 h-full w-full gap-8">
+                    <div class="order-2 md:order-1 col-span-4 flex flex-col w-full">
                       <div class="flex flex-col gap-3">
                         <AnimatedParagraph
-                          class="text-6xl font-bold uppercase leading-none"
+                          class="text-4xl md:text-6xl font-bold uppercase leading-none"
                           duration={1.4}
                           manual
                         >
@@ -84,16 +90,16 @@ const team = [
                           {member.role}
                         </p>
                       </div>
-                      <div class="w-full pt-12">
+                      <div class="w-full pt-6 md:pt-12">
                         <AnimatedParagraph
-                          class="text-lg font-medium"
+                          class="text-base md:text-lg font-medium"
                           duration={0.8}
                           manual
                         >
                           {member.description}
                         </AnimatedParagraph>
                       </div>
-                      <div class="flex flex-1 items-end justify-start gap-2">
+                      <div class="hidden md:flex flex-1 items-end justify-start gap-2">
                         <p class="font-bold text-sm uppercase">
                           Sigue deslizando
                         </p>
@@ -117,7 +123,7 @@ const team = [
                       </div>
                     </div>
 
-                    <div class="col-span-4 flex items-center">
+                    <div class="order-1 md:order-2 col-span-4 flex items-center">
                       <Image
                         src={member.image}
                         alt={member.name}
@@ -125,7 +131,7 @@ const team = [
                         height={1000}
                         format="webp"
                         quality={80}
-                        class="w-125 h-full object-cover"
+                        class="w-full md:w-125 h-auto md:h-full object-cover"
                         loading="eager"
                         decoding="async"
                       />
@@ -170,6 +176,37 @@ const team = [
   const initTeamAnimation = () => {
     const section = document.querySelector(".team-section");
     const cards = document.querySelectorAll(".team-card");
+
+    if (window.innerWidth < 768) {
+      cards.forEach((card) => {
+        gsap.set(card, { opacity: 1, pointerEvents: "auto" });
+        const paragraphs = card.querySelectorAll(".animated-paragraph");
+        paragraphs.forEach((p) => {
+          const duration = parseFloat(
+            (p as HTMLElement).dataset.duration || "0.8"
+          );
+          const lines = p.querySelectorAll(".split-line");
+          if (lines.length > 0) {
+            gsap.fromTo(
+              lines,
+              { yPercent: 100, opacity: 0 },
+              {
+                yPercent: 0,
+                opacity: 1,
+                duration: duration,
+                stagger: 0.05,
+                ease: "expo.out",
+                scrollTrigger: {
+                  trigger: p,
+                  start: "top 85%",
+                },
+              }
+            );
+          }
+        });
+      });
+      return;
+    }
 
     const animateParagraph = (card: Element) => {
       const paragraphs = card.querySelectorAll(".animated-paragraph");

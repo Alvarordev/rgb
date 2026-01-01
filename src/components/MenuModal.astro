@@ -1,5 +1,6 @@
 ---
 import TextSwipe from "./TextSwipe.astro";
+import logoWhite from "../assets/rgb-logo-white.png";
 ---
 
 <div
@@ -18,9 +19,16 @@ import TextSwipe from "./TextSwipe.astro";
   <div
     class="modal-content relative h-full w-full flex flex-col justify-center items-center opacity-0 invisible"
   >
+    <a
+      href="/"
+      class="absolute top-8 md:top-14 left-3.5 md:left-9 flex items-center gap-4"
+    >
+      <img src={logoWhite.src} alt="rgb-logo" class="w-20 md:w-32" />
+    </a>
+
     <button
       id="close-modal"
-      class="absolute top-12 right-3.5 md:right-9 text-[#fcfcfc] cursor-pointer group"
+      class="absolute top-10 md:top-14 right-3.5 md:right-9 text-[#fcfcfc] cursor-pointer group"
     >
       <TextSwipe class="font-bold tracking-tighter leading-[0.85] text-sm">
         <Fragment slot="text1">CERRAR</Fragment>
