@@ -28,9 +28,9 @@ const { images } = Astro.props;
       <div
         class="flex w-full justify-between text-[10px] md:text-xs pb-2 px-3.5 md:px-7 font-bold"
       >
-        <p>Lima, PE</p>
-        <p>RGB © 2025</p>
-        <p>Architectura</p>
+        <p class="flex-1 text-left">Lima, PE</p>
+        <p class="text-center">RGB © 2025</p>
+        <p class="flex-1 text-right">Architectura</p>
       </div>
       <ImageCarousel images={images} />
     </div>
