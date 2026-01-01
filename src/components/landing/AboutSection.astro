@@ -1,6 +1,7 @@
 ---
 import AnimatedParagraph from "../AnimatedParagraph.astro";
 import Button from "../Button.astro";
+import OptimizedImage from "../OptimizedImage.astro";
 import sala from "../../assets/sala.png";
 ---
 
@@ -10,10 +11,10 @@ import sala from "../../assets/sala.png";
     <span class="ml-40"> con propósito</span>
   </h3>
   <div class="flex flex-col w-full items-center mt-10">
-    <img
-      src={sala.src}
+    <OptimizedImage
+      src={sala}
       alt="cocina"
-      class="h-72 w-115 aspect-square object-cover"
+      class="h-72 w-115 aspect-square"
     />
     <AnimatedParagraph class="text-xl font-medium max-w-115 mt-8 w-full">
       En RGB creemos en la arquitectura como una forma de transformar ideas en

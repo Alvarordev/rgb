@@ -1,6 +1,7 @@
 ---
 import TextSwipe from "../TextSwipe.astro";
 import Button from "../Button.astro";
+import OptimizedImage from "../OptimizedImage.astro";
 
 import casaTrujillo from "../../assets/casa-trujillo.jpg";
 import sala from "../../assets/sala.png";
@@ -24,10 +25,10 @@ import cocina2 from "../../assets/cocina2.jpg";
   <div class="grid grid-cols-12 gap-x-6 gap-y-20 pt-12">
     <div class="col-span-6">
       <div class="flex flex-col group">
-        <img
-          src={casaTrujillo.src}
+        <OptimizedImage
+          src={casaTrujillo}
           alt="casa trujillo"
-          class="h-full w-full object-cover max-h-[90vh]"
+          class="max-h-[90vh]"
         />
         <div class="flex justify-between text-sm font-bold pt-2">
           <div class="flex">
@@ -48,10 +49,10 @@ import cocina2 from "../../assets/cocina2.jpg";
 
     <div class="col-span-6">
       <div class="flex flex-col group">
-        <img
-          src={sala.src}
+        <OptimizedImage
+          src={sala}
           alt="sala"
-          class="h-full w-full object-cover max-h-[80vh]"
+          class="max-h-[80vh]"
         />
         <div class="flex justify-between text-sm font-bold pt-2">
           <div class="flex">
@@ -72,10 +73,10 @@ import cocina2 from "../../assets/cocina2.jpg";
     <div class="col-span-6">
       <div class="grid grid-cols-6">
         <div class="flex flex-col group col-span-5">
-          <img
-            src={terraza.src}
+          <OptimizedImage
+            src={terraza}
             alt="terraza"
-            class="h-full w-full object-cover max-h-[80vh]"
+            class="max-h-[80vh]"
           />
 
           <div class="flex justify-between text-sm font-bold pt-2">
@@ -97,10 +98,10 @@ import cocina2 from "../../assets/cocina2.jpg";
     </div>
     <div class="col-span-6">
       <div class="flex flex-col group">
-        <img
-          src={casaVerde.src}
+        <OptimizedImage
+          src={casaVerde}
           alt="casa-verde"
-          class="h-full w-full object-cover max-h-[80vh]"
+          class="max-h-[80vh]"
         />
 
         <div class="flex justify-between text-sm font-bold pt-2">
@@ -122,10 +123,10 @@ import cocina2 from "../../assets/cocina2.jpg";
     </div>
     <div class="col-span-6">
       <div class="flex flex-col group">
-        <img
-          src={banoSevilla.src}
+        <OptimizedImage
+          src={banoSevilla}
           alt="bano-sevilla"
-          class="h-full w-full object-cover max-h-[80vh]"
+          class="max-h-[80vh]"
         />
         <div class="flex justify-between text-sm font-bold pt-2">
           <div class="flex">
@@ -146,10 +147,10 @@ import cocina2 from "../../assets/cocina2.jpg";
     <div class="col-span-6">
       <div class="grid grid-cols-6">
         <div class="flex flex-col group col-span-5 col-start-2">
-          <img
-            src={cocina2.src}
+          <OptimizedImage
+            src={cocina2}
             alt="cocina2"
-            class="h-full w-full object-cover max-h-[80vh]"
+            class="max-h-[80vh]"
           />
           <div class="flex justify-between text-sm font-bold pt-2">
             <div class="flex">

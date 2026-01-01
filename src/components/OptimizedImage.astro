@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: any;
+  alt: string;
+  class?: string;
+  imageClass?: string;
+  duration?: number;
+}
+
+const { src, alt, class: className, imageClass, duration = 0.8 } = Astro.props;
+---
+
+<div 
+  class:list={["relative overflow-hidden", className]} 
+  data-animated-image
+  style={`--anim-duration: ${duration}s;`}
+>
+  <Image 
+    src={src} 
+    alt={alt} 
+    format="webp"
+    class:list={["w-full h-full object-cover image-animated", imageClass]}
+  />
+  
+  <div class="absolute inset-0 bg-black overlay-animated pointer-events-none"></div>
+</div>
+
+<style>
+  .image-animated {
+    transform: scale(1.10);
+    transition: transform var(--anim-duration) cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .overlay-animated {
+    opacity: 0.9;
+    transition: opacity var(--anim-duration) cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity;
+  }
+
+  [data-animated-image].is-visible .image-animated {
+    transform: scale(1);
+  }
+
+  [data-animated-image].is-visible .overlay-animated {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  function initImageAnimations() {
+    const observerOptions = {
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-animated-image]').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  initImageAnimations();
+  document.addEventListener('astro:after-swap', initImageAnimations);
+</script>

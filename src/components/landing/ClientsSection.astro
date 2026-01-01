@@ -1,5 +1,6 @@
 ---
 import AnimatedParagraph from "../AnimatedParagraph.astro";
+import OptimizedImage from "../OptimizedImage.astro";
 import terraza2 from "../../assets/terraza2.png";
 import cliente1 from "../../assets/cliente1.webm";
 ---
@@ -10,10 +11,10 @@ import cliente1 from "../../assets/cliente1.webm";
   <h3 class="font-bold text-sm">(NUESTROS CLIENTES)</h3>
   <div class="grid grid-cols-12">
     <div class="col-span-6 mr-10">
-      <img
-        src={terraza2.src}
+      <OptimizedImage
+        src={terraza2}
         alt="Terraza-2"
-        class="w-full h-auto object-cover"
+        class="w-full h-auto"
       />
       <div class="font-medium mt-6 text-xl">
         <AnimatedParagraph>
