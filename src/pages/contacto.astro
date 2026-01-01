@@ -10,22 +10,24 @@ import TextSwipe from "../components/TextSwipe.astro";
   <Header light />
 
   <main class="bg-[#fcfcfc] text-[#151515]">
-    <section class="h-screen w-full flex flex-col justify-center px-7 pt-20">
-      <div class="grid grid-cols-12 w-full items-end">
-        <div class="col-span-8">
+    <section
+      class="min-h-screen w-full flex flex-col justify-center px-3.5 md:px-7 pt-32 md:pt-20"
+    >
+      <div class="flex flex-col md:grid md:grid-cols-12 w-full items-end gap-y-10 md:gap-y-0">
+        <div class="col-span-8 w-full">
           <h1
-            class="text-[8rem] font-bold uppercase tracking-tight leading-[0.9]"
+            class="text-5xl md:text-[8rem] font-bold uppercase tracking-tight leading-tight md:leading-[0.9]"
           >
             <AnimatedParagraph duration={1.4}>
               Hablemos de <br /> tu proyecto
             </AnimatedParagraph>
           </h1>
         </div>
-        <div class="col-span-4 flex flex-col items-end pb-4">
+        <div class="col-span-4 flex flex-col items-start md:items-end pb-4 w-full">
           <p class="text-sm font-bold uppercase mb-2">(Contacto)</p>
           <a
             href="mailto:hola@rgbstudio.pe"
-            class="text-4xl font-bold tracking-tighter"
+            class="text-2xl md:text-4xl font-bold tracking-tighter"
           >
             <TextSwipe>
               <Fragment slot="text1">hola@rgbstudio.pe</Fragment>
@@ -35,18 +37,18 @@ import TextSwipe from "../components/TextSwipe.astro";
       </div>
 
       <div
-        class="grid grid-cols-12 w-full mt-20 border-t border-[#151515]/20 pt-10"
+        class="flex flex-col md:grid md:grid-cols-12 w-full mt-12 md:mt-20 border-t border-[#151515]/20 pt-10 gap-y-10 md:gap-y-0 pb-20 md:pb-0"
       >
         <div class="col-span-3">
           <p class="text-sm font-bold uppercase mb-6">(Ubicación)</p>
-          <AnimatedParagraph class="text-2xl font-medium tracking-tighter">
+          <AnimatedParagraph class="text-xl md:text-2xl font-medium tracking-tighter">
             Lima, Perú <br />
             Calle Las Camelias 790, <br />
             San Isidro
           </AnimatedParagraph>
         </div>
 
-        <div class="col-span-1"></div>
+        <div class="hidden md:block col-span-1"></div>
 
         <div class="col-span-3">
           <p class="text-sm font-bold uppercase mb-6">(Redes Sociales)</p>
@@ -55,7 +57,7 @@ import TextSwipe from "../components/TextSwipe.astro";
               <a
                 href="https://www.instagram.com/rgb.studio.pe/"
                 target="_blank"
-                class="text-2xl font-bold tracking-tighter"
+                class="text-xl md:text-2xl font-bold tracking-tighter"
               >
                 <TextSwipe>
                   <Fragment slot="text1">Instagram</Fragment>
@@ -66,7 +68,7 @@ import TextSwipe from "../components/TextSwipe.astro";
               <a
                 href="https://www.tiktok.com/@rgbstudiope?is_from_webapp=1&sender_device=pc"
                 target="_blank"
-                class="text-2xl font-bold tracking-tighter"
+                class="text-xl md:text-2xl font-bold tracking-tighter"
               >
                 <TextSwipe>
                   <Fragment slot="text1">TikTok</Fragment>
@@ -74,7 +76,7 @@ import TextSwipe from "../components/TextSwipe.astro";
               </a>
             </li>
             <li>
-              <a href="#" class="text-2xl font-bold tracking-tighter">
+              <a href="#" class="text-xl md:text-2xl font-bold tracking-tighter">
                 <TextSwipe>
                   <Fragment slot="text1">WhatsApp</Fragment>
                 </TextSwipe>
@@ -83,12 +85,12 @@ import TextSwipe from "../components/TextSwipe.astro";
           </ul>
         </div>
 
-        <div class="col-span-1"></div>
+        <div class="hidden md:block col-span-1"></div>
 
         <div class="col-span-4 flex flex-col justify-between">
           <div>
             <p class="text-sm font-bold uppercase mb-6">(Llámanos)</p>
-            <a href="#" class="text-2xl font-bold tracking-tighter">
+            <a href="#" class="text-xl md:text-2xl font-bold tracking-tighter">
               <TextSwipe>
                 <Fragment slot="text1">+51 999 999 999</Fragment>
               </TextSwipe>
@@ -97,7 +99,7 @@ import TextSwipe from "../components/TextSwipe.astro";
 
           <div class="mt-10">
             <button
-              class="group bg-[#151515] text-[#fcfcfc] h-14 px-8 rounded-full cursor-pointer flex items-center"
+              class="group bg-[#151515] text-[#fcfcfc] h-14 px-8 rounded-full cursor-pointer flex items-center w-fit"
             >
               <TextSwipe class="font-bold tracking-tighter text-sm">
                 <Fragment slot="text1">INICIAR UNA CONSULTA</Fragment>
