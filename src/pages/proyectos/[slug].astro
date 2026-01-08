@@ -24,7 +24,7 @@ const { project } = Astro.props;
       >
         <div>
           <h1
-            class="text-4xl md:text-[8rem] font-bold uppercase leading-[0.85] tracking-tighter mb-4"
+            class="text-4xl md:text-[6.5rem] 2xl:text-[8rem] font-bold uppercase leading-[0.85] tracking-tighter mb-4"
           >
             {project.title}
           </h1>
@@ -54,34 +54,28 @@ const { project } = Astro.props;
             let imgClass =
               "w-full h-full max-h-[70vh] md:max-h-[85vh] object-cover object-center aspect-[3/4]";
 
-            const cycle = index % 7;
+            const cycle = index % 6;
             switch (cycle) {
-              case 0:
+              case 0: 
                 colClass = "col-span-12 md:col-span-6";
                 break;
-              case 1:
-                colClass =
-                  "col-span-12 md:col-span-6 flex justify-end items-start";
-                imgClass =
-                  "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
+              case 1: 
+                colClass = "col-span-12 md:col-span-6 flex justify-end items-start";
+                imgClass = "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
                 break;
-              case 2:
+              case 2: 
                 colClass = "col-span-12 md:col-span-6 md:col-start-2";
                 break;
-              case 3:
-                colClass = "col-span-12 md:col-span-8 md:col-start-3";
+              case 3: 
+                colClass = "col-span-12 md:col-span-4 md:col-start-9 flex justify-end items-start";
+                imgClass = "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
                 break;
               case 4:
-                colClass = "col-span-12 md:col-span-6 md:col-start-6";
+                colClass = "col-span-12 md:col-span-4 md:col-start-1";
                 break;
-              case 5:
-                colClass =
-                  "col-span-12 md:col-span-6 flex justify-start items-start";
-                imgClass =
-                  "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
-                break;
-              case 6:
-                colClass = "col-span-12 md:col-span-6";
+              case 5: 
+                colClass = "col-span-12 md:col-span-6 md:col-start-6 flex justify-end items-start";
+                imgClass = "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
                 break;
             }
 
