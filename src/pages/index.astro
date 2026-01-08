@@ -10,21 +10,11 @@ import Footer from "../components/Footer.astro";
 import FloatingMenu from "../components/FloatingMenu.astro";
 import MenuModal from "../components/MenuModal.astro";
 
-import banoSevilla from "../assets/bano-sevilla.jpg";
-import casaTrujillo from "../assets/casa-trujillo.jpg";
-import casaVerde from "../assets/casa-verde.png";
-import cocina2 from "../assets/cocina2.jpg";
-import sala from "../assets/sala.png";
-import terraza from "../assets/terraza.jpeg";
+import { projects } from "../data/projects";
 
-const images = [
-  banoSevilla.src,
-  casaTrujillo.src,
-  casaVerde.src,
-  cocina2.src,
-  sala.src,
-  terraza.src,
-];
+const images = projects.map((project) => {
+  return project.images[0];
+});
 ---
 
 <Layout>

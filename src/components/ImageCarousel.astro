@@ -1,6 +1,6 @@
 ---
 interface Props {
-  images?: string[];
+  images?: ImageMetadata[];
 }
 
 const { images = [] } = Astro.props;
@@ -13,9 +13,9 @@ const { images = [] } = Astro.props;
   <div class="carousel-track flex">
     <div class="carousel-group flex gap-4 shrink-0 items-center pr-4">
       {
-        images.map((src, index) => (
+        images.map((image, index) => (
           <img
-            src={src}
+            src={image.src}
             alt={`Project ${index + 1}`}
             class="h-64 md:h-72 w-auto min-w-75 object-cover shrink-0"
           />

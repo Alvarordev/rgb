@@ -2,13 +2,7 @@
 import TextSwipe from "../TextSwipe.astro";
 import Button from "../Button.astro";
 import OptimizedImage from "../OptimizedImage.astro";
-
-import casaTrujillo from "../../assets/casa-trujillo.jpg";
-import sala from "../../assets/sala.png";
-import terraza from "../../assets/terraza.jpeg";
-import casaVerde from "../../assets/casa-verde.png";
-import banoSevilla from "../../assets/bano-sevilla.jpg";
-import cocina2 from "../../assets/cocina2.jpg";
+import { projects } from "../../data/projects";
 ---
 
 <section
@@ -22,157 +16,139 @@ import cocina2 from "../../assets/cocina2.jpg";
       <span class="md:ml-40">proyectos</span>
     </h3>
 
-    <p class="text-4xl md:text-[8rem] font-bold leading-[0.95]">(06)</p>
+    <p class="text-4xl md:text-[8rem] font-bold leading-[0.95]">(05)</p>
   </div>
 
   <div class="grid grid-cols-12 gap-x-6 gap-y-10 md:gap-y-20 pt-12">
     <div class="col-span-12 md:col-span-6">
-      <div class="flex flex-col group">
+      <a href={`/proyectos/${projects[0].slug}`} class="flex flex-col group">
         <OptimizedImage
-          src={casaTrujillo}
-          alt="casa trujillo"
+          src={projects[0].images[0]}
+          alt={projects[0].title}
           class="max-h-[90vh] object-cover"
         />
         <div class="flex justify-between text-sm font-bold pt-2">
           <div class="flex">
             <p>(01)</p>
-            <p class="pl-4 md:pl-8">CASA TRUJILLO</p>
-          </div>
-
-          <div>
-            <TextSwipe
-              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
-            >
-              <Fragment slot="text1">VER PROYECTO</Fragment>
-            </TextSwipe>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6">
-      <div class="flex flex-col group">
-        <OptimizedImage
-          src={sala}
-          alt="sala"
-          class="max-h-[80vh] object-cover"
-        />
-        <div class="flex justify-between text-sm font-bold pt-2">
-          <div class="flex">
-            <p>(02)</p>
-            <p class="pl-4 md:pl-8">SALA HACIENDA</p>
-          </div>
-
-          <div>
-            <TextSwipe
-              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
-            >
-              <Fragment slot="text1">VER PROYECTO</Fragment>
-            </TextSwipe>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-span-12 md:col-span-6">
-      <div class="grid grid-cols-6">
-        <div class="flex flex-col group col-span-6 md:col-span-5">
-          <OptimizedImage
-            src={terraza}
-            alt="terraza"
-            class="max-h-[80vh] object-cover"
-          />
-
-          <div class="flex justify-between text-sm font-bold pt-2">
-            <div class="flex">
-              <p>(03)</p>
-              <p class="pl-4 md:pl-8">TERRAZA LIMA</p>
-            </div>
-
-            <div>
-              <TextSwipe
-                class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
-              >
-                <Fragment slot="text1">VER PROYECTO</Fragment>
-              </TextSwipe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-span-12 md:col-span-6">
-      <div class="flex flex-col group">
-        <OptimizedImage
-          src={casaVerde}
-          alt="casa-verde"
-          class="max-h-[80vh] object-cover"
-        />
-
-        <div class="flex justify-between text-sm font-bold pt-2">
-          <div class="flex">
-            <p>(04)</p>
-            <p class="pl-4 md:pl-8">CASA VERDE</p>
+            <p class="pl-4 md:pl-8 uppercase">{projects[0].title}</p>
           </div>
 
           <div>
             <TextSwipe
               class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
             >
-              <Fragment slot="text1">2024</Fragment>
+              <Fragment slot="text1">{projects[0].year}</Fragment>
               <Fragment slot="text2">VER PROYECTO</Fragment>
             </TextSwipe>
           </div>
         </div>
+      </a>
+    </div>
+
+    <div class="hidden md:block md:col-span-1"></div>
+
+    <div class="col-span-12 md:col-span-5">
+      <a href={`/proyectos/${projects[1].slug}`} class="flex flex-col group">
+        <OptimizedImage
+          src={projects[1].images[0]}
+          alt={projects[1].title}
+          imageClass="max-h-[60vh] object-cover object-center"
+        />
+        <div class="flex justify-between text-sm font-bold pt-2">
+          <div class="flex">
+            <p>(02)</p>
+            <p class="pl-4 md:pl-8 uppercase">{projects[1].title}</p>
+          </div>
+
+          <div>
+            <TextSwipe
+              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+            >
+              <Fragment slot="text1">{projects[1].year}</Fragment>
+              <Fragment slot="text2">VER PROYECTO</Fragment>
+            </TextSwipe>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-span-12 md:col-span-6">
+      <div class="grid grid-cols-6">
+        <a
+          href={`/proyectos/${projects[2].slug}`}
+          class="flex flex-col group col-span-6 md:col-span-5"
+        >
+          <OptimizedImage
+            src={projects[2].images[0]}
+            alt={projects[2].title}
+            class="max-h-[80vh] object-cover"
+          />
+
+          <div class="flex justify-between text-sm font-bold pt-2">
+            <div class="flex">
+              <p>(03)</p>
+              <p class="pl-4 md:pl-8 uppercase">{projects[2].title}</p>
+            </div>
+
+            <div>
+              <TextSwipe
+                class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+              >
+                <Fragment slot="text1">{projects[2].year}</Fragment>
+                <Fragment slot="text2">VER PROYECTO</Fragment>
+              </TextSwipe>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
     <div class="col-span-12 md:col-span-6">
-      <div class="flex flex-col group">
+      <a href={`/proyectos/${projects[3].slug}`} class="flex flex-col group">
         <OptimizedImage
-          src={banoSevilla}
-          alt="bano-sevilla"
+          src={projects[3].images[0]}
+          alt={projects[3].title}
+          imageClass="max-h-[60vh] object-cover object-center"
+        />
+
+        <div class="flex justify-between text-sm font-bold pt-2">
+          <div class="flex">
+            <p>(04)</p>
+            <p class="pl-4 md:pl-8 uppercase">{projects[3].title}</p>
+          </div>
+
+          <div>
+            <TextSwipe
+              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+            >
+              <Fragment slot="text1">{projects[3].year}</Fragment>
+              <Fragment slot="text2">VER PROYECTO</Fragment>
+            </TextSwipe>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-span-12 md:col-span-6 md:col-start-4">
+      <a href={`/proyectos/${projects[4].slug}`} class="flex flex-col group">
+        <OptimizedImage
+          src={projects[4].images[0]}
+          alt={projects[4].title}
           class="max-h-[80vh] object-cover"
         />
         <div class="flex justify-between text-sm font-bold pt-2">
           <div class="flex">
             <p>(05)</p>
-            <p class="pl-4 md:pl-8">BAÑO SEVILLA</p>
+            <p class="pl-4 md:pl-8 uppercase">{projects[4].title}</p>
           </div>
 
           <div>
             <TextSwipe
-              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
+              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
             >
-              <Fragment slot="text1">VER PROYECTO</Fragment>
+              <Fragment slot="text1">{projects[4].year}</Fragment>
+              <Fragment slot="text2">VER PROYECTO</Fragment>
             </TextSwipe>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-span-12 md:col-span-6">
-      <div class="grid grid-cols-6">
-        <div
-          class="flex flex-col group col-span-6 md:col-span-5 md:col-start-2"
-        >
-          <OptimizedImage
-            src={cocina2}
-            alt="cocina2"
-            class="max-h-[80vh] object-cover"
-          />
-          <div class="flex justify-between text-sm font-bold pt-2">
-            <div class="flex">
-              <p>(06)</p>
-              <p class="pl-4 md:pl-8">COCINA</p>
-            </div>
-
-            <div>
-              <TextSwipe
-                class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515]"
-              >
-                <Fragment slot="text1">VER PROYECTO</Fragment>
-              </TextSwipe>
-            </div>
-          </div>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
 
