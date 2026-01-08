@@ -93,7 +93,7 @@ export const projects: Project[] = [
     title: 'Patio Atenas',
     year: '2025',
     location: 'Los Olivos, Lima, Perú',
-    images: [p03_01, p03_02, p03_03, p03_04, p03_05],
+    images: [p03_04, p03_02, p03_03, p03_01, p03_05],
     alt: 'Patio Atenas',
   },
   {
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     title: 'Terraza Atenas',
     year: '2025',
     location: 'Los Olivos, Lima, Perú',
-    images: [p04_01, p04_02, p04_03, p04_04, p04_05],
+    images: [p04_05, p04_02, p04_01, p04_04, p04_03],
     videos: [video04],
     alt: 'Terraza Atenas',
   },

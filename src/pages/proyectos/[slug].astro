@@ -56,26 +56,26 @@ const { project } = Astro.props;
 
             const cycle = index % 6;
             switch (cycle) {
-              case 0: 
+              case 0:
                 colClass = "col-span-12 md:col-span-6";
                 break;
-              case 1: 
+              case 1:
                 colClass = "col-span-12 md:col-span-6 flex justify-end items-start";
-                imgClass = "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
+                imgClass = "h-full w-auto min-w-[60vh] max-h-[70vh] md:max-h-[85vh] object-cover";
                 break;
-              case 2: 
-                colClass = "col-span-12 md:col-span-6 md:col-start-2";
+              case 2:
+                colClass = "col-span-12 md:col-span-6 md:col-start-1";
                 break;
-              case 3: 
-                colClass = "col-span-12 md:col-span-4 md:col-start-9 flex justify-end items-start";
-                imgClass = "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
+              case 3:
+                colClass = "col-span-12 md:col-span-5 md:col-start-8 flex justify-end items-center";
+                imgClass = "h-full w-auto max-h-[70vh] md:max-h-[80vh] object-contain";
                 break;
               case 4:
-                colClass = "col-span-12 md:col-span-4 md:col-start-1";
-                break;
-              case 5: 
-                colClass = "col-span-12 md:col-span-6 md:col-start-6 flex justify-end items-start";
+                colClass = "col-span-12 md:col-span-5 md:col-start-2 flex justify-start items-start";
                 imgClass = "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
+                break;
+              case 5:
+                colClass = "col-span-12 md:col-span-5 md:col-start-8";
                 break;
             }
 
