@@ -1,6 +1,5 @@
 ---
 import TextSwipe from "./TextSwipe.astro";
-import casaTrujillo from "../assets/casa-trujillo.jpg";
 import logo from "../assets/rgb-logo.png";
 import { projects } from "../data/projects";
 ---
@@ -8,11 +7,11 @@ import { projects } from "../data/projects";
 <footer class="relative w-full bg-[#fcfcfc] flex flex-col pt-20 md:pt-40">
   <div class="flex flex-col mb-8 px-3.5 md:px-7">
     <p
-      class="uppercase text-[3rem] md:text-[8rem] font-bold tracking-tight leading-[0.95] mb-8"
+      class="uppercase text-[3rem] md:text-[6.5rem] 2xl:text-[8rem] font-bold tracking-tight leading-[0.95] mb-8 text-wrap"
     >
       Listo para comenzar
       <br class="md:hidden" />
-      <span class="md:ml-40"> tu nuevo proyecto? </span>
+      <span class="2xl:ml-40"> tu nuevo proyecto? </span>
     </p>
 
     <div class="flex md:justify-center">
@@ -40,7 +39,7 @@ import { projects } from "../data/projects";
 
     <div class="hidden md:block col-span-1 md:order-2"></div>
 
-    <div class="order-1 md:order-3 col-span-2">
+    <div class="order-1 md:order-3 md:col-span-3 2xl:col-span-2">
       <p class="font-bold text-sm mb-4">(NAVEGACION)</p>
       <ul class="text-4xl md:text-5xl font-bold flex flex-col gap-6 md:gap-8">
         <li>
@@ -83,7 +82,7 @@ import { projects } from "../data/projects";
       </ul>
     </div>
 
-    <div class="hidden md:block col-span-2 md:order-4"></div>
+    <div class="hidden md:block md:col-span-1 2xl:col-span-2 md:order-4"></div>
 
     <div class="order-2 md:order-4 col-span-4">
       <div class="flex flex-col mb-12 md:mb-20">
