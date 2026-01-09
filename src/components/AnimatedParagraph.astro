@@ -1,20 +1,26 @@
 ---
 interface Props {
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
   class?: string;
   duration?: number;
   manual?: boolean;
 }
 
-const { class: className, duration = 0.8, manual = false } = Astro.props;
+const {
+  as: Tag = "p",
+  class: className,
+  duration = 0.8,
+  manual = false,
+} = Astro.props;
 ---
 
-<div
+<Tag
   class:list={["animated-paragraph", className]}
   data-duration={duration}
   data-manual={manual ? "true" : "false"}
 >
   <slot />
-</div>
+</Tag>
 
 <style is:global>
   .animated-paragraph {

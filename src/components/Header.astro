@@ -15,7 +15,7 @@ const { light = false } = Astro.props;
   <nav
     class:list={[
       "flex w-full justify-between mt-8 items-center",
-      light ? "text-[#151515]" : "text-[#fcfcfc]",
+      light ? "text-foreground" : "text-background",
     ]}
   >
     <a href="/" class="flex items-center gap-4">
@@ -65,7 +65,9 @@ const { light = false } = Astro.props;
       <Button
         href="/contacto"
         class:list={[
-          light ? "bg-[#151515] text-[#fcfcfc]" : "bg-[#fcfcfc] text-[#151515]",
+          light
+            ? "bg-foreground text-background"
+            : "bg-background text-foreground",
         ]}
         text1="CONTÁCTANOS"
         textSwipeClass="font-bold tracking-tighter leading-[1.15] text-sm"

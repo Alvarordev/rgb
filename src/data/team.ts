@@ -22,7 +22,7 @@ export const team: TeamMember[] = [
     image: aleImg,
     role: "Arquitecta & Socia-Fundadora",
     description:
-      "Concibo los espacios como extensiones de quienes los habitan, partiendo de la observación y el entendimiento profundo de sus necesidades para traducirlas en propuestas funcionales y con identidad. Creo en una arquitectura que equilibra estética, técnica y emoción, pero que también se atreve a salir de lo convencional. La funcionalidad y la versatilidad son fundamentales en mi manera de diseñar, creando espacios fluidos y adaptables que acompañan la vida cotidiana. Cada proyecto es un proceso colaborativo, donde escuchar es tan importante como diseñar.",
+      "Concibo los espacios como extensiones de quienes los habitan, partiendo de la observación y el entendimiento profundo de sus necesidades para traducirlas en propuestas funcionales y con identidad. Trabajo desde una mirada integral del espacio, buscando coherencia entre arquitectura, interiorismo y experiencia sensorial. Creo en una arquitectura que equilibra estética, técnica y emoción, y que también se atreve a salir de lo convencional. Me interesa diseñar ambientes con carácter, calma y personalidad, capaces de adaptarse, evolucionar y sentirse propios con el tiempo. Cada proyecto es un proceso colaborativo, donde escuchar es tan importante como diseñar.",
   },
   {
     name: "Marjorie Fribourg",

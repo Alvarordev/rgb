@@ -5,7 +5,7 @@ import grupalImg from "../../assets/about/grupal.png";
 import { team } from "../../data/team";
 ---
 
-<section class="team-section relative bg-[#fcfcfc] px-3.5 md:px-7">
+<section class="team-section relative px-3.5 md:px-7">
   <div class="sticky-container h-auto md:h-[250vh]">
     <div
       class="relative md:sticky top-0 h-auto md:h-screen flex flex-col py-12 overflow-hidden"
@@ -47,7 +47,7 @@ import { team } from "../../data/team";
             {
               team.map((member, index) => (
                 <div
-                  class={`team-card sticky md:absolute top-20 md:inset-0 flex flex-col md:opacity-0 md:pointer-events-none card-${index} bg-[#fcfcfc] pt-10 md:pt-0`}
+                  class={`team-card sticky md:absolute top-20 md:inset-0 flex flex-col md:opacity-0 md:pointer-events-none card-${index} bg-background pt-10 md:pt-0`}
                 >
                   <div class="flex flex-col md:grid md:grid-cols-8 h-full w-full gap-8">
                     <div class="order-2 md:order-1 col-span-4 flex flex-col w-full">

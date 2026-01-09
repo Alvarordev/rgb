@@ -6,10 +6,7 @@ interface Props {
 const { images = [] } = Astro.props;
 ---
 
-<div
-  class="image-carousel w-full overflow-hidden"
-  data-duration="30"
->
+<div class="image-carousel w-full overflow-hidden" data-duration="30">
   <div class="carousel-track flex">
     <div class="carousel-group flex gap-4 shrink-0 items-center pr-4">
       {
@@ -44,7 +41,7 @@ const { images = [] } = Astro.props;
     track.appendChild(clone);
 
     const groups = track.querySelectorAll<HTMLElement>(".carousel-group");
-    const animations = gsap.utils.toArray<HTMLElement>(groups).map((el) =>
+    gsap.utils.toArray<HTMLElement>(groups).map((el) =>
       gsap.to(el, {
         xPercent: -100,
         repeat: -1,
@@ -52,19 +49,6 @@ const { images = [] } = Astro.props;
         ease: "none",
       })
     );
-
-    const pause = () => {
-      animations.forEach((anim) =>
-        gsap.to(anim, { timeScale: 0, duration: 0.8, ease: "power2.out" })
-      );
-    };
-
-    const play = () => {
-      animations.forEach((anim) =>
-        gsap.to(anim, { timeScale: 1, duration: 0.2, ease: "power2.inOut" })
-      );
-    };
-
   };
 
   if (document.readyState === "complete") {

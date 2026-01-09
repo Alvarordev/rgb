@@ -1,0 +1,119 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  images: ImageMetadata[];
+  videos?: string[];
+  projectTitle: string;
+}
+
+const { images, videos, projectTitle } = Astro.props;
+
+function getImageLayoutClasses(index: number) {
+  const cycle = index % 6;
+  const layouts: Record<
+    number,
+    { btnClass?: string; colClass: string; imgClass: string }
+  > = {
+    0: {
+      colClass: "col-span-12 md:col-span-6",
+      imgClass:
+        "w-full h-full max-h-[70vh] md:max-h-[85vh] object-cover object-center aspect-[3/4]",
+    },
+    1: {
+      btnClass: "flex justify-end ",
+      colClass: "col-span-12 md:col-span-6 flex justify-end items-start",
+      imgClass:
+        "h-full w-auto lg:min-w-[60vh] max-h-[70vh] md:max-h-[85vh] object-cover",
+    },
+    2: {
+      colClass: "col-span-12 md:col-span-6 md:col-start-1",
+      imgClass:
+        "w-full h-full max-h-[70vh] md:max-h-[85vh] object-cover object-center aspect-[3/4]",
+    },
+    3: {
+      colClass:
+        "col-span-12 md:col-span-5 md:col-start-8 flex justify-end items-center",
+      imgClass: "h-full w-auto max-h-[70vh] md:max-h-[80vh] object-contain",
+    },
+    4: {
+      colClass:
+        "col-span-12 md:col-span-5 md:col-start-2 flex justify-start items-start",
+      imgClass: "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain",
+    },
+    5: {
+      colClass: "col-span-12 md:col-span-5 md:col-start-8",
+      imgClass:
+        "w-full h-full max-h-[70vh] md:max-h-[85vh] object-cover object-center aspect-[3/4]",
+    },
+  };
+  return layouts[cycle];
+}
+---
+
+<div class="grid grid-cols-12 gap-x-6 gap-y-10 md:gap-y-20 items-stretch">
+  {
+    images.map((image, index) => {
+      const { colClass, btnClass, imgClass } = getImageLayoutClasses(index);
+
+      return (
+        <div class={colClass}>
+          <button
+            type="button"
+            class={`${btnClass} w-full h-full rounded-sm`}
+            data-gallery-trigger
+            data-index={index}
+            aria-label={`Abrir imagen ${index + 1} de ${images.length} en galería`}
+          >
+            <Image
+              src={image}
+              alt={`${projectTitle} - imagen ${index + 1}`}
+              class={`${imgClass} cursor-pointer transition-opacity hover:opacity-90`}
+              loading={index < 2 ? "eager" : "lazy"}
+              quality={85}
+              widths={[400, 800, 1200, 1600]}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </button>
+        </div>
+      );
+    })
+  }
+
+  {
+    videos?.map((video) => (
+      <div class="col-span-12 md:col-span-8 md:col-start-3">
+        <video
+          src={video}
+          autoplay
+          muted
+          loop
+          playsinline
+          class="w-full h-full max-h-[80vh] md:max-h-[85vh] object-cover object-center rounded-sm"
+          aria-label={`Video del proyecto ${projectTitle}`}
+        >
+          <track kind="captions" />
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryTriggers = document.querySelectorAll<HTMLButtonElement>(
+      "[data-gallery-trigger]"
+    );
+
+    galleryTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const index = parseInt(trigger.dataset.index || "0", 10);
+        if (typeof (window as any).openProjectGallery === "function") {
+          (window as any).openProjectGallery(index);
+        }
+      });
+    });
+  });
+</script>

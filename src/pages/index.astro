@@ -8,7 +8,7 @@ import ApproachSection from "../components/landing/ApproachSection.astro";
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import FloatingMenu from "../components/FloatingMenu.astro";
-import MenuModal from "../components/MenuModal.astro";
+import MenuModal from "../components/modals/MenuModal.astro";
 
 import { projects } from "../data/projects";
 
@@ -21,7 +21,7 @@ const images = projects.map((project) => {
   <Header />
   <FloatingMenu triggerId="hero-section" />
   <MenuModal />
-  <main class="relative w-full">
+  <main class="relative w-full bg-background">
     <HeroSection images={images} />
 
     <AboutSection />

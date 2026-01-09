@@ -2,6 +2,9 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import ProjectGalleryModal from "../../components/modals/ProjectGalleryModal.astro";
+import ProjectHeader from "../../components/projects/ProjectHeader.astro";
+import ProjectGallery from "../../components/projects/ProjectGallery.astro";
 import { projects } from "../../data/projects";
 
 export async function getStaticPaths() {
@@ -17,114 +20,53 @@ const { project } = Astro.props;
 <Layout title={`${project.title} | RGB`}>
   <Header light={true} />
 
-  <main class="bg-[#fcfcfc] text-[#151515] pt-32 md:pt-40">
-    <section class="px-3.5 md:px-7">
-      <div
-        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-20 md:mb-32"
-      >
-        <div>
-          <h1
-            class="text-4xl md:text-[6.5rem] 2xl:text-[8rem] font-bold uppercase leading-[0.85] tracking-tighter mb-4"
-          >
-            {project.title}
-          </h1>
-          <div class="flex gap-8 text-sm md:text-base font-medium uppercase">
-            <div class="flex flex-col">
-              <span class="text-[#151515]/40 text-xs mb-1">Ubicación</span>
-              <span>{project.location}</span>
-            </div>
-            <div class="flex flex-col">
-              <span class="text-[#151515]/40 text-xs mb-1">Año</span>
-              <span>{project.year}</span>
-            </div>
-          </div>
-        </div>
+  <main class="bg-background text-foreground pt-32 md:pt-40">
+    <section class="px-3.5 md:px-7" aria-label="Detalles del proyecto">
+      <ProjectHeader
+        title={project.title}
+        location={project.location}
+        year={project.year}
+        id={project.id}
+      />
 
-        <p
-          class="text-4xl md:text-[8rem] font-bold leading-[0.95] text-[#151515]/10"
-        >
-          ({project.id.toString().padStart(2, "0")})
-        </p>
-      </div>
-
-      <div class="grid grid-cols-12 gap-x-6 gap-y-10 md:gap-y-20 items-stretch">
-        {
-          project.images.map((image, index) => {
-            let colClass = "";
-            let imgClass =
-              "w-full h-full max-h-[70vh] md:max-h-[85vh] object-cover object-center aspect-[3/4]";
-
-            const cycle = index % 6;
-            switch (cycle) {
-              case 0:
-                colClass = "col-span-12 md:col-span-6";
-                break;
-              case 1:
-                colClass = "col-span-12 md:col-span-6 flex justify-end items-start";
-                imgClass = "h-full w-auto min-w-[60vh] max-h-[70vh] md:max-h-[85vh] object-cover";
-                break;
-              case 2:
-                colClass = "col-span-12 md:col-span-6 md:col-start-1";
-                break;
-              case 3:
-                colClass = "col-span-12 md:col-span-5 md:col-start-8 flex justify-end items-center";
-                imgClass = "h-full w-auto max-h-[70vh] md:max-h-[80vh] object-contain";
-                break;
-              case 4:
-                colClass = "col-span-12 md:col-span-5 md:col-start-2 flex justify-start items-start";
-                imgClass = "h-full w-auto max-h-[70vh] md:max-h-[85vh] object-contain";
-                break;
-              case 5:
-                colClass = "col-span-12 md:col-span-5 md:col-start-8";
-                break;
-            }
-
-            return (
-              <div class={colClass}>
-                <img
-                  src={image.src}
-                  alt={`${project.title} - imagen ${index + 1}`}
-                  class={imgClass}
-                />
-              </div>
-            );
-          })
-        }
-
-        {
-          project.videos?.map((video) => (
-            <div class="col-span-12 md:col-span-8 md:col-start-3">
-              <video
-                src={video}
-                autoplay
-                muted
-                loop
-                playsinline
-                class="w-full h-full max-h-[80vh] md:max-h-[85vh] object-cover object-center "
-              />
-            </div>
-          ))
-        }
-      </div>
+      <ProjectGallery
+        images={project.images}
+        videos={project.videos}
+        projectTitle={project.title}
+      />
     </section>
 
-    <div class="py-20 flex justify-center">
+    <nav class="py-20 flex justify-center" aria-label="Navegación del proyecto">
       <a
         href="/proyectos"
-        class="group flex items-center gap-4 text-sm font-bold uppercase tracking-tighter"
+        class="group flex items-center gap-4 text-sm font-bold uppercase tracking-tighter rounded-sm px-2 py-1"
       >
-        <span class="w-10 h-px bg-[#151515] transition-all group-hover:w-16"
-        ></span>
+        <span
+          class="w-10 h-px bg-foreground transition-all group-hover:w-16"
+          aria-hidden="true"></span>
         Volver a Proyectos
       </a>
-    </div>
+    </nav>
 
     <Footer />
   </main>
+
+  <ProjectGalleryModal images={project.images} />
 </Layout>
 
-<style>
-  .text-swipe {
-    overflow: hidden;
-  }
-</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryTriggers = document.querySelectorAll<HTMLButtonElement>(
+      "[data-gallery-trigger]"
+    );
+
+    galleryTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const index = parseInt(trigger.dataset.index || "0", 10);
+        if (typeof (window as any).openProjectGallery === "function") {
+          (window as any).openProjectGallery(index);
+        }
+      });
+    });
+  });
+</script>

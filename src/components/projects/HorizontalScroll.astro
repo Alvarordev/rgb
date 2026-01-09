@@ -1,0 +1,84 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import { projects } from "../../data/projects";
+---
+
+<section id="horizontal-scroll-section" class="relative h-[350vh]">
+  <div
+    class="sticky top-0 h-screen w-full overflow-hidden flex flex-col px-3.5 md:px-7 pt-32 md:pt-40 pb-8"
+  >
+    <slot />
+
+    <div class="mt-8 w-full h-0.5 bg-foreground/10 relative overflow-hidden">
+      <div
+        id="scroll-progress-line"
+        class="absolute top-0 left-0 w-full h-full bg-foreground origin-left scale-x-0"
+      >
+      </div>
+    </div>
+
+    <div class="mt-auto -mx-3.5 md:-mx-7">
+      <div
+        id="horizontal-strip"
+        class="flex gap-4 md:gap-7 px-3.5 md:px-7 items-end will-change-transform"
+      >
+        {
+          projects.map((project) => (
+            <ProjectCard
+              title={project.title}
+              year={project.year}
+              slug={project.slug}
+              image={project.images[3]}
+            />
+          ))
+        }
+        <div class="shrink-0 w-[10vw] h-1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initHorizontalScroll = () => {
+    const section = document.querySelector("#horizontal-scroll-section");
+    const strip = document.querySelector("#horizontal-strip");
+    const progressLine = document.querySelector("#scroll-progress-line");
+
+    if (!section || !strip || !progressLine) return;
+
+    const getScrollAmount = () => {
+      return strip.scrollWidth - window.innerWidth;
+    };
+
+    gsap.to(strip, {
+      x: () => -getScrollAmount(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.5,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    gsap.to(progressLine, {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.5,
+      },
+    });
+  };
+
+  initHorizontalScroll();
+  document.addEventListener("astro:after-swap", initHorizontalScroll);
+</script>

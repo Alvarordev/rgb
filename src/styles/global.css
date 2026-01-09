@@ -67,5 +67,8 @@
 @theme {
   --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-author: "Author", sans-serif;
-}
 
+  --color-background: #fcfcfc;
+  --color-foreground: #151515;
+  --color-accent: #efede5;
+}

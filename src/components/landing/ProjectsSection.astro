@@ -6,7 +6,7 @@ import { projects } from "../../data/projects";
 ---
 
 <section
-  class="relative flex flex-col w-full pt-20 pb-10 px-3.5 md:px-7 bg-[#fcfcfc]"
+  class="relative flex flex-col w-full pt-20 pb-10 px-3.5 md:px-7 bg-background"
 >
   <div class="flex justify-between items-end">
     <h3
@@ -35,7 +35,7 @@ import { projects } from "../../data/projects";
 
           <div>
             <TextSwipe
-              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+              class="font-bold tracking-tighter leading-[0.85] text-sm text-end"
             >
               <Fragment slot="text1">{projects[0].year}</Fragment>
               <Fragment slot="text2">VER PROYECTO</Fragment>
@@ -62,7 +62,7 @@ import { projects } from "../../data/projects";
 
           <div>
             <TextSwipe
-              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+              class="font-bold tracking-tighter leading-[0.85] text-sm text-end"
             >
               <Fragment slot="text1">{projects[1].year}</Fragment>
               <Fragment slot="text2">VER PROYECTO</Fragment>
@@ -91,7 +91,7 @@ import { projects } from "../../data/projects";
 
             <div>
               <TextSwipe
-                class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+                class="font-bold tracking-tighter leading-[0.85] text-sm text-end"
               >
                 <Fragment slot="text1">{projects[2].year}</Fragment>
                 <Fragment slot="text2">VER PROYECTO</Fragment>
@@ -117,7 +117,7 @@ import { projects } from "../../data/projects";
 
           <div>
             <TextSwipe
-              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+              class="font-bold tracking-tighter leading-[0.85] text-sm text-end"
             >
               <Fragment slot="text1">{projects[3].year}</Fragment>
               <Fragment slot="text2">VER PROYECTO</Fragment>
@@ -141,7 +141,7 @@ import { projects } from "../../data/projects";
 
           <div>
             <TextSwipe
-              class="font-bold tracking-tighter leading-[0.85] text-sm text-[#151515] text-end"
+              class="font-bold tracking-tighter leading-[0.85] text-sm text-end"
             >
               <Fragment slot="text1">{projects[4].year}</Fragment>
               <Fragment slot="text2">VER PROYECTO</Fragment>
@@ -155,7 +155,7 @@ import { projects } from "../../data/projects";
   <div class="flex items-center justify-center w-full mt-2 md:mt-10">
     <Button
       href="/proyectos"
-      class="bg-[#151515] mt-6 md:mt-10"
+      class="bg-foreground mt-6 md:mt-10"
       text1="Ver todos los proyectos"
       textSwipeClass="font-bold tracking-tighter leading-[1.15] text-sm text-[#fcfcfc]"
     />

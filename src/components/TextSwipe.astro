@@ -16,7 +16,7 @@ const text2 = Astro.slots.has("text2")
 
 <div
   class:list={[
-    "swipe-animation relative overflow-hidden cursor-pointer uppercase pr-[0.1em]",
+    "swipe-animation relative overflow-hidden cursor-pointer uppercase pr-[0.1em] leading-[1.15]",
     className,
   ]}
   style={`--duration: ${duration}ms`}
@@ -43,13 +43,15 @@ const text2 = Astro.slots.has("text2")
     transform: translateY(100%);
   }
 
-  .swipe-animation:hover span:nth-child(1),
-  :global(.group:hover) .swipe-animation span:nth-child(1) {
-    transform: translateY(-101%);
-  }
+  @media (hover: hover) and (pointer: fine) {
+    .swipe-animation:hover span:nth-child(1),
+    :global(.group:hover) .swipe-animation span:nth-child(1) {
+      transform: translateY(-101%);
+    }
 
-  .swipe-animation:hover span:nth-child(2),
-  :global(.group:hover) .swipe-animation span:nth-child(2) {
-    transform: translateY(0);
+    .swipe-animation:hover span:nth-child(2),
+    :global(.group:hover) .swipe-animation span:nth-child(2) {
+      transform: translateY(0);
+    }
   }
 </style>

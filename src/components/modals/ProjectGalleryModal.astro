@@ -1,0 +1,213 @@
+---
+interface Props {
+  images: ImageMetadata[];
+  id?: string;
+}
+
+const { images, id = "project-gallery-modal" } = Astro.props;
+---
+
+<dialog
+  id={id}
+  class="group fixed inset-0 z-9999 w-screen h-screen max-w-none max-h-none border-0 bg-transparent p-0 m-0 outline-none"
+>
+  <div class="fixed inset-0 bg-black/80 backdrop-blur-md" aria-hidden="true">
+  </div>
+
+  <div
+    class="relative w-full h-full flex items-center justify-center overflow-hidden"
+  >
+    <button
+      id={`${id}-close`}
+      class="absolute top-4 right-4 z-60 text-white p-2 hover:opacity-70 transition-opacity focus:outline-none"
+      aria-label="Cerrar galería"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-10 h-10"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <button
+      id={`${id}-prev`}
+      class="absolute left-4 z-60 text-white p-4 hover:opacity-70 transition-opacity hidden md:block focus:outline-none"
+      aria-label="Imagen anterior"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-12 h-12"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+      </svg>
+    </button>
+
+    <div
+      id={`${id}-container`}
+      class="relative w-full h-full flex items-center justify-center p-4 md:p-10 select-none"
+    >
+      {
+        images.map((img, index) => (
+          <img
+            src={img.src}
+            data-index={index}
+            alt={`Galería imagen ${index + 1}`}
+            class={`gallery-image absolute max-w-full max-h-full object-contain transition-all duration-300 opacity-0 pointer-events-none scale-95`}
+          />
+        ))
+      }
+    </div>
+
+    <button
+      id={`${id}-next`}
+      class="absolute right-4 z-60 text-white p-4 hover:opacity-70 transition-opacity hidden md:block focus:outline-none"
+      aria-label="Siguiente imagen"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-12 h-12"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+      </svg>
+    </button>
+  </div>
+</dialog>
+
+<script>
+  const modal = document.querySelector("dialog") as HTMLDialogElement | null;
+
+  if (modal) {
+    const container = modal.querySelector(
+      'div[id$="-container"]'
+    ) as HTMLDivElement | null;
+    const closeBtn = modal.querySelector(
+      'button[aria-label="Cerrar galería"]'
+    ) as HTMLButtonElement | null;
+    const prevBtn = modal.querySelector(
+      'button[aria-label="Imagen anterior"]'
+    ) as HTMLButtonElement | null;
+    const nextBtn = modal.querySelector(
+      'button[aria-label="Siguiente imagen"]'
+    ) as HTMLButtonElement | null;
+    const images =
+      container?.querySelectorAll<HTMLImageElement>(".gallery-image");
+
+    const imageCount = images?.length || 0;
+    let currentIndex = 0;
+
+    function showImage(index: number) {
+      if (!images) return;
+
+      if (index < 0) index = imageCount - 1;
+      if (index >= imageCount) index = 0;
+
+      currentIndex = index;
+
+      images.forEach((img) => {
+        img.style.opacity = "0";
+        img.style.pointerEvents = "none";
+        img.classList.remove("scale-100");
+        img.classList.add("scale-95");
+        img.style.zIndex = "0";
+      });
+
+      const currentImg = images[currentIndex];
+      if (currentImg) {
+        currentImg.style.zIndex = "10";
+        currentImg.style.opacity = "1";
+        currentImg.style.pointerEvents = "auto";
+        currentImg.classList.remove("scale-95");
+        currentImg.classList.add("scale-100");
+      }
+    }
+
+    function openModal(index: number) {
+      currentIndex = index;
+      showImage(currentIndex);
+      modal!.showModal();
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal!.close();
+      document.body.style.overflow = "";
+    }
+
+    (window as any).openProjectGallery = openModal;
+
+    closeBtn?.addEventListener("click", closeModal);
+
+    prevBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showImage(currentIndex - 1);
+    });
+
+    nextBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showImage(currentIndex + 1);
+    });
+
+    container?.addEventListener("click", (e) => {
+      if (e.target === container) {
+        closeModal();
+      }
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!modal.open) return;
+
+      if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+      if (e.key === "ArrowRight") showImage(currentIndex + 1);
+      if (e.key === "Escape") closeModal();
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    container?.addEventListener(
+      "touchstart",
+      (e: TouchEvent) => {
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
+
+    container?.addEventListener(
+      "touchend",
+      (e: TouchEvent) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 50) showImage(currentIndex + 1);
+        if (touchEndX > touchStartX + 50) showImage(currentIndex - 1);
+      },
+      { passive: true }
+    );
+  }
+</script>

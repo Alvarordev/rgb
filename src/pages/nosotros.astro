@@ -7,7 +7,7 @@ import AboutHero from "../components/about/AboutHero.astro";
 import CommitmentSection from "../components/about/CommitmentSection.astro";
 import SvgSection from "../components/about/SvgSection.astro";
 import FloatingMenu from "../components/FloatingMenu.astro";
-import MenuModal from "../components/MenuModal.astro";
+import MenuModal from "../components/modals/MenuModal.astro";
 ---
 
 <Layout>
@@ -15,7 +15,7 @@ import MenuModal from "../components/MenuModal.astro";
   <FloatingMenu triggerId="about-section" />
   <MenuModal />
 
-  <main class="bg-[#fcfcfc] text-[#151515]">
+  <main class="bg-background text-foreground">
     <AboutHero />
     <CommitmentSection />
     <SvgSection />
