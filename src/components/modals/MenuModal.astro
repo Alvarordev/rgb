@@ -28,42 +28,32 @@ import TextSwipe from "../TextSwipe.astro";
 
     <button
       id="close-modal"
-      class="absolute top-10 md:top-14 right-3.5 md:right-9 text-[#fcfcfc] cursor-pointer group"
+      class="absolute top-10 md:top-14 right-3.5 md:right-9 text-background cursor-pointer group"
     >
       <TextSwipe class="font-bold tracking-tighter leading-[0.85] text-sm">
         <Fragment slot="text1">CERRAR</Fragment>
       </TextSwipe>
     </button>
 
-    <nav class="flex flex-col items-center gap-8">
-      <a
-        href="/"
-        class="modal-nav-link text-[#fcfcfc] text-4xl md:text-7xl font-bold tracking-tighter"
-      >
+    <nav
+      class="flex flex-col items-center gap-8 text-background text-4xl md:text-7xl font-bold tracking-tighter"
+    >
+      <a href="/" class="modal-nav-link">
         <TextSwipe>
           <Fragment slot="text1">HOME</Fragment>
         </TextSwipe>
       </a>
-      <a
-        href="/proyectos"
-        class="modal-nav-link text-[#fcfcfc] text-4xl md:text-7xl font-bold tracking-tighter"
-      >
+      <a href="/proyectos" class="modal-nav-link">
         <TextSwipe class2="text-red-500">
           <Fragment slot="text1">PROYECTOS</Fragment>
         </TextSwipe>
       </a>
-      <a
-        href="/nosotros"
-        class="modal-nav-link text-[#fcfcfc] text-4xl md:text-7xl font-bold tracking-tighter"
-      >
+      <a href="/nosotros" class="modal-nav-link">
         <TextSwipe class2="text-green-500">
           <Fragment slot="text1">NOSOTROS</Fragment>
         </TextSwipe>
       </a>
-      <a
-        href="/contacto"
-        class="modal-nav-link text-[#fcfcfc] text-4xl md:text-7xl font-bold tracking-tighter"
-      >
+      <a href="/contacto" class="modal-nav-link">
         <TextSwipe class2="text-blue-500">
           <Fragment slot="text1">CONTACTO</Fragment>
         </TextSwipe>

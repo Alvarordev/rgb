@@ -2,6 +2,7 @@
 import TextSwipe from "./TextSwipe.astro";
 import logo from "../assets/rgb-logo.png";
 import { projects } from "../data/projects";
+import Button from "./Button.astro";
 ---
 
 <footer class="relative w-full bg-background flex flex-col pt-20 md:pt-40">
@@ -15,13 +16,11 @@ import { projects } from "../data/projects";
     </p>
 
     <div class="flex md:justify-center">
-      <button
-        class="group bg-foreground text-background h-12 px-6 rounded-full cursor-pointer flex items-center"
-      >
-        <TextSwipe class="font-bold tracking-tighter leading-[0.85] text-sm">
-          <Fragment slot="text1">CUENTANOS SOBRE TU IDEA</Fragment>
-        </TextSwipe>
-      </button>
+      <Button
+        href="/contacto"
+        text1="CUENTANOS SOBRE TU IDEA"
+        class="bg-foreground text-background font-bold tracking-tighter leading-[0.85]"
+      />
     </div>
   </div>
 
@@ -39,7 +38,7 @@ import { projects } from "../data/projects";
 
     <div class="hidden md:block col-span-1 md:order-2"></div>
 
-    <div class="order-1 md:order-3 md:col-span-3 ">
+    <div class="order-1 md:order-3 md:col-span-3">
       <p class="font-bold text-sm mb-4">(NAVEGACION)</p>
       <ul class="text-4xl md:text-5xl font-bold flex flex-col gap-6 md:gap-8">
         <li>
