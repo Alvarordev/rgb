@@ -7,11 +7,12 @@ interface Props {
 }
 
 const { images } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <section
   id="hero-section"
-  class="bg-foreground text-background h-screen w-full flex flex-col overflow-hidden sticky top-0"
+  class="bg-foreground text-background h-dvh w-full flex flex-col overflow-hidden sticky top-0"
 >
   <div class="h-full w-full flex flex-col">
     <div class="flex flex-1 justify-center items-center px-3.5 md:px-0">
@@ -30,7 +31,7 @@ const { images } = Astro.props;
         class="flex w-full justify-between text-[10px] md:text-xs pb-2 px-3.5 md:px-7 font-bold"
       >
         <p class="flex-1 text-left">Lima, PE</p>
-        <p class="text-center">RGB © 2025</p>
+        <p class="text-center">RGB © {year}</p>
         <p class="flex-1 text-right">Arquitectura</p>
       </div>
       <ImageCarousel images={images} />

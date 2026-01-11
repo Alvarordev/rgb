@@ -3,6 +3,8 @@ import TextSwipe from "./TextSwipe.astro";
 import logo from "../assets/rgb-logo.png";
 import { projects } from "../data/projects";
 import Button from "./Button.astro";
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="relative w-full bg-background flex flex-col pt-20 md:pt-40">
@@ -123,7 +125,7 @@ import Button from "./Button.astro";
 
     <div class="order-4 col-span-12">
       <p class="text-xs md:text-sm text-center mt-10 font-bold">
-        © 2025 RGB Studio. Todos los derechos reservados.
+        © {year} RGB Studio. Todos los derechos reservados.
       </p>
     </div>
   </div>
