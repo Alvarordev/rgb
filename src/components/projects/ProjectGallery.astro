@@ -25,7 +25,7 @@ function getImageLayoutClasses(index: number) {
       btnClass: "flex justify-end ",
       colClass: "col-span-12 md:col-span-6 flex justify-end items-start",
       imgClass:
-        "h-full w-auto lg:min-w-[60vh] max-h-[70vh] md:max-h-[85vh] object-cover",
+        "h-full w-full md:w-auto lg:min-w-[60vh] max-h-[70vh] md:max-h-[85vh] object-cover",
     },
     2: {
       colClass: "col-span-12 md:col-span-6 md:col-start-1",
@@ -70,7 +70,6 @@ function getImageLayoutClasses(index: number) {
               src={image}
               alt={`${projectTitle} - imagen ${index + 1}`}
               class={`${imgClass} cursor-pointer transition-opacity hover:opacity-90`}
-              loading={index < 2 ? "eager" : "lazy"}
               quality={85}
               widths={[400, 800, 1200, 1600]}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
