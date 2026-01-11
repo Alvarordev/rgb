@@ -17,25 +17,26 @@ import TextSwipe from "../components/TextSwipe.astro";
       <div
         class="flex flex-col md:grid md:grid-cols-12 w-full items-end gap-y-10 md:gap-y-0"
       >
-        <div class="col-span-8 w-full">
+        <div class="col-span-7 w-full">
           <AnimatedParagraph
             as="h1"
             duration={1.4}
-            class="text-5xl md:text-[7rem] 2xl:text-[8rem] font-bold uppercase tracking-tight leading-tight md:leading-[0.9]"
+            class="text-5xl md:text-[6rem] 2xl:text-[7.5rem] font-bold uppercase tracking-tight leading-tight md:leading-[0.9]"
           >
             Hablemos de <br /> tu proyecto
           </AnimatedParagraph>
         </div>
         <div
-          class="col-span-4 flex flex-col items-start md:items-end pb-4 w-full"
+          class="col-span-5 flex flex-col items-start md:items-end pb-4 w-full"
         >
           <p class="text-sm font-bold uppercase mb-2">(Contacto)</p>
           <a
-            href="mailto:hola@rgbstudio.pe"
-            class="text-2xl md:text-4xl font-bold tracking-tighter"
+            href="mailto:rgb.studio.arquitectura@gmail.com"
+            class="text-2xl md:text-2xl 2xl:text-3xl font-bold tracking-tighter"
           >
             <TextSwipe>
-              <Fragment slot="text1">hola@rgbstudio.pe</Fragment>
+              <Fragment slot="text1">rgb.studio.arquitectura@gmail.com</Fragment
+              >
             </TextSwipe>
           </a>
         </div>
@@ -44,7 +45,7 @@ import TextSwipe from "../components/TextSwipe.astro";
       <div
         class="flex flex-col md:grid md:grid-cols-12 w-full mt-12 md:mt-20 border-t border-foreground/20 pt-10 gap-y-10 md:gap-y-0 pb-20 md:pb-0"
       >
-        <div class="col-span-3">
+        <!-- <div class="col-span-3">
           <p class="text-sm font-bold uppercase mb-6">(Ubicación)</p>
           <AnimatedParagraph
             class="text-xl md:text-2xl font-medium tracking-tighter"
@@ -53,9 +54,9 @@ import TextSwipe from "../components/TextSwipe.astro";
             Calle Las Camelias 790, <br />
             San Isidro
           </AnimatedParagraph>
-        </div>
+        </div> -->
 
-        <div class="hidden md:block col-span-1"></div>
+        <!-- <div class="hidden md:block col-span-1"></div> -->
 
         <div class="col-span-3">
           <p class="text-sm font-bold uppercase mb-6">(Redes Sociales)</p>
@@ -102,7 +103,7 @@ import TextSwipe from "../components/TextSwipe.astro";
             <p class="text-sm font-bold uppercase mb-6">(Llámanos)</p>
             <a href="#" class="text-xl md:text-2xl font-bold tracking-tighter">
               <TextSwipe>
-                <Fragment slot="text1">+51 999 999 999</Fragment>
+                <Fragment slot="text1">+51 934 887 139</Fragment>
               </TextSwipe>
             </a>
           </div>

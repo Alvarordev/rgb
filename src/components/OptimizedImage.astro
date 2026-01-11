@@ -22,8 +22,6 @@ const { src, alt, class: className, imageClass, duration = 0.8 } = Astro.props;
     alt={alt}
     format="webp"
     quality="mid"
-    widths={[240, 540, 720, 1080, 1600, src.width]}
-    sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 1080px, ${src.width}px`}
     class:list={["w-full h-full image-animated", imageClass]}
   />
 

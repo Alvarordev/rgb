@@ -71,36 +71,40 @@ import { projects } from "../../data/projects";
         </div>
       </a>
     </div>
+
     <div class="col-span-12 md:col-span-6">
       <div class="grid grid-cols-6">
-        <a
-          href={`/proyectos/${projects[2].slug}`}
-          class="flex flex-col group col-span-6 md:col-span-5"
-        >
-          <OptimizedImage
-            src={projects[2].images[0]}
-            alt={projects[2].title}
-            class="max-h-[80vh] object-cover"
-          />
+        <div class="group col-span-6 md:col-span-5">
+          <a
+            href={`/proyectos/${projects[2].slug}`}
+            class="flex flex-col "
+          >
+            <OptimizedImage
+              src={projects[2].images[0]}
+              alt={projects[2].title}
+              class="max-h-[80vh] object-cover"
+            />
 
-          <div class="flex justify-between text-sm font-bold pt-2">
-            <div class="flex">
-              <p>(03)</p>
-              <p class="pl-4 md:pl-8 uppercase">{projects[2].title}</p>
-            </div>
+            <div class="flex justify-between text-sm font-bold pt-2">
+              <div class="flex">
+                <p>(03)</p>
+                <p class="pl-4 md:pl-8 uppercase">{projects[2].title}</p>
+              </div>
 
-            <div>
-              <TextSwipe
-                class="font-bold tracking-tighter leading-[0.85] text-sm text-end"
-              >
-                <Fragment slot="text1">{projects[2].year}</Fragment>
-                <Fragment slot="text2">VER PROYECTO</Fragment>
-              </TextSwipe>
+              <div>
+                <TextSwipe
+                  class="font-bold tracking-tighter leading-[0.85] text-sm text-end"
+                >
+                  <Fragment slot="text1">{projects[2].year}</Fragment>
+                  <Fragment slot="text2">VER PROYECTO</Fragment>
+                </TextSwipe>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
+
     <div class="col-span-12 md:col-span-6">
       <a href={`/proyectos/${projects[3].slug}`} class="flex flex-col group">
         <OptimizedImage
