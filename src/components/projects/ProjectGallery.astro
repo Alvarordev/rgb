@@ -35,7 +35,7 @@ function getImageLayoutClasses(index: number) {
     3: {
       colClass:
         "col-span-12 md:col-span-5 md:col-start-8 flex justify-end items-center",
-      imgClass: "h-full w-auto max-h-[70vh] md:max-h-[80vh] object-contain",
+      imgClass: "h-full w-auto max-h-[60vh] md:max-h-[70vh] object-cover",
     },
     4: {
       colClass:
@@ -52,7 +52,7 @@ function getImageLayoutClasses(index: number) {
 }
 ---
 
-<div class="grid grid-cols-12 gap-x-6 gap-y-10 md:gap-y-20 items-stretch">
+<div class="grid grid-cols-12 gap-x-6 gap-y-6 md:gap-y-12 items-stretch">
   {
     images.map((image, index) => {
       const { colClass, btnClass, imgClass } = getImageLayoutClasses(index);
@@ -70,9 +70,6 @@ function getImageLayoutClasses(index: number) {
               src={image}
               alt={`${projectTitle} - imagen ${index + 1}`}
               class={`${imgClass} cursor-pointer transition-opacity hover:opacity-90`}
-              quality={85}
-              widths={[400, 800, 1200, 1600]}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </button>
         </div>
@@ -89,7 +86,7 @@ function getImageLayoutClasses(index: number) {
           muted
           loop
           playsinline
-          class="w-full h-full max-h-[80vh] md:max-h-[85vh] object-cover object-center rounded-sm"
+          class="w-full h-full max-h-[80vh] md:max-h-[95vh] object-cover object-center rounded-sm"
           aria-label={`Video del proyecto ${projectTitle}`}
         >
           <track kind="captions" />
