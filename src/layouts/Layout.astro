@@ -1,5 +1,20 @@
 ---
 import "../styles/global.css";
+import defaultOgImage from "../assets/rgb-logo.png";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+
+const defaultTitle = "RGB Studio - Arquitectura y Diseño de Interiores";
+const defaultDescription = "Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos.";
+const siteTitle = title ? title : defaultTitle;
+const siteDescription = description ? description : defaultDescription;
+const socialImageURL = new URL(ogImage ?? defaultOgImage.src, Astro.url);
 ---
 
 <!doctype html>
@@ -8,59 +23,35 @@ import "../styles/global.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>
-      {Astro.props.title ?? "RGB Studio - Arquitectura y Diseño de Interiores"}
-    </title>
-    <meta
-      name="description"
-      content={Astro.props.description ??
-        "Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos."}
-    />
+    <title>{siteTitle}</title>
+    <meta name="description" content={siteDescription} />
     <link
       rel="canonical"
-      href={Astro.site ? Astro.site + Astro.url.pathname : undefined}
+      href={Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url}
     />
     <meta name="robots" content="index, follow" />
     <meta http-equiv="Content-Language" content="es" />
 
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_PE" />
     <meta property="og:site_name" content="RGB Studio" />
-    <meta
-      property="og:title"
-      content={Astro.props.title ??
-        "RGB Studio - Arquitectura y Diseño de Interiores"}
-    />
-    <meta
-      property="og:description"
-      content={Astro.props.description ??
-        "Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos."}
-    />
-    <meta
-      property="og:url"
-      content={Astro.site ? Astro.site + Astro.url.pathname : undefined}
-    />
-    <meta
-      property="og:image"
-      content={Astro.props.ogImage ?? "/og-default.jpg"}
-    />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:secure_url" content={socialImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content={Astro.props.title ??
-        "RGB Studio - Arquitectura y Diseño de Interiores"}
-    />
-    <meta
-      name="twitter:description"
-      content={Astro.props.description ??
-        "Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos."}
-    />
-    <meta
-      name="twitter:image"
-      content={Astro.props.ogImage ?? "/og-default.jpg"}
-    />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={siteDescription} />
+    <meta name="twitter:image" content={socialImageURL} />
     <meta name="twitter:site" content="@rgbstudiope" />
     <meta name="twitter:creator" content="@rgbstudiope" />
   </head>

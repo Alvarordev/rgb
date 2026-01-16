@@ -3,17 +3,24 @@ import AnimatedParagraph from "../AnimatedParagraph.astro";
 ---
 
 <div
-  class="flex flex-col md:flex-row justify-between md:items-end w-full gap-y-8 md:gap-y-0"
+  class="flex flex-col lg:flex-row justify-between lg:items-end w-full gap-y-8 lg:gap-y-0"
 >
   <AnimatedParagraph
     as="h1"
     duration={1.5}
-    class="text-5xl md:text-[6.5rem] 2xl:text-[7.25rem] font-bold tracking-tight uppercase leading-[0.85]"
+    class="text-5xl md:text-[4rem] xl:text-[7rem] 2xl:text-[7.25rem] font-bold tracking-tight uppercase leading-[0.85]"
   >
     Nuestros <br /> Proyectos
   </AnimatedParagraph>
-  <AnimatedParagraph class="text-lg md:text-lg font-medium max-w-md">
-    Explora nuestra selección de trabajos más recientes, donde cada espacio
-    cuenta una historia única de diseño, funcionalidad y estética atemporal.
-  </AnimatedParagraph>
+  <div>
+    <AnimatedParagraph
+      class="text-base pr-2 md:pr-0 2xl:text-lg font-medium max-w-md"
+    >
+      Explora nuestra selección de trabajos más recientes, donde cada espacio
+      cuenta una historia única de diseño, funcionalidad y estética atemporal.
+    </AnimatedParagraph>
+    <p class="w-full text-end text-[10px] font-bold uppercase tracking-tigth lg:translate-y-5">
+      (Desliza hacia abajo)
+    </p>
+  </div>
 </div>
