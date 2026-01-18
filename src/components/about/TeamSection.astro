@@ -5,19 +5,19 @@ import grupalImg from "../../assets/about/grupal.png";
 import { team } from "../../data/team";
 ---
 
-<section class="team-section relative px-3.5 md:px-7">
-  <div class="sticky-container h-auto md:h-[250vh]">
+<section class="team-section relative px-3.5 lg:px-7">
+  <div class="sticky-container h-auto lg:h-[250vh]">
     <div
-      class="relative md:sticky top-0 h-auto md:h-screen flex flex-col py-12 overflow-hidden"
+      class="relative lg:sticky top-0 h-auto lg:h-screen flex flex-col py-12 overflow-hidden"
     >
       <div class="mb-8">
         <p class="uppercase font-bold text-sm">(Nuestro equipo)</p>
       </div>
 
       <div
-        class="flex flex-col md:grid md:grid-cols-12 flex-1 gap-y-12 md:gap-y-0"
+        class="flex flex-col lg:grid lg:grid-cols-12 flex-1 gap-y-12 lg:gap-y-0"
       >
-        <div class="col-span-12 md:col-span-3 flex flex-col">
+        <div class="col-span-12 lg:col-span-3 flex flex-col">
           <div class="w-full">
             <Image
               src={grupalImg}
@@ -25,7 +25,7 @@ import { team } from "../../data/team";
               width={600}
               format="webp"
               quality={80}
-              class="w-full h-[50vh] md:h-auto object-cover"
+              class="w-full h-[50vh] lg:h-auto object-cover"
               loading="eager"
               decoding="async"
             />
@@ -38,16 +38,16 @@ import { team } from "../../data/team";
           </div>
         </div>
 
-        <div class="hidden md:block col-span-1"></div>
+        <div class="hidden lg:block col-span-1"></div>
 
-        <div class="col-span-12 md:col-span-8 relative flex flex-col">
+        <div class="col-span-12 lg:col-span-8 relative flex flex-col">
           <div
-            class="cards-wrapper relative flex-1 flex flex-col gap-y-8 md:gap-y-0"
+            class="cards-wrapper relative flex-1 flex flex-col gap-y-8 lg:gap-y-0"
           >
             {
               team.map((member, index) => (
                 <div
-                  class={`team-card sticky md:absolute top-20 md:inset-0 flex flex-col md:opacity-0 md:pointer-events-none card-${index} bg-background pt-10 md:pt-0`}
+                  class={`team-card sticky lg:absolute top-20 lg:inset-0 flex flex-col lg:opacity-0 lg:pointer-events-none card-${index} bg-background pt-10 lg:pt-0`}
                 >
                   <div class="flex flex-col md:grid md:grid-cols-8 h-full w-full gap-8">
                     <div class="order-2 md:order-1 col-span-4 flex flex-col w-full">
@@ -63,9 +63,9 @@ import { team } from "../../data/team";
                           {member.role}
                         </p>
                       </div>
-                      <div class="w-full pt-6 md:pt-12">
+                      <div class="w-full pt-6 md:pt-12 xl:pr-10 text-balance">
                         <AnimatedParagraph
-                          class="text-base md:text-lg font-medium"
+                          class="text-base lg:text-lg font-medium"
                           duration={0.8}
                           manual
                         >
@@ -150,7 +150,7 @@ import { team } from "../../data/team";
     const section = document.querySelector(".team-section");
     const cards = document.querySelectorAll(".team-card");
 
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1024) {
       cards.forEach((card) => {
         gsap.set(card, { opacity: 1, pointerEvents: "auto" });
         const paragraphs = card.querySelectorAll(".animated-paragraph");

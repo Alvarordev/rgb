@@ -18,7 +18,7 @@ export const team: TeamMember[] = [
       "Creo que el buen diseño nace de entender a las personas y la manera en que habitan los espacios. Cada proyecto es una oportunidad para crear ambientes con identidad, funcionales y coherentes, donde la estética y la experiencia conviven en equilibrio. El color y el diseño lumínico son herramientas clave en mi proceso creativo. Trabajo la luz natural y artificial de forma complementaria, incorporando tecnología para generar atmósferas adaptadas a distintos usos y momentos del día. La integración de la naturaleza y el paisajismo es parte esencial de nuestro lenguaje, creando espacios que se viven como experiencias.",
   },
   {
-    name: "Alessandra Diaz",
+    name: "Alessandra Díaz",
     image: aleImg,
     role: "Arquitecta & Socia-Fundadora",
     description:
