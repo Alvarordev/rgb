@@ -4,6 +4,12 @@ import Header from "../components/Header.astro";
 import MenuModal from "../components/modals/MenuModal.astro";
 import AnimatedParagraph from "../components/AnimatedParagraph.astro";
 import TextSwipe from "../components/TextSwipe.astro";
+import Button from "../components/Button.astro";
+
+const phoneNumber = "51934887139";
+const message =
+  "Hola, estoy interesado en realizar un proyecto de diseño con ustedes. Quisiera más información sobre cómo trabajan.";
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 ---
 
 <Layout title="Contacto | RGB Arquitectura">
@@ -83,7 +89,7 @@ import TextSwipe from "../components/TextSwipe.astro";
                 </TextSwipe>
               </a>
             </li>
-            <li>
+            <!-- <li>
               <a
                 href="#"
                 class="text-xl md:text-2xl font-bold tracking-tighter"
@@ -92,7 +98,7 @@ import TextSwipe from "../components/TextSwipe.astro";
                   <Fragment slot="text1">WhatsApp</Fragment>
                 </TextSwipe>
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
 
@@ -109,13 +115,12 @@ import TextSwipe from "../components/TextSwipe.astro";
           </div>
 
           <div class="mt-10">
-            <button
-              class="group bg-foreground text-background h-14 px-8 rounded-full cursor-pointer flex items-center w-fit"
-            >
-              <TextSwipe class="font-bold tracking-tighter text-sm">
-                <Fragment slot="text1">INICIAR UNA CONSULTA</Fragment>
-              </TextSwipe>
-            </button>
+            <Button
+              href={whatsappUrl}
+              text1="INICIAR UNA CONSULTA"
+              class="bg-foreground text-background border border-foreground w-fit px-8 h-14"
+              textSwipeClass="font-bold tracking-tighter leading-[1.15] text-sm"
+            />
           </div>
         </div>
       </div>
