@@ -3,6 +3,7 @@ import TextSwipe from "./TextSwipe.astro";
 import Button from "./Button.astro";
 import logoWhite from "../assets/rgb-logo-white.png";
 import logo from "../assets/rgb-logo.png";
+import { whatsappUrl } from "../data/whatsapp";
 
 interface Props {
   light?: boolean;
@@ -63,7 +64,7 @@ const { light = false } = Astro.props;
 
     <div class="hidden md:block">
       <Button
-        href="/contacto"
+        href={whatsappUrl}
         class:list={[
           light
             ? "bg-foreground text-background"

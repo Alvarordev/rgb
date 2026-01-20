@@ -1,4 +1,5 @@
 ---
+import { whatsappUrl } from "../data/whatsapp";
 import Button from "./Button.astro";
 
 interface Props {
@@ -16,7 +17,7 @@ const { triggerId } = Astro.props;
   <div class="flex gap-2 overflow-hidden py-2 px-1">
     <div class="menu-button-wrapper translate-y-full opacity-0">
       <Button
-      href="/contacto"
+        href={whatsappUrl}
         text1="CONTÁCTANOS"
         class="bg-foreground text-background border border-foreground"
         textSwipeClass="font-bold tracking-tighter leading-[1.15] text-sm"

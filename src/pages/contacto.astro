@@ -5,11 +5,7 @@ import MenuModal from "../components/modals/MenuModal.astro";
 import AnimatedParagraph from "../components/AnimatedParagraph.astro";
 import TextSwipe from "../components/TextSwipe.astro";
 import Button from "../components/Button.astro";
-
-const phoneNumber = "51934887139";
-const message =
-  "Hola, estoy interesado en realizar un proyecto de diseño con ustedes. Quisiera más información sobre cómo trabajan.";
-const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+import { whatsappUrl } from "../data/whatsapp.ts";
 ---
 
 <Layout title="Contacto | RGB Arquitectura">
