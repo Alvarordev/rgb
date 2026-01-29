@@ -98,22 +98,20 @@ import { projects } from "../../data/projects";
   };
 
   const cleanup = () => {
-    ScrollTrigger.getAll().forEach(trigger => {
-      if (trigger.vars && trigger.vars.trigger === document.querySelector("#horizontal-scroll-section")) {
-        trigger.kill();
-      }
-    });
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
   };
 
-  // Limpiar antes de inicializar
-  document.addEventListener("astro:before-preparation", cleanup);
-  
-  // Inicializar después de que la página esté lista
-  document.addEventListener("astro:page-load", () => {
-    cleanup();
-    setTimeout(initHorizontalScroll, 100);
-  });
-  
-  // Primera inicialización
-  initHorizontalScroll();
+  // Solo inicializar en desktop
+  if (window.innerWidth >= 1024) {
+    initHorizontalScroll();
+    
+    document.addEventListener("astro:before-preparation", cleanup);
+    
+    document.addEventListener("astro:page-load", () => {
+      cleanup();
+      if (window.innerWidth >= 1024) {
+        setTimeout(initHorizontalScroll, 150);
+      }
+    });
+  }
 </script>
