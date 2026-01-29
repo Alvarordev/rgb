@@ -22,7 +22,7 @@ import { projects } from "../../data/projects";
     <div class="mt-8 lg:mt-auto -mx-3.5 md:-mx-7">
       <div
         id="horizontal-strip"
-        class="flex flex-col lg:flex-row gap-8 lg:gap-7 px-3.5 md:px-7 items-start lg:items-end will-change-transform"
+        class="flex flex-col lg:flex-row gap-4 lg:gap-4 px-3.5 md:px-7 items-start lg:items-end will-change-transform"
       >
         {
           projects.map((project) => (
@@ -97,6 +97,23 @@ import { projects } from "../../data/projects";
     });
   };
 
+  const cleanup = () => {
+    ScrollTrigger.getAll().forEach(trigger => {
+      if (trigger.vars && trigger.vars.trigger === document.querySelector("#horizontal-scroll-section")) {
+        trigger.kill();
+      }
+    });
+  };
+
+  // Limpiar antes de inicializar
+  document.addEventListener("astro:before-preparation", cleanup);
+  
+  // Inicializar después de que la página esté lista
+  document.addEventListener("astro:page-load", () => {
+    cleanup();
+    setTimeout(initHorizontalScroll, 100);
+  });
+  
+  // Primera inicialización
   initHorizontalScroll();
-  document.addEventListener("astro:after-swap", initHorizontalScroll);
 </script>
