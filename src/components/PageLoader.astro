@@ -56,10 +56,22 @@
   }
 
   function hideLoaderAndTriggerAnimations() {
-    const loader = document.getElementById('page-loader');
-    if (!loader) return;
-
     document.body.classList.remove('is-navigating');
+    document.body.style.overflow = '';
+    
+    const lenis = (window as any).lenis;
+    if (lenis) {
+      lenis.start();
+      lenis.resize();
+    }
+
+    const loader = document.getElementById('page-loader');
+    if (!loader) {
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('animations:start'));
+      }, 50);
+      return;
+    }
 
     if (isInitialLoad) {
       isInitialLoad = false;
@@ -78,12 +90,23 @@
 
   document.addEventListener('astro:before-preparation', showLoader);
   
-  document.addEventListener('astro:after-swap', forceScrollToTop);
+  document.addEventListener('astro:after-swap', () => {
+    forceScrollToTop();
+    document.body.classList.remove('is-navigating');
+    document.body.style.overflow = '';
+  });
 
   document.addEventListener('astro:page-load', () => {
-    const lenis = (window as any).lenis;
-    if (lenis) lenis.start();
-
     hideLoaderAndTriggerAnimations();
+    
+    setTimeout(() => {
+      const lenis = (window as any).lenis;
+      if (lenis) {
+        lenis.start();
+        lenis.resize();
+      }
+      document.body.classList.remove('is-navigating');
+      document.body.style.overflow = '';
+    }, 100);
   });
 </script>
