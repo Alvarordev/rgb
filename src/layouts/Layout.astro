@@ -6,9 +6,15 @@ import PageLoader from "../components/PageLoader.astro";
 
 interface Props {
   title?: string;
+  description?: string;
+  keywords?: string;
 }
 
-const { title } = Astro.props;
+const { 
+  title, 
+  description = "Estudio de arquitectura en Lima, Perú especializado en diseño de interiores, remodelaciones y proyectos residenciales. Creamos espacios funcionales y estéticos que transforman tu hogar.",
+  keywords = "arquitectura Lima, diseño de interiores Lima, arquitectos en Lima, remodelación de casas Lima, diseño arquitectónico Perú, interiorismo Lima, proyectos residenciales, arquitectura moderna Lima, decoración de interiores Perú, RGB Studio"
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -20,35 +26,72 @@ const { title } = Astro.props;
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ? title : "RGB Studio - Arquitectura y Diseño de Interiores"}</title>
-    <meta name="description" content="Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos." />
+    <title>{title ? title : "RGB Studio - Arquitectura y Diseño de Interiores en Lima, Perú"}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     <link
       rel="canonical"
       href={new URL(Astro.url.pathname, Astro.site || Astro.url)}
     />
     <meta name="robots" content="index, follow" />
+    <meta name="author" content="RGB Studio" />
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="PE-LIM" />
+    <meta name="geo.placename" content="Lima" />
+    <meta name="geo.position" content="-12.046374;-77.042793" />
+    <meta name="ICBM" content="-12.046374, -77.042793" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_PE" />
     <meta property="og:site_name" content="RGB Studio" />
-    <meta property="og:title" content={title ? title : "RGB Studio - Arquitectura y Diseño de Interiores"} />
-    <meta property="og:description" content="Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos." />
+    <meta property="og:title" content={title ? title : "RGB Studio - Arquitectura y Diseño de Interiores en Lima, Perú"} />
+    <meta property="og:description" content={description} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:image" content={new URL("/og-logo.png", Astro.site || Astro.url).href} />
     <meta property="og:image:secure_url" content={new URL("/og-logo.png", Astro.site || Astro.url).href} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="RGB Studio Logo" />
+    <meta property="og:image:alt" content="RGB Studio - Arquitectura y Diseño de Interiores Lima" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title ? title : "RGB Studio - Arquitectura y Diseño de Interiores"} />
-    <meta name="twitter:description" content="Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos." />
+    <meta name="twitter:title" content={title ? title : "RGB Studio - Arquitectura y Diseño de Interiores en Lima, Perú"} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL("/og-logo.png", Astro.site || Astro.url).href} />
     <meta name="twitter:site" content="@rgbstudiope" />
     <meta name="twitter:creator" content="@rgbstudiope" />
+    
+    <!-- JSON-LD Schema for Local Business -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ArchitecturalService",
+        "name": "RGB Studio",
+        "description": "Estudio de arquitectura especializado en diseño de interiores y proyectos residenciales en Lima, Perú",
+        "url": "https://rgbstudio.pe",
+        "logo": "https://rgbstudio.pe/og-logo.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lima",
+          "addressRegion": "Lima",
+          "addressCountry": "PE"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "-12.046374",
+          "longitude": "-77.042793"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Lima"
+        },
+        "serviceType": ["Arquitectura", "Diseño de Interiores", "Remodelaciones", "Proyectos Residenciales"],
+        "priceRange": "$$"
+      }
+    </script>
   </head>
 
   <body>
