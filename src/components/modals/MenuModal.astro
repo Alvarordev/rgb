@@ -17,7 +17,7 @@ import TextSwipe from "../TextSwipe.astro";
   </svg>
 
   <div
-    class="modal-content relative h-full w-full flex flex-col justify-center items-center opacity-0 invisible"
+    class="modal-content relative h-full w-full flex flex-col justify-center items-start pl-3.5 md:pl-9 opacity-0 invisible"
   >
     <a
       href="/"
@@ -36,7 +36,7 @@ import TextSwipe from "../TextSwipe.astro";
     </button>
 
     <nav
-      class="flex flex-col items-center gap-8 text-background text-4xl md:text-7xl font-bold tracking-tighter"
+      class="flex flex-col items-start gap-4 md:gap-2 text-background text-5xl md:text-8xl font-bold tracking-tighter"
     >
       <a href="/" class="modal-nav-link">
         <TextSwipe>
@@ -59,6 +59,25 @@ import TextSwipe from "../TextSwipe.astro";
         </TextSwipe>
       </a>
     </nav>
+
+    <div class="absolute bottom-8 md:bottom-14 left-3.5 md:left-9 flex flex-col gap-4 text-background text-xl md:text-2xl font-bold tracking-tighter">
+      <a
+        href="https://www.instagram.com/rgb.studio.pe/"
+        target="_blank"
+      >
+        <TextSwipe class="leading-[0.85]">
+          <Fragment slot="text1">INSTAGRAM</Fragment>
+        </TextSwipe>
+      </a>
+      <a
+        href="https://www.tiktok.com/@rgbstudiope?is_from_webapp=1&sender_device=pc"
+        target="_blank"
+      >
+        <TextSwipe class="leading-[0.85]">
+          <Fragment slot="text1">TIKTOK</Fragment>
+        </TextSwipe>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -90,19 +109,19 @@ import TextSwipe from "../TextSwipe.astro";
 
     tl.to(path, {
       attr: { d: midPath },
-      duration: 0.4,
+      duration: 0.35,
       ease: "power2.in",
     })
       .to(path, {
         attr: { d: endPath },
-        duration: 0.4,
+        duration: 0.35,
         ease: "power2.out",
       })
       .to(
         content,
         {
           autoAlpha: 1,
-          duration: 0.4,
+          duration: 0.35,
           ease: "power3.out",
         },
         "-=0.2"
@@ -110,14 +129,14 @@ import TextSwipe from "../TextSwipe.astro";
 
     menuBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
-        tl.play();
+        tl.timeScale(1).play();
         document.body.style.overflow = "hidden";
         if ((window as any).lenis) (window as any).lenis.stop();
       });
     });
 
     closeBtn.addEventListener("click", () => {
-      tl.reverse();
+      tl.timeScale(1.5).reverse();
       document.body.style.overflow = "";
       if ((window as any).lenis) (window as any).lenis.start();
     });
@@ -125,7 +144,7 @@ import TextSwipe from "../TextSwipe.astro";
     const links = content.querySelectorAll("a");
     links.forEach((link) => {
       link.addEventListener("click", () => {
-        tl.reverse();
+        tl.timeScale(1.5).reverse();
         document.body.style.overflow = "";
         if ((window as any).lenis) (window as any).lenis.start();
       });
