@@ -98,18 +98,32 @@ function getImageLayoutClasses(index: number) {
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  function initGalleryTriggers() {
     const galleryTriggers = document.querySelectorAll<HTMLButtonElement>(
       "[data-gallery-trigger]"
     );
 
     galleryTriggers.forEach((trigger) => {
-      trigger.addEventListener("click", () => {
+      const oldListener = (trigger as any)._galleryClickListener;
+      if (oldListener) {
+        trigger.removeEventListener("click", oldListener);
+      }
+
+      // Crear nuevo listener
+      const listener = () => {
         const index = parseInt(trigger.dataset.index || "0", 10);
         if (typeof (window as any).openProjectGallery === "function") {
           (window as any).openProjectGallery(index);
         }
-      });
+      };
+
+      (trigger as any)._galleryClickListener = listener;
+      
+      trigger.addEventListener("click", listener);
     });
-  });
+  }
+
+  document.addEventListener("DOMContentLoaded", initGalleryTriggers);
+
+  document.addEventListener("astro:page-load", initGalleryTriggers);
 </script>

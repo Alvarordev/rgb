@@ -1,15 +1,30 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface Props {
-  src: any;
+  src: ImageMetadata;
   alt: string;
   class?: string;
   imageClass?: string;
   duration?: number;
+  width?: number;
+  height?: number;
+  widths?: number[];
+  sizes?: string;
 }
 
-const { src, alt, class: className, imageClass, duration = 0.8 } = Astro.props;
+const { 
+  src, 
+  alt, 
+  class: className, 
+  imageClass, 
+  duration = 0.8,
+  width,
+  height,
+  widths,
+  sizes
+} = Astro.props;
 ---
 
 <div
@@ -23,6 +38,10 @@ const { src, alt, class: className, imageClass, duration = 0.8 } = Astro.props;
     format="webp"
     quality="max"
     class:list={["w-full h-full image-animated", imageClass]}
+    width={width}
+    height={height}
+    widths={widths}
+    sizes={sizes}
   />
 
   <div class="absolute inset-0 bg-black overlay-animated pointer-events-none">
@@ -52,7 +71,7 @@ const { src, alt, class: className, imageClass, duration = 0.8 } = Astro.props;
 </style>
 
 <script>
-  function initImageAnimations() {
+  function setupImageObserver() {
     const observerOptions = {
       threshold: 0.15,
     };
@@ -66,11 +85,12 @@ const { src, alt, class: className, imageClass, duration = 0.8 } = Astro.props;
       });
     }, observerOptions);
 
-    document.querySelectorAll("[data-animated-image]").forEach((el) => {
+    document.querySelectorAll("[data-animated-image]:not(.is-observed)").forEach((el) => {
+      el.classList.add("is-observed");
       observer.observe(el);
     });
   }
 
-  initImageAnimations();
-  document.addEventListener("astro:after-swap", initImageAnimations);
+  document.addEventListener("astro:after-swap", setupImageObserver);
+  window.addEventListener("animations:start", setupImageObserver);
 </script>

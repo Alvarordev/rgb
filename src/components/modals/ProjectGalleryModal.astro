@@ -96,118 +96,124 @@ const { images, id = "project-gallery-modal" } = Astro.props;
 </dialog>
 
 <script>
-  const modal = document.querySelector("dialog") as HTMLDialogElement | null;
+  function initProjectGallery() {
+    const modal = document.querySelector("dialog") as HTMLDialogElement | null;
 
-  if (modal) {
-    const container = modal.querySelector(
-      'div[id$="-container"]'
-    ) as HTMLDivElement | null;
-    const closeBtn = modal.querySelector(
-      'button[aria-label="Cerrar galería"]'
-    ) as HTMLButtonElement | null;
-    const prevBtn = modal.querySelector(
-      'button[aria-label="Imagen anterior"]'
-    ) as HTMLButtonElement | null;
-    const nextBtn = modal.querySelector(
-      'button[aria-label="Siguiente imagen"]'
-    ) as HTMLButtonElement | null;
-    const images =
-      container?.querySelectorAll<HTMLImageElement>(".gallery-image");
+    if (modal) {
+      const container = modal.querySelector(
+        'div[id$="-container"]'
+      ) as HTMLDivElement | null;
+      const closeBtn = modal.querySelector(
+        'button[aria-label="Cerrar galería"]'
+      ) as HTMLButtonElement | null;
+      const prevBtn = modal.querySelector(
+        'button[aria-label="Imagen anterior"]'
+      ) as HTMLButtonElement | null;
+      const nextBtn = modal.querySelector(
+        'button[aria-label="Siguiente imagen"]'
+      ) as HTMLButtonElement | null;
+      const images =
+        container?.querySelectorAll<HTMLImageElement>(".gallery-image");
 
-    const imageCount = images?.length || 0;
-    let currentIndex = 0;
+      const imageCount = images?.length || 0;
+      let currentIndex = 0;
 
-    function showImage(index: number) {
-      if (!images) return;
+      function showImage(index: number) {
+        if (!images) return;
 
-      if (index < 0) index = imageCount - 1;
-      if (index >= imageCount) index = 0;
+        if (index < 0) index = imageCount - 1;
+        if (index >= imageCount) index = 0;
 
-      currentIndex = index;
+        currentIndex = index;
 
-      images.forEach((img) => {
-        img.style.opacity = "0";
-        img.style.pointerEvents = "none";
-        img.classList.remove("scale-100");
-        img.classList.add("scale-95");
-        img.style.zIndex = "0";
+        images.forEach((img) => {
+          img.style.opacity = "0";
+          img.style.pointerEvents = "none";
+          img.classList.remove("scale-100");
+          img.classList.add("scale-95");
+          img.style.zIndex = "0";
+        });
+
+        const currentImg = images[currentIndex];
+        if (currentImg) {
+          currentImg.style.zIndex = "10";
+          currentImg.style.opacity = "1";
+          currentImg.style.pointerEvents = "auto";
+          currentImg.classList.remove("scale-95");
+          currentImg.classList.add("scale-100");
+        }
+      }
+
+      function openModal(index: number) {
+        currentIndex = index;
+        showImage(currentIndex);
+        modal!.showModal();
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal!.close();
+        document.body.style.overflow = "";
+      }
+
+      (window as any).openProjectGallery = openModal;
+
+      closeBtn?.addEventListener("click", closeModal);
+
+      prevBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        showImage(currentIndex - 1);
       });
 
-      const currentImg = images[currentIndex];
-      if (currentImg) {
-        currentImg.style.zIndex = "10";
-        currentImg.style.opacity = "1";
-        currentImg.style.pointerEvents = "auto";
-        currentImg.classList.remove("scale-95");
-        currentImg.classList.add("scale-100");
-      }
+      nextBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        showImage(currentIndex + 1);
+      });
+
+      container?.addEventListener("click", (e) => {
+        if (e.target === container) {
+          closeModal();
+        }
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (!modal.open) return;
+
+        if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+        if (e.key === "ArrowRight") showImage(currentIndex + 1);
+        if (e.key === "Escape") closeModal();
+      });
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      container?.addEventListener(
+        "touchstart",
+        (e: TouchEvent) => {
+          touchStartX = e.changedTouches[0].screenX;
+        },
+        { passive: true }
+      );
+
+      container?.addEventListener(
+        "touchend",
+        (e: TouchEvent) => {
+          touchEndX = e.changedTouches[0].screenX;
+          if (touchEndX < touchStartX - 50) showImage(currentIndex + 1);
+          if (touchEndX > touchStartX + 50) showImage(currentIndex - 1);
+        },
+        { passive: true }
+      );
     }
-
-    function openModal(index: number) {
-      currentIndex = index;
-      showImage(currentIndex);
-      modal!.showModal();
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeModal() {
-      modal!.close();
-      document.body.style.overflow = "";
-    }
-
-    (window as any).openProjectGallery = openModal;
-
-    closeBtn?.addEventListener("click", closeModal);
-
-    prevBtn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      showImage(currentIndex - 1);
-    });
-
-    nextBtn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      showImage(currentIndex + 1);
-    });
-
-    container?.addEventListener("click", (e) => {
-      if (e.target === container) {
-        closeModal();
-      }
-    });
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (!modal.open) return;
-
-      if (e.key === "ArrowLeft") showImage(currentIndex - 1);
-      if (e.key === "ArrowRight") showImage(currentIndex + 1);
-      if (e.key === "Escape") closeModal();
-    });
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    container?.addEventListener(
-      "touchstart",
-      (e: TouchEvent) => {
-        touchStartX = e.changedTouches[0].screenX;
-      },
-      { passive: true }
-    );
-
-    container?.addEventListener(
-      "touchend",
-      (e: TouchEvent) => {
-        touchEndX = e.changedTouches[0].screenX;
-        if (touchEndX < touchStartX - 50) showImage(currentIndex + 1);
-        if (touchEndX > touchStartX + 50) showImage(currentIndex - 1);
-      },
-      { passive: true }
-    );
   }
+
+  initProjectGallery();
+
+  document.addEventListener("astro:page-load", initProjectGallery);
 </script>

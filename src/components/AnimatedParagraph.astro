@@ -44,12 +44,10 @@ const {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const initAnimations = () => {
-    const paragraphs = document.querySelectorAll(".animated-paragraph");
+  function setupParagraphs() {
+    const paragraphs = document.querySelectorAll(".animated-paragraph:not(.is-ready)");
 
     paragraphs.forEach((p) => {
-      const duration = parseFloat((p as HTMLElement).dataset.duration || "0.8");
-
       const split = new SplitType(p as HTMLElement, {
         types: "lines",
         lineClass: "split-line",
@@ -63,10 +61,21 @@ const {
       });
 
       p.classList.add("is-ready");
+    });
+  }
 
+  function animateParagraphs() {
+    const paragraphs = document.querySelectorAll(".animated-paragraph.is-ready:not(.is-animated)");
+
+    paragraphs.forEach((p) => {
+      p.classList.add("is-animated");
+      
       if ((p as HTMLElement).dataset.manual === "true") return;
+      
+      const duration = parseFloat((p as HTMLElement).dataset.duration || "0.8");
+      const lines = p.querySelectorAll(".split-line");
 
-      gsap.from(split.lines, {
+      gsap.from(lines, {
         scrollTrigger: {
           trigger: p,
           start: "top 85%",
@@ -79,9 +88,10 @@ const {
         ease: "expo.out",
       });
     });
-  };
+  }
 
-  initAnimations();
+  document.addEventListener("astro:after-swap", setupParagraphs);
+  setupParagraphs();
 
-  document.addEventListener("astro:page-load", initAnimations);
+  window.addEventListener("animations:start", animateParagraphs);
 </script>

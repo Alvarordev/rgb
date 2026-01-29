@@ -40,6 +40,11 @@ const { images = [] } = Astro.props;
 
     const duration = parseFloat(durationAttr);
 
+    const existingClones = track.querySelectorAll('.carousel-group:not(:first-child)');
+    existingClones.forEach(clone => clone.remove());
+
+    gsap.killTweensOf(".carousel-group");
+
     const clone = group.cloneNode(true) as HTMLElement;
     track.appendChild(clone);
 
@@ -59,4 +64,5 @@ const { images = [] } = Astro.props;
   } else {
     window.addEventListener("load", initCarousel);
   }
+  document.addEventListener("astro:page-load", initCarousel);
 </script>
