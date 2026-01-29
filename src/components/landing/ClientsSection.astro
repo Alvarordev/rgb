@@ -46,7 +46,7 @@ import cliente1 from "../../assets/cliente1.webm";
       >
         <video
           id="client-video"
-          src={cliente1}
+          data-video-src={cliente1}
           class="w-full h-full scale-100 md:scale-120 object-contain md:max-h-[90vh]"
           loop
           playsinline></video>
@@ -90,36 +90,55 @@ import cliente1 from "../../assets/cliente1.webm";
 </section>
 
 <script>
-  const video = document.getElementById("client-video") as HTMLVideoElement;
-  const playIcon = document.getElementById("play-icon");
-  const pauseIcon = document.getElementById("pause-icon");
-  const videoContainer = document.querySelector(".video-container");
-  const videoControls = document.getElementById("video-controls");
+  function initClientVideo() {
+    const video = document.getElementById("client-video") as HTMLVideoElement;
+    const playIcon = document.getElementById("play-icon");
+    const pauseIcon = document.getElementById("pause-icon");
+    const videoContainer = document.querySelector(".video-container");
+    const videoControls = document.getElementById("video-controls");
 
-  if (video && videoContainer && videoControls) {
-    const updateUI = () => {
-      if (video.paused) {
-        videoControls.classList.remove("opacity-0");
-        videoControls.classList.add("opacity-100");
-        playIcon?.classList.remove("hidden");
-        pauseIcon?.classList.add("hidden");
-      } else {
-        videoControls.classList.remove("opacity-100");
-        videoControls.classList.add("opacity-0");
-        playIcon?.classList.add("hidden");
-        pauseIcon?.classList.remove("hidden");
+    if (video && videoContainer && videoControls) {
+      const src = video.dataset.videoSrc;
+      if (src && !video.src) {
+        video.src = src;
+        video.load();
       }
-    };
 
-    videoContainer.addEventListener("click", () => {
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
+      const updateUI = () => {
+        if (video.paused) {
+          videoControls.classList.remove("opacity-0");
+          videoControls.classList.add("opacity-100");
+          playIcon?.classList.remove("hidden");
+          pauseIcon?.classList.add("hidden");
+        } else {
+          videoControls.classList.remove("opacity-100");
+          videoControls.classList.add("opacity-0");
+          playIcon?.classList.add("hidden");
+          pauseIcon?.classList.remove("hidden");
+        }
+      };
+
+      const oldListener = (videoContainer as any)._videoClickListener;
+      if (oldListener) {
+        videoContainer.removeEventListener("click", oldListener);
       }
+
+      const clickListener = () => {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+        updateUI();
+      };
+
+      (videoContainer as any)._videoClickListener = clickListener;
+      videoContainer.addEventListener("click", clickListener);
+
       updateUI();
-    });
-
-    updateUI();
+    }
   }
+
+  document.addEventListener("DOMContentLoaded", initClientVideo);
+  document.addEventListener("astro:page-load", initClientVideo);
 </script>

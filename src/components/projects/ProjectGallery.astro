@@ -78,15 +78,15 @@ function getImageLayoutClasses(index: number) {
   }
 
   {
-    videos?.map((video) => (
+    videos?.map((video, idx) => (
       <div class="col-span-12 md:col-span-8 md:col-start-3">
         <video
-          src={video}
-          autoplay
+          data-video-src={video}
+          data-video-index={idx}
+          class="project-video w-full h-full max-h-[80vh] md:max-h-[95vh] object-cover object-center rounded-sm"
           muted
           loop
           playsinline
-          class="w-full h-full max-h-[80vh] md:max-h-[95vh] object-cover object-center rounded-sm"
           aria-label={`Video del proyecto ${projectTitle}`}
         >
           <track kind="captions" />
@@ -123,7 +123,30 @@ function getImageLayoutClasses(index: number) {
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initGalleryTriggers);
+  function initVideos() {
+    const videos = document.querySelectorAll<HTMLVideoElement>('.project-video');
+    
+    videos.forEach((video) => {
+      const src = video.dataset.videoSrc;
+      if (src && !video.src) {
+        video.src = src;
+        video.load();
+        
+        // Intentar reproducir el video cuando esté listo
+        video.addEventListener('loadeddata', () => {
+          video.play().catch(() => {
+            // Ignorar errores de autoplay (Firefox puede bloquearlo)
+          });
+        }, { once: true });
+      }
+    });
+  }
 
-  document.addEventListener("astro:page-load", initGalleryTriggers);
+  function init() {
+    initGalleryTriggers();
+    initVideos();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("astro:page-load", init);
 </script>
