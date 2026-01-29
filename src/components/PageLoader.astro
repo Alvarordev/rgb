@@ -20,10 +20,6 @@
   #page-loader.initial {
     display: none;
   }
-
-  body.is-navigating {
-    overflow: hidden !important;
-  }
 </style>
 
 <script>
@@ -40,7 +36,7 @@
       loader.classList.remove('is-hidden', 'initial');
       loader.offsetHeight;
     }
-    document.body.classList.add('is-navigating');
+    document.body.style.overflow = 'hidden';
 
     const lenis = (window as any).lenis;
     if (lenis) lenis.stop();
@@ -56,7 +52,7 @@
   }
 
   function hideLoaderAndTriggerAnimations() {
-    document.body.classList.remove('is-navigating');
+    // SIEMPRE restaurar overflow primero
     document.body.style.overflow = '';
     
     const lenis = (window as any).lenis;
@@ -92,20 +88,20 @@
   
   document.addEventListener('astro:after-swap', () => {
     forceScrollToTop();
-    document.body.classList.remove('is-navigating');
+    // Forzar restauración de overflow
     document.body.style.overflow = '';
   });
 
   document.addEventListener('astro:page-load', () => {
     hideLoaderAndTriggerAnimations();
     
+    // Triple verificación
     setTimeout(() => {
       const lenis = (window as any).lenis;
       if (lenis) {
         lenis.start();
         lenis.resize();
       }
-      document.body.classList.remove('is-navigating');
       document.body.style.overflow = '';
     }, 100);
   });
