@@ -132,8 +132,8 @@ import TextSwipe from "../TextSwipe.astro";
     });
   };
 
-  initMenuModal();
-  document.addEventListener("astro:after-swap", initMenuModal);
+  // Inicializar en el primer cargado y en cada navegación
+  document.addEventListener("astro:page-load", initMenuModal);
 </script>
 
 <style>

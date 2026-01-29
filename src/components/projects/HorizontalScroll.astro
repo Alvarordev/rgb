@@ -46,39 +46,41 @@ import { projects } from "../../data/projects";
 
   const initHorizontalScroll = () => {
     const section = document.querySelector("#horizontal-scroll-section");
-    const strip = document.querySelector("#horizontal-strip");
+    const strip = document.querySelector("#horizontal-strip") as HTMLElement;
     const progressLine = document.querySelector("#scroll-progress-line");
 
     if (!section || !strip || !progressLine) return;
+
+    ScrollTrigger.getAll().forEach(t => {
+      if (t.trigger === section) t.kill();
+    });
 
     const getScrollAmount = () => {
       return strip.scrollWidth - window.innerWidth;
     };
 
-    gsap.to(strip, {
-      x: () => -getScrollAmount(),
-      ease: "none",
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.5,
+        scrub: 1, 
         invalidateOnRefresh: true,
       },
     });
 
-    gsap.to(progressLine, {
+    tl.to(strip, {
+      x: () => -getScrollAmount(),
+      ease: "none",
+    }, 0);
+
+    tl.to(progressLine, {
       scaleX: 1,
       ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.5,
-      },
-    });
+    }, 0);
   };
 
   initHorizontalScroll();
-  document.addEventListener("astro:after-swap", initHorizontalScroll);
+
+  document.addEventListener("astro:page-load", initHorizontalScroll);
 </script>
