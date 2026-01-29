@@ -52,22 +52,13 @@
   }
 
   function hideLoaderAndTriggerAnimations() {
-    // SIEMPRE restaurar overflow primero
     document.body.style.overflow = '';
     
     const lenis = (window as any).lenis;
-    if (lenis) {
-      lenis.start();
-      lenis.resize();
-    }
+    if (lenis) lenis.start();
 
     const loader = document.getElementById('page-loader');
-    if (!loader) {
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('animations:start'));
-      }, 50);
-      return;
-    }
+    if (!loader) return;
 
     if (isInitialLoad) {
       isInitialLoad = false;
@@ -86,23 +77,12 @@
 
   document.addEventListener('astro:before-preparation', showLoader);
   
-  document.addEventListener('astro:after-swap', () => {
-    forceScrollToTop();
-    // Forzar restauración de overflow
-    document.body.style.overflow = '';
-  });
+  document.addEventListener('astro:after-swap', forceScrollToTop);
 
   document.addEventListener('astro:page-load', () => {
+    const lenis = (window as any).lenis;
+    if (lenis) lenis.start();
+
     hideLoaderAndTriggerAnimations();
-    
-    // Triple verificación
-    setTimeout(() => {
-      const lenis = (window as any).lenis;
-      if (lenis) {
-        lenis.start();
-        lenis.resize();
-      }
-      document.body.style.overflow = '';
-    }, 100);
   });
 </script>
