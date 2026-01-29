@@ -56,18 +56,10 @@
   }
 
   function hideLoaderAndTriggerAnimations() {
-    // SIEMPRE limpiar el estado de navegación primero
-    document.body.classList.remove('is-navigating');
-    document.body.style.overflow = '';
-    
-    const lenis = (window as any).lenis;
-    if (lenis) {
-      lenis.start();
-      lenis.resize();
-    }
-
     const loader = document.getElementById('page-loader');
     if (!loader) return;
+
+    document.body.classList.remove('is-navigating');
 
     if (isInitialLoad) {
       isInitialLoad = false;
@@ -86,25 +78,12 @@
 
   document.addEventListener('astro:before-preparation', showLoader);
   
-  document.addEventListener('astro:after-swap', () => {
-    forceScrollToTop();
-    // Forzar limpieza de cualquier estado de bloqueo
-    document.body.classList.remove('is-navigating');
-    document.body.style.overflow = '';
-  });
+  document.addEventListener('astro:after-swap', forceScrollToTop);
 
   document.addEventListener('astro:page-load', () => {
+    const lenis = (window as any).lenis;
+    if (lenis) lenis.start();
+
     hideLoaderAndTriggerAnimations();
-    
-    // Triple verificación para asegurar que Lenis esté activo
-    setTimeout(() => {
-      const lenis = (window as any).lenis;
-      if (lenis) {
-        lenis.start();
-        lenis.resize();
-      }
-      document.body.classList.remove('is-navigating');
-      document.body.style.overflow = '';
-    }, 100);
   });
 </script>

@@ -24,8 +24,10 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const path = document.querySelector("#firma-path") as SVGPathElement;
-  if (path) {
+  const initSvgAnimation = () => {
+    const path = document.querySelector("#firma-path") as SVGPathElement;
+    if (!path) return;
+
     const length = path.getTotalLength();
 
     gsap.set(path, {
@@ -40,8 +42,12 @@
         trigger: path,
         start: "top 90%",
         end: "center center",
-        scrub: 0.5, 
+        scrub: 0.5,
       },
     });
-  }
+  };
+
+  window.addEventListener('animations:start', initSvgAnimation);
+  
+  initSvgAnimation();
 </script>
