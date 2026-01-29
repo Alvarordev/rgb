@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
   images?: ImageMetadata[];
 }
@@ -11,8 +13,9 @@ const { images = [] } = Astro.props;
     <div class="carousel-group flex gap-4 shrink-0 items-center pr-4">
       {
         images.map((image, index) => (
-          <img
-            src={image.src}
+          <Image
+            src={image}
+            height={600}
             alt={`Project ${index + 1}`}
             class="h-64 w-auto min-w-75 object-cover shrink-0"
           />
@@ -47,7 +50,7 @@ const { images = [] } = Astro.props;
         repeat: -1,
         duration,
         ease: "none",
-      })
+      }),
     );
   };
 

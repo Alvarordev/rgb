@@ -8,7 +8,6 @@ import ApproachSection from "../components/landing/ApproachSection.astro";
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import FloatingMenu from "../components/FloatingMenu.astro";
-import MenuModal from "../components/modals/MenuModal.astro";
 
 import { projects } from "../data/projects";
 
@@ -20,7 +19,6 @@ const images = projects.map((project) => {
 <Layout>
   <Header />
   <FloatingMenu triggerId="hero-section" />
-  <MenuModal />
   <main class="relative w-full bg-background">
     <HeroSection images={images} />
 
@@ -37,22 +35,10 @@ const images = projects.map((project) => {
 </Layout>
 
 <script>
-  import Lenis from "lenis";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
-
-  const lenis = new Lenis();
-  (window as any).lenis = lenis;
-
-  lenis.on("scroll", ScrollTrigger.update);
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-
-  gsap.ticker.lagSmoothing(0);
 
   gsap.to(".title", {
     y: -200,

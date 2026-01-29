@@ -1,16 +1,12 @@
 ---
 import "../styles/global.css";
+import MenuModal from "../components/modals/MenuModal.astro";
 
 interface Props {
   title?: string;
 }
 
 const { title } = Astro.props;
-
-const defaultTitle = "RGB Studio - Arquitectura y Diseño de Interiores";
-const siteDescription = "Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos.";
-const siteTitle = title ? title : defaultTitle;
-const ogImageURL = new URL("/og-logo.png", Astro.site || Astro.url);
 ---
 
 <!doctype html>
@@ -21,8 +17,8 @@ const ogImageURL = new URL("/og-logo.png", Astro.site || Astro.url);
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{siteTitle}</title>
-    <meta name="description" content={siteDescription} />
+    <title>{title ? title : "RGB Studio - Arquitectura y Diseño de Interiores"}</title>
+    <meta name="description" content="Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos." />
     <link
       rel="canonical"
       href={new URL(Astro.url.pathname, Astro.site || Astro.url)}
@@ -33,11 +29,11 @@ const ogImageURL = new URL("/og-logo.png", Astro.site || Astro.url);
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_PE" />
     <meta property="og:site_name" content="RGB Studio" />
-    <meta property="og:title" content={siteTitle} />
-    <meta property="og:description" content={siteDescription} />
+    <meta property="og:title" content={title ? title : "RGB Studio - Arquitectura y Diseño de Interiores"} />
+    <meta property="og:description" content="Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos." />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:image" content={ogImageURL.href} />
-    <meta property="og:image:secure_url" content={ogImageURL.href} />
+    <meta property="og:image" content={new URL("/og-logo.png", Astro.site || Astro.url).href} />
+    <meta property="og:image:secure_url" content={new URL("/og-logo.png", Astro.site || Astro.url).href} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -45,15 +41,35 @@ const ogImageURL = new URL("/og-logo.png", Astro.site || Astro.url);
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={siteTitle} />
-    <meta name="twitter:description" content={siteDescription} />
-    <meta name="twitter:image" content={ogImageURL.href} />
+    <meta name="twitter:title" content={title ? title : "RGB Studio - Arquitectura y Diseño de Interiores"} />
+    <meta name="twitter:description" content="Estudio de arquitectura en Lima especializado en diseño de interiores, remodelaciones y proyectos residenciales. En RGB Studio creamos espacios funcionales y estéticos." />
+    <meta name="twitter:image" content={new URL("/og-logo.png", Astro.site || Astro.url).href} />
     <meta name="twitter:site" content="@rgbstudiope" />
     <meta name="twitter:creator" content="@rgbstudiope" />
   </head>
 
   <body>
+    <MenuModal />
     <slot />
+
+    <script>
+      import Lenis from "lenis";
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const lenis = new Lenis();
+      (window as any).lenis = lenis;
+
+      lenis.on("scroll", ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      gsap.ticker.lagSmoothing(0);
+    </script>
   </body>
 </html>
 
