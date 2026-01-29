@@ -49,69 +49,45 @@ import { projects } from "../../data/projects";
   gsap.registerPlugin(ScrollTrigger);
 
   const initHorizontalScroll = () => {
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+    if (window.innerWidth < 1024) return;
+
     const section = document.querySelector("#horizontal-scroll-section");
-    const strip = document.querySelector("#horizontal-strip");
+    const strip = document.querySelector("#horizontal-strip") as HTMLElement;
     const progressLine = document.querySelector("#scroll-progress-line");
 
     if (!section || !strip || !progressLine) return;
 
-    ScrollTrigger.matchMedia({
-      "(min-width: 1024px)": function () {
-        const getScrollAmount = () => {
-          return strip.scrollWidth - window.innerWidth;
-        };
+    const getScrollAmount = () => {
+      return strip.scrollWidth - window.innerWidth;
+    };
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl.to(
-          strip,
-          {
-            x: () => -getScrollAmount(),
-            ease: "none",
-          },
-          0,
-        );
-
-        tl.to(
-          progressLine,
-          {
-            scaleX: 1,
-            ease: "none",
-          },
-          0,
-        );
-      },
-
-      "(max-width: 1023px)": function () {
-        gsap.set(strip, { clearProps: "all" });
-        gsap.set(progressLine, { clearProps: "all" });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        invalidateOnRefresh: true,
       },
     });
+
+    tl.to(strip, {
+      x: () => -getScrollAmount(),
+      ease: "none",
+    }, 0);
+
+    tl.to(progressLine, {
+      scaleX: 1,
+      ease: "none",
+    }, 0);
   };
 
-  const cleanup = () => {
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  };
+  initHorizontalScroll();
 
-  // Solo inicializar en desktop
-  if (window.innerWidth >= 1024) {
-    initHorizontalScroll();
-    
-    document.addEventListener("astro:before-preparation", cleanup);
-    
-    document.addEventListener("astro:page-load", () => {
-      cleanup();
-      if (window.innerWidth >= 1024) {
-        setTimeout(initHorizontalScroll, 150);
-      }
-    });
-  }
+  document.addEventListener("astro:page-load", () => {
+    setTimeout(initHorizontalScroll, 100);
+  });
 </script>
+
