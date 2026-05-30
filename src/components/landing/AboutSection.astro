@@ -4,7 +4,7 @@ import Button from "../Button.astro";
 import OptimizedImage from "../OptimizedImage.astro";
 import { projects } from "../../data/projects";
 
-const image = projects[2].images[3];
+const image = projects[3].images[3];
 ---
 
 <section
@@ -20,7 +20,7 @@ const image = projects[2].images[3];
     <OptimizedImage
       src={image}
       alt="cocina"
-      class="h-64 md:h-72 w-full md:w-115 object-cover"
+      class="h-64 md:h-80 w-full md:w-115 object-cover"
     />
     <AnimatedParagraph
       class="text-base md:text-xl font-medium max-w-115 mt-8 w-full leading-tight"

@@ -1,14 +1,25 @@
+---
+import logoWhite from "../assets/rgb-logo-white.png";
+
+const year = new Date().getFullYear();
+---
+
 <div
   id="page-loader"
-  class="fixed inset-0 z-9999 bg-foreground"
+  class="flex justify-between items-end pb-8 pr-10 fixed inset-0 z-9999 bg-foreground"
   aria-hidden="true"
   transition:persist
-></div>
+>
+  <img src={logoWhite.src} alt="rgb-logo" class="w-32 md:w-100" />
+  <p class="text-xs md:text-sm text-center mt-10 font-bold text-background">
+    © {year} RGB Studio. Todos los derechos reservados.
+  </p>
+</div>
 
 <style is:global>
   #page-loader {
     opacity: 1;
-    transition: none; 
+    transition: none;
     pointer-events: none;
   }
 
@@ -26,60 +37,60 @@
   const LOADER_VISIBLE_TIME = 400;
   let isInitialLoad = true;
 
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
   }
 
   function showLoader() {
-    const loader = document.getElementById('page-loader');
+    const loader = document.getElementById("page-loader");
     if (loader) {
-      loader.classList.remove('is-hidden', 'initial');
+      loader.classList.remove("is-hidden", "initial");
       loader.offsetHeight;
     }
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
     const lenis = (window as any).lenis;
     if (lenis) lenis.stop();
   }
 
   function forceScrollToTop() {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
-    
+
     const lenis = (window as any).lenis;
     if (lenis) lenis.scrollTo(0, { immediate: true, force: true });
   }
 
   function hideLoaderAndTriggerAnimations() {
-    document.body.style.overflow = '';
-    
+    document.body.style.overflow = "";
+
     const lenis = (window as any).lenis;
     if (lenis) lenis.start();
 
-    const loader = document.getElementById('page-loader');
+    const loader = document.getElementById("page-loader");
     if (!loader) return;
 
     if (isInitialLoad) {
       isInitialLoad = false;
-      loader.classList.add('initial');
+      loader.classList.add("initial");
       setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('animations:start'));
+        window.dispatchEvent(new CustomEvent("animations:start"));
       }, 50);
       return;
     }
 
     setTimeout(() => {
-      loader.classList.add('is-hidden');
-      window.dispatchEvent(new CustomEvent('animations:start'));
+      loader.classList.add("is-hidden");
+      window.dispatchEvent(new CustomEvent("animations:start"));
     }, LOADER_VISIBLE_TIME);
   }
 
-  document.addEventListener('astro:before-preparation', showLoader);
-  
-  document.addEventListener('astro:after-swap', forceScrollToTop);
+  document.addEventListener("astro:before-preparation", showLoader);
 
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("astro:after-swap", forceScrollToTop);
+
+  document.addEventListener("astro:page-load", () => {
     const lenis = (window as any).lenis;
     if (lenis) lenis.start();
 
