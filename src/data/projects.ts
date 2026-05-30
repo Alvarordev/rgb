@@ -85,12 +85,12 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    slug: "cocina",
-    title: "Cocina",
+    slug: "cocina-agave",
+    title: "Cocina Agave",
     year: "2026",
-    location: "San Borja, Lima, Perú",
+    location: "Pueblo Libre, Lima, Perú",
     images: [p07_06, p07_02, p07_04, p07_08, p07_03, p07_01, p07_07, p07_05, p07_09],
-    alt: "Cocina",
+    alt: "Cocina Agave",
   },
   {
     id: 2,
