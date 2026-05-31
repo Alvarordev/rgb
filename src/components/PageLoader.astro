@@ -6,12 +6,12 @@ const year = new Date().getFullYear();
 
 <div
   id="page-loader"
-  class="flex justify-between items-end pb-8 pr-10 fixed inset-0 z-9999 bg-foreground"
+  class="flex justify-between items-end pb-4 md:pb-8 pr-1 md:pr-10 fixed inset-0 z-9999 bg-foreground"
   aria-hidden="true"
   transition:persist
 >
-  <img src={logoWhite.src} alt="rgb-logo" class="w-32 md:w-100" />
-  <p class="text-xs md:text-sm text-center mt-10 font-bold text-background">
+  <img src={logoWhite.src} alt="rgb-logo" class="w-52 md:w-100" />
+  <p class="text-xs md:text-sm text-center mt-10 font-bold text-background hidden md:flex">
     © {year} RGB Studio. Todos los derechos reservados.
   </p>
 </div>
